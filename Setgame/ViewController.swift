@@ -9,9 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    
-  
     
     
     
@@ -23,26 +20,32 @@ class ViewController: UIViewController {
     
     
     
-    
-    
     @IBOutlet weak var cardText: UIButton!{
         didSet {
             cardChange()
         }
     }
     
+    var text = "\u{25B2}"
 
-
-    // MARK Stopping point. PLaceholder Three Triangles
+//     MARK Stopping point. Placeholder is a single card symbol but with the attribute settings working in func cardChange()
     private func cardChange() {
-        cardText.setTitle("\u{25B2} \u{25B2} \u{25B2}", for: [])
-        cardText.setTitleColor(#colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), for: [])
-        cardText.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+       
+        var colorText: [NSAttributedString.Key: Any] = [
+//            .strokeWidth : -5,
+
+            .foregroundColor : UIColor.black.withAlphaComponent(0.15),
+            .font : UIFont.systemFont(ofSize : 50)
+            
+            ]
         
+        let  cardAttributes = NSAttributedString(string: text, attributes: colorText)
+       
+        cardText.setAttributedTitle(cardAttributes, for: [])
+
+
     }
-    
-    
-    
+
 }
 
 
