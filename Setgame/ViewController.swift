@@ -37,11 +37,12 @@ class ViewController: UIViewController {
     var cardPlace = 0
     
     
-    // Was able through all the cards and put a placeholder label on them. In this case, black, open, traingle.
+    // Able set default attribute settings. Can set variable colors and fill style for the cards labels.
     private func colorizeText()  {
         var textColor: [NSAttributedString.Key: Any] = [
-            .strokeWidth : 5,
-            .foregroundColor : UIColor.black.withAlphaComponent(CGFloat(shaded[0])),
+            .strokeWidth : -5,
+            .strokeColor : UIColor.red,
+            .foregroundColor : UIColor.red.withAlphaComponent(CGFloat(shaded[1])),
             .font : UIFont.systemFont(ofSize : 50)
             
         ]
