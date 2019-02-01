@@ -12,20 +12,7 @@ class ViewController: UIViewController {
     
     
     
-    
-    @IBAction func touchCard(_ sender: UIButton) {
-        
-        
-    }
-    
-    
-    
-    @IBOutlet weak var cardText: UIButton!{
-        didSet {
-            colorizeText()
-        }
-    }
-    
+
     var triangle = "\u{25B2}"
     var square = "\u{25A0}"
     var circle = "\u{25CF}"
@@ -36,9 +23,22 @@ class ViewController: UIViewController {
     var shaded =  [100, 0.15]
     
     
+    @IBOutlet var cardText: [UIButton]! {
+        didSet {
+            for card in cardText.indices {
+                colorizeText()
+                
+            }
+        
+        }
+    }
     
-    // More testing of attributes. Need to find a way to set strokewidth becuase it always overrides any settings on foreground color
-    private func colorizeText() {
+    //Variable for cardText UIArray index
+    var cardPlace = 0
+    
+    
+    // Was able through all the cards and put a placeholder label on them. In this case, black, open, traingle.
+    private func colorizeText()  {
         var textColor: [NSAttributedString.Key: Any] = [
             .strokeWidth : 5,
             .foregroundColor : UIColor.black.withAlphaComponent(CGFloat(shaded[0])),
@@ -46,10 +46,15 @@ class ViewController: UIViewController {
             
         ]
         
+        
         let textAttributes = NSAttributedString(string: text, attributes: textColor)
-        cardText.setAttributedTitle(textAttributes, for: [])
+        cardText[cardPlace].setAttributedTitle(textAttributes, for: [])
+        cardPlace += 1
+
         
     }
+    
+    
     
 
 //     MARK Stopping point. Placeholder is a single card symbol but with the attribute settings working in func cardChange()
