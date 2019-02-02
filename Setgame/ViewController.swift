@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
+    //TODO Created a palceholder card struct in separate file and linked it to view controller by declaring an instance with placeholder strings as arguments. 
     
 
     var triangle = "\u{25B2}"
@@ -22,38 +22,64 @@ class ViewController: UIViewController {
     
     var shaded =  [100, 0.15]
     
+    var range = 0..<12
+    
+    var cards = [Card]()
+    
+    var card = Card(shape: "triangle", color: "red", fill: "noFill", amount: "amount")
+    
+    
+    func populateCards() {
+        for i in range {
+            cards += [card]
+            
+            
+        }
+    }
+    
+    
     
     @IBOutlet var cardText: [UIButton]! {
         didSet {
-            for card in cardText.indices {
-                colorizeText()
-                
-            }
+            
+            
+            populateCards()
+            print(cards)
+           
+//            for card in cardText.indices {
+//                colorizeText()
+//            }
         
         }
     }
+    
+    
     
     //Variable for cardText UIArray index
     var cardPlace = 0
     
     
     // Able set default attribute settings. Can set variable colors and fill style for the cards labels.
+    
+    
+    
     private func colorizeText()  {
         var textColor: [NSAttributedString.Key: Any] = [
             .strokeWidth : -5,
             .strokeColor : UIColor.red,
             .foregroundColor : UIColor.red.withAlphaComponent(CGFloat(shaded[1])),
             .font : UIFont.systemFont(ofSize : 50)
-            
+
         ]
-        
-        
+
+
         let textAttributes = NSAttributedString(string: text, attributes: textColor)
         cardText[cardPlace].setAttributedTitle(textAttributes, for: [])
         cardPlace += 1
 
-        
+
     }
+    
     
     
     
