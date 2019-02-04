@@ -83,6 +83,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="view" destination="C5v-h0-hr2" id="hJX-33-djZ"/>
                         <outletCollection property="cardText" destination="8YC-4U-bZo" collectionClass="NSMutableArray" id="TkZ-kT-QSb"/>
                         <outletCollection property="cardText" destination="C5v-h0-hr2" collectionClass="NSMutableArray" id="PF7-bx-IRT"/>
                         <outletCollection property="cardText" destination="H1b-8D-9dn" collectionClass="NSMutableArray" id="fBJ-tF-U0l"/>

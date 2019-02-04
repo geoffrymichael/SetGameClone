@@ -10,81 +10,62 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //TODO Created a palceholder card struct in separate file and linked it to view controller by declaring an instance with placeholder strings as arguments. 
-    
-
-    var triangle = "\u{25B2}"
-    var square = "\u{25A0}"
-    var circle = "\u{25CF}"
-
-    var text = "\u{25B2}"
-
-    
-    var shaded =  [100, 0.15]
-    
-    var range = 0..<12
-    
+    //TODO Was able to finally figure out a nested for loop algorithm to at least populate and array with 81 groupings of 3 distinct features of Ints from 0 through 2
+  
     var cards = [Card]()
     
-    var card = Card(shape: "triangle", color: "red", fill: "noFill", amount: "amount")
-    
-    
     func populateCards() {
-        for i in range {
-            cards += [card]
-            
-            
+        for a in 0...2 {
+            for b in 0...2 {
+                for c in 0...2 {
+                    for d in 0...2 {
+                        var card = Card(shape: a, color: b, fill: c, amount: d)
+                        cards.append(card)
+                    }
+                }
+            print(cards)
+                print(cards.count)
+            }
         }
     }
-    
-    
+
     
     @IBOutlet var cardText: [UIButton]! {
         didSet {
-            
-            
             populateCards()
-            print(cards)
-           
-//            for card in cardText.indices {
-//                colorizeText()
-//            }
-        
         }
     }
     
     
     
-    //Variable for cardText UIArray index
-    var cardPlace = 0
-    
-    
-    // Able set default attribute settings. Can set variable colors and fill style for the cards labels.
     
     
     
-    private func colorizeText()  {
-        var textColor: [NSAttributedString.Key: Any] = [
-            .strokeWidth : -5,
-            .strokeColor : UIColor.red,
-            .foregroundColor : UIColor.red.withAlphaComponent(CGFloat(shaded[1])),
-            .font : UIFont.systemFont(ofSize : 50)
-
-        ]
-
-
-        let textAttributes = NSAttributedString(string: text, attributes: textColor)
-        cardText[cardPlace].setAttributedTitle(textAttributes, for: [])
-        cardPlace += 1
-
-
-    }
+    
+    
+    
+//    private func colorizeText()  {
+//        var textColor: [NSAttributedString.Key: Any] = [
+//            .strokeWidth : -5,
+//            .strokeColor : UIColor.red,
+//            .foregroundColor : UIColor.red.withAlphaComponent(CGFloat(shaded[1])),
+//            .font : UIFont.systemFont(ofSize : 50)
+//
+//        ]
+//
+//
+//        let textAttributes = NSAttributedString(string: text, attributes: textColor)
+//        cardText[cardPlace].setAttributedTitle(textAttributes, for: [])
+//        cardPlace += 1
+//
+//
+//    }
     
     
     
     
 
-//     MARK Stopping point. Placeholder is a single card symbol but with the attribute settings working in func cardChange()
+    //     MARK Stopping point. Placeholder is a single card symbol but with the attribute settngs working in func cardChange()
 
     
     

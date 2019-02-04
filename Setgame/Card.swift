@@ -9,11 +9,9 @@
 import Foundation
 
 struct Card {
-    var shape : String
-    var color : String
-    var fill : String
-    var amount : String
-    
-    
+    var shape : Int
+    var color : Int
+    var fill : Int
+    var amount : Int
 }
 
