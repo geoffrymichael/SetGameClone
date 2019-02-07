@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //TODO Was able to finally figure out a nested for loop algorithm to at least populate and array with 81 groupings of 3 distinct features of Ints from 0 through 2
+    //TODO Trying out having the Card struct produce a dictionary of items. Starting to try out function for producing different card attributes. 
   
     var cards = [Card]()
     
@@ -23,8 +23,7 @@ class ViewController: UIViewController {
                         cards.append(card)
                     }
                 }
-            print(cards)
-                print(cards.count)
+                
             }
         }
     }
@@ -33,12 +32,28 @@ class ViewController: UIViewController {
     @IBOutlet var cardText: [UIButton]! {
         didSet {
             populateCards()
+            print(cards)
+            print(cards.count)
+            
+            forSquare()
         }
     }
     
     
     
+    func forSquare() {
+        var textColor: [NSAttributedString.Key: Any] = [
+                    .strokeWidth : -5,
+                    .strokeColor : UIColor.red,
+                    .foregroundColor : UIColor.red.withAlphaComponent(CGFloat(100)),
+                    .font : UIFont.systemFont(ofSize : 20)
+        
+                ]
     
+        let textAttributes = NSAttributedString(string: "■", attributes: textColor)
+                cardText[0].setAttributedTitle(textAttributes, for: [])
+        
+    }
     
     
     

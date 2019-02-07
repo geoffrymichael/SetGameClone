@@ -13,5 +13,15 @@ struct Card {
     var color : Int
     var fill : Int
     var amount : Int
+    var cardDict: [String: Int] {
+        return ["shape": shape,
+                "color:": color,
+                "fill": fill,
+                "amount": amount
+        ]
+    }
+    var nsDictionary: NSDictionary {
+        return cardDict as NSDictionary
+    }
 }
 
