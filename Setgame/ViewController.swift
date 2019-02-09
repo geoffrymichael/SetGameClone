@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //TODO Trying out having the Card struct produce a dictionary of items. Starting to try out function for producing different card attributes. 
+    
   
     var cards = [Card]()
     
@@ -39,18 +39,23 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
+    // TODO Working on testing out arrays of attributes and inserting in a function to fill a deck accordingly. 
     func forSquare() {
+        var text = "▲"
+//        var text = ["▲","■", "⚫︎"]
+        var colors = [UIColor.red, UIColor.blue, UIColor.green]
+        var fills = [-5,5,-0.15]
+        var amounts = [text, text + text, text + text + text]
+        
         var textColor: [NSAttributedString.Key: Any] = [
-                    .strokeWidth : -5,
-                    .strokeColor : UIColor.red,
-                    .foregroundColor : UIColor.red.withAlphaComponent(CGFloat(100)),
+                    .strokeWidth : fills[0],
+                    .strokeColor : colors[2],
+                    .foregroundColor : colors[2].withAlphaComponent(CGFloat(-fills[2])),
                     .font : UIFont.systemFont(ofSize : 20)
         
                 ]
     
-        let textAttributes = NSAttributedString(string: "■", attributes: textColor)
+        let textAttributes = NSAttributedString(string: amounts[2], attributes: textColor)
                 cardText[0].setAttributedTitle(textAttributes, for: [])
         
     }
