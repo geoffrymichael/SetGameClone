@@ -41,11 +41,28 @@ class ViewController: UIViewController {
     
     // TODO Working on testing out arrays of attributes and inserting in a function to fill a deck accordingly. 
     func forSquare() {
+        
         var text = "▲"
 //        var text = ["▲","■", "⚫︎"]
         var colors = [UIColor.red, UIColor.blue, UIColor.green]
         var fills = [-5,5,-0.15]
         var amounts = [text, text + text, text + text + text]
+        
+        var x = 0
+        
+        //Testing iterating through the cards collection and getting different ouputs
+        for i in cards {
+            
+            if cards[x].shape == 0 {
+                print("COW")
+            } else if cards[x].shape == 1 {
+                print("DOGGIE")
+            } else if cards[x].shape == 2 {
+                print("MANBEAR")
+            }
+            x += 1
+        }
+        
         
         var textColor: [NSAttributedString.Key: Any] = [
                     .strokeWidth : fills[0],
