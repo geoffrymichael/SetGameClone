@@ -27,6 +27,7 @@ import Foundation
 
 struct Card {
     
+       
     var shape: Shape
     var color: Color
     var fill: Fill
