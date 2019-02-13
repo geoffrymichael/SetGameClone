@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButton: [UIButton]! {
         didSet {
-            print(deck)
             
         }
     }
@@ -24,5 +23,7 @@ class ViewController: UIViewController {
     
     
 }
+
+
 
 

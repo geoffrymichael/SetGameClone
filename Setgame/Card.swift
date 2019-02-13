@@ -43,16 +43,24 @@ struct Card {
         var description: String { return rawValue }
     }
     
-    enum Color: String {
+    enum Color: String , CustomStringConvertible {
+        var description: String {return rawValue}
+        
+        
+        
         case blue = "blue"
         case red = "red"
         case yellow = "yellow"
         
         static var all = [Color.blue, .red, .yellow]
         
+        
+        
     }
     
-    enum Fill: String {
+    enum Fill: String, CustomStringConvertible {
+        var description: String {return rawValue}
+        
         case clear = "clear"
         case shaded = "shaded"
         case filled = "filled"
@@ -62,11 +70,14 @@ struct Card {
     }
     
     enum Amount: Int {
+        
+        
         case one = 1
         case two = 2
         case three = 3
         
         static var all = [Amount.one, .two, .three]
+        
         
     }
     
