@@ -51,9 +51,9 @@ struct Card {
         
         case blue = "blue"
         case red = "red"
-        case yellow = "yellow"
+        case purple = "purple"
         
-        static var all = [Color.blue, .red, .yellow]
+        static var all = [Color.blue, .red, .purple]
         
         
         
@@ -81,5 +81,7 @@ struct Card {
         
         
     }
+    
+    
     
 }

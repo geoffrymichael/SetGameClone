@@ -22,7 +22,7 @@ struct SwiftGameDeck {
                 }
             }
         }
+        cards.shuffle()
     }
-    
-    
+
 }
