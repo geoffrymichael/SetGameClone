@@ -8,7 +8,7 @@
 
 
 
-//TODO: The basic population of the decks seems to be working. Next is the logic of picking and comparing cards 
+//TODO: The basic population of the decks seems to be working. Next is the logic of picking and comparing cards
 
 
 import UIKit
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
                     .strokeWidth : btStroke,
                     .strokeColor : btColor,
                     .foregroundColor : btColor.withAlphaComponent(CGFloat(btFloat)),
-                    .font : UIFont.systemFont(ofSize : 30)
+                    .font : UIFont.systemFont(ofSize : 25)
         
                 ]
         
