@@ -37,7 +37,7 @@ struct Card {
     enum Shape: String, CustomStringConvertible {
         case triangle = "▲"
         case square = "■"
-        case circle = "⚫︎"
+        case circle = "●"
         
         static var all = [Shape.triangle, .square, .circle]
         

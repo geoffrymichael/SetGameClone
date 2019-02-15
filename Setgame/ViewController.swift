@@ -6,6 +6,11 @@
 //  Copyright © 2019 Geoffry Gambling. All rights reserved.
 //
 
+
+
+//TODO: The basic population of the decks seems to be working. Next is the logic of picking and comparing cards 
+
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -24,20 +29,20 @@ class ViewController: UIViewController {
         for i in cardButton{
             var btStroke : Int!
             var btFloat : Float!
+            var btShape = deck.cards[x].shape.rawValue
             
             
-            //TODO: Even if a bit verbose, I was able to create code that can iterate through the deck of cards and display different shapes and shadings. However, changing the color does not seem to work. for some reason, some cards are defaulting tothe default UIColor.
-            var btColor = UIColor.blue
+            var btColor = UIColor.purple
             
             
-//            if deck.cards[x].color.rawValue == "blue" {
-//                btColor = UIColor.blue
-//            } else if deck.cards[x].color.rawValue == "red" {
-//                btColor = UIColor.red
-//            } else if deck.cards[x].fill.rawValue == "purple" {
-//                btColor = UIColor.purple
-//            }
-//
+            if deck.cards[x].color.rawValue == "blue" {
+                btColor = UIColor.blue
+            } else if deck.cards[x].color.rawValue == "red" {
+                btColor = UIColor.red
+            } else if deck.cards[x].fill.rawValue == "purple" {
+                btColor = UIColor.purple
+            }
+
             if deck.cards[x].fill.rawValue == "clear" {
                 btStroke = -5
                 btFloat = 5.00
@@ -49,7 +54,13 @@ class ViewController: UIViewController {
                 btFloat = 5.00
             }
             
-            changeAtt(deck.cards[x].shape.rawValue, place: x, btStroke: btStroke, btFloat: btFloat, btColor: btColor)
+            if deck.cards[x].amount.rawValue == 2 {
+                btShape = btShape + btShape
+            } else if deck.cards[x].amount.rawValue == 3 {
+                btShape = btShape + btShape + btShape
+            }
+            
+            changeAtt(btShape, place: x, btStroke: btStroke, btFloat: btFloat, btColor: btColor)
 //            cardButton[x].setTitle(deck.cards[x].shape.rawValue, for: [])
             x += 1
         }
@@ -88,7 +99,7 @@ class ViewController: UIViewController {
                     .strokeWidth : btStroke,
                     .strokeColor : btColor,
                     .foregroundColor : btColor.withAlphaComponent(CGFloat(btFloat)),
-                    .font : UIFont.systemFont(ofSize : 40)
+                    .font : UIFont.systemFont(ofSize : 30)
         
                 ]
         
