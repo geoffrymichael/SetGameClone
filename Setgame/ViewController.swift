@@ -22,12 +22,25 @@ class ViewController: UIViewController {
     
     
     
-    //    TODO: finish the logic here. I am trying to get a border around picked cards
+    //    TODO: Able to put a border around chosen cards, but need to be able to max the picked cards to three and reset isChosen to 0 if cards do not match or remove the three cards if they are matched. Perhaps a while loop?
     @IBAction func cardTouch(_ sender: UIButton) {
+        var btBorder = 0.0
+        var btBorderColor = UIColor.clear.cgColor
+        var x = 0
+        
         if let cardNumber = cardButton.index(of: sender) {
             deck.cards[cardNumber].isChosen = true
+            for i in deck.cards {
+                if deck.cards[x].isChosen {
+                    cardButton[x].layer.borderWidth = 3.0
+                    cardButton[x].layer.borderColor = UIColor.blue.cgColor
+                }
+                x += 1
+            }
             
-            deck.findPickedCardes()
+            deck.findPickedCards()
+            
+            
             
 //            print(deck.cards[cardNumber])
         }
@@ -46,16 +59,14 @@ class ViewController: UIViewController {
             
 //            changeAtt("☁︎", shade: 0.15, color: UIColor.blue, amount: 2)
             populateCards()
-            print(deck.cards.count)
             
         }
     }
     
     
     func populateCards() {
-        var x = 0
-        var btColor = UIColor.purple
-       
+       var x = 0
+        
         
         for _ in cardButton{
             var btStroke : Int!
@@ -63,12 +74,15 @@ class ViewController: UIViewController {
             var btShape = deck.cards[x].shape.rawValue
             
             
-            if deck.cards[x].color.rawValue == "blue" {
-                btColor = UIColor.blue
+            var btColor = UIColor.blue
+            
+            
+            if deck.cards[x].color.rawValue == "purple" {
+                btColor = UIColor.purple
             } else if deck.cards[x].color.rawValue == "red" {
                 btColor = UIColor.red
-            } else if deck.cards[x].fill.rawValue == "purple" {
-                btColor = UIColor.purple
+            } else if deck.cards[x].fill.rawValue == "blue" {
+                btColor = UIColor.blue
             }
             
             if deck.cards[x].fill.rawValue == "clear" {

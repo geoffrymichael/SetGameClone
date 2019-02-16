@@ -26,13 +26,14 @@ struct SetGameDeck {
     }
 
     //    TODO: finish the logic.
-    func findPickedCardes()  {
+    func findPickedCards()  {
         var pickedCards = cards.filter {
             ($0.isChosen)
         }
         
-        print(pickedCards)
+               
         print(pickedCards.count)
+        
         
     }
     
