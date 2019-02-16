@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SwiftGameDeck {
+struct SetGameDeck {
     
     var cards = [Card]()
     
@@ -17,7 +17,7 @@ struct SwiftGameDeck {
             for color in Card.Color.all {
                 for fill in Card.Fill.all {
                     for amount in Card.Amount.all {
-                        cards.append(Card(shape: shape, color: color, fill: fill, amount: amount))
+                        cards.append(Card(shape: shape, color: color, fill: fill, amount: amount, isChosen: false))
                     }
                 }
             }
@@ -25,4 +25,44 @@ struct SwiftGameDeck {
         cards.shuffle()
     }
 
+    //    TODO: finish the logic.
+    func findPickedCardes()  {
+        var pickedCards = cards.filter {
+            ($0.isChosen)
+        }
+        
+        print(pickedCards)
+        print(pickedCards.count)
+        
+    }
+    
+
+    
+    
+    func pickCards() {
+        
+        
+        
+        //Need to be able to select a card
+        //Need to be able to select another card
+        //Need to be able to pick a third card
+        
+        //One thing in common and other three not
+        //two things same, two things different
+        //Tree things in common and one different
+        
+    }
+    
+    
+    
+}
+
+extension Collection {
+    //this usues the Collection methods
+    //then we create and array that will be an element.
+    //then we say if the count of our element if the count ois equal to one, otherwise = nil
+    var oneAndOnly: Element? {
+        
+        return count == 1 ? first : nil
+    }
 }

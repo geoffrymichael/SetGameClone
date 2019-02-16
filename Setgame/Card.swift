@@ -32,6 +32,7 @@ struct Card {
     var color: Color
     var fill: Fill
     var amount: Amount
+    var isChosen: Bool
     
     
     enum Shape: String, CustomStringConvertible {
