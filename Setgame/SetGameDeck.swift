@@ -25,17 +25,7 @@ struct SetGameDeck {
         cards.shuffle()
     }
 
-    //    TODO: finish the logic.
-    func findPickedCards()  {
-        var pickedCards = cards.filter {
-            ($0.isChosen)
-        }
-        
-               
-        print(pickedCards.count)
-        
-        
-    }
+    
     
 
     

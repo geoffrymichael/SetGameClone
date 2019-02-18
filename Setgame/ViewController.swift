@@ -14,50 +14,42 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    
-    
+
     var deck = SetGameDeck()
     
+    var chosenCards = [Card]()
     
     
     
-    //    TODO: Able to put a border around chosen cards, but need to be able to max the picked cards to three and reset isChosen to 0 if cards do not match or remove the three cards if they are matched. Perhaps a while loop?
+    //    TODO: Trying out a refactor using an array to keepy track of picked cards. I have not removed the isChosen from the card though yet. Able to put a border around chosen cards, but need to be able to max the picked cards to three and reset isChosen to 0 if cards do not match or remove the three cards if they are matched. 
     @IBAction func cardTouch(_ sender: UIButton) {
-        var btBorder = 0.0
-        var btBorderColor = UIColor.clear.cgColor
-        var x = 0
         
-        if let cardNumber = cardButton.index(of: sender) {
-            deck.cards[cardNumber].isChosen = true
-            for i in deck.cards {
-                if deck.cards[x].isChosen {
-                    cardButton[x].layer.borderWidth = 3.0
-                    cardButton[x].layer.borderColor = UIColor.blue.cgColor
-                }
-                x += 1
+        if chosenCards.count < 3 {
+            if let cardNumber = cardButton.index(of: sender) {
+                
+                cardButton[cardNumber].layer.borderWidth = 3.0
+                cardButton[cardNumber].layer.borderColor = UIColor.blue.cgColor
+                
+                chosenCards.append(deck.cards[cardNumber])
+                
             }
             
-            deck.findPickedCards()
             
             
-            
-//            print(deck.cards[cardNumber])
+
         }
+       
         
-        
+        print(chosenCards)
+        print(chosenCards.count)
         
     }
-    
-    
-    
-    
-    
+
     
     @IBOutlet var cardButton: [UIButton]! {
         didSet {
             
-//            changeAtt("☁︎", shade: 0.15, color: UIColor.blue, amount: 2)
+
             populateCards()
             
         }
