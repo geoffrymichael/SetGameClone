@@ -21,10 +21,10 @@ class ViewController: UIViewController {
     
     
     
-    //    TODO: Trying out a refactor using an array to keepy track of picked cards. I have not removed the isChosen from the card though yet. Able to put a border around chosen cards, but need to be able to max the picked cards to three and reset isChosen to 0 if cards do not match or remove the three cards if they are matched. 
+    //    TODO: Able to clear the chosenCards array and clear borders when clicking on third card. This woud be used when the cards dont match set conditions. Need to figure out set conditions.
     @IBAction func cardTouch(_ sender: UIButton) {
         
-        if chosenCards.count < 3 {
+        if chosenCards.count < 2 {
             if let cardNumber = cardButton.index(of: sender) {
                 
                 cardButton[cardNumber].layer.borderWidth = 3.0
@@ -33,15 +33,23 @@ class ViewController: UIViewController {
                 chosenCards.append(deck.cards[cardNumber])
                 
             }
-            
-            
-            
 
+        }
+        
+        
+        else {
+            var x = 0
+            for i in cardButton {
+                cardButton[x].layer.borderWidth = 0
+                x += 1
+            }
+            chosenCards = []
         }
        
         
         print(chosenCards)
         print(chosenCards.count)
+        
         
     }
 
