@@ -25,8 +25,13 @@ import Foundation
 //    }
 //}
 
-struct Card {
+struct Card: Hashable {
     
+    var hashShape: String { return shape.rawValue }
+    
+    static func == (lhs: Card.Shape, rhs: Card) -> Bool {
+        return lhs == rhs.shape
+    }
        
     var shape: Shape
     var color: Color

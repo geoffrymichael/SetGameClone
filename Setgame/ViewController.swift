@@ -34,6 +34,8 @@ class ViewController: UIViewController {
                 
             }
 
+        } else if chosenCards[0].amount.hashValue == chosenCards[1].amount.hashValue {
+            print("Blecccchchchch")
         }
         
         
