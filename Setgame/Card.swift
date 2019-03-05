@@ -25,14 +25,14 @@ import Foundation
 //    }
 //}
 
-struct Card: Hashable {
+struct Card: Equatable {
     
-    var hashShape: String { return shape.rawValue }
-    
-    static func == (lhs: Card.Shape, rhs: Card) -> Bool {
-        return lhs == rhs.shape
+    static func == (lhs: Card, rhs: Card) -> Bool {
+        return lhs.shape == rhs.shape &&
+        lhs.color == rhs.color &&
+        lhs.fill == rhs.fill
     }
-       
+    
     var shape: Shape
     var color: Color
     var fill: Fill
@@ -40,7 +40,7 @@ struct Card: Hashable {
     var isChosen: Bool
     
     
-    enum Shape: String, CustomStringConvertible {
+    enum Shape: String, Equatable, CustomStringConvertible {
         case triangle = "▲"
         case square = "■"
         case circle = "●"
@@ -48,9 +48,13 @@ struct Card: Hashable {
         static var all = [Shape.triangle, .square, .circle]
         
         var description: String { return rawValue }
+        
+        static func == (lhs: Card.Shape, rhs: Card.Shape) -> Bool {
+            return lhs.rawValue == rhs.rawValue
+        }
     }
     
-    enum Color: String , CustomStringConvertible {
+    enum Color: String , Equatable, CustomStringConvertible {
         var description: String {return rawValue}
         
         
@@ -61,11 +65,13 @@ struct Card: Hashable {
         
         static var all = [Color.blue, .red, .purple]
         
-        
+        static func == (lhs: Card.Color, rhs: Card.Color) -> Bool {
+            return lhs.rawValue == rhs.rawValue
+        }
         
     }
     
-    enum Fill: String, CustomStringConvertible {
+    enum Fill: String, Equatable, CustomStringConvertible {
         var description: String {return rawValue}
         
         case clear = "clear"
@@ -74,9 +80,14 @@ struct Card: Hashable {
         
         static var all = [Fill.clear, .shaded, .filled ]
         
+        
+        static func == (lhs: Card.Fill, rhs: Card.Fill) -> Bool {
+            return lhs.rawValue == rhs.rawValue
+        }
+        
     }
     
-    enum Amount: Int {
+    enum Amount: Int, Equatable {
         
         
         case one = 1
@@ -85,6 +96,9 @@ struct Card: Hashable {
         
         static var all = [Amount.one, .two, .three]
         
+        static func == (lhs: Card.Amount, rhs: Card.Amount) -> Bool {
+            return lhs.rawValue == rhs.rawValue
+        }
         
     }
     

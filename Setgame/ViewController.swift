@@ -32,12 +32,11 @@ class ViewController: UIViewController {
                 
                 chosenCards.append(deck.cards[cardNumber])
                 
+                
             }
 
-        } else if chosenCards[0].amount.hashValue == chosenCards[1].amount.hashValue {
-            print("Blecccchchchch")
-        }
-        
+        } 
+    
         
         else {
             var x = 0
@@ -53,6 +52,11 @@ class ViewController: UIViewController {
         print(chosenCards.count)
         
         
+        //TODO Still Testing out comparing equatable values. 
+        var firstCard = [String]()
+        firstCard   = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue]
+        var secondCard = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue]
+        print(firstCard.contains(secondCard[0]))
     }
 
     
