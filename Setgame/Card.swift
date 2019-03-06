@@ -87,12 +87,12 @@ struct Card: Equatable {
         
     }
     
-    enum Amount: Int, Equatable {
+    enum Amount: String, Equatable {
         
         
-        case one = 1
-        case two = 2
-        case three = 3
+        case one = "one"
+        case two = "two"
+        case three = "three"
         
         static var all = [Amount.one, .two, .three]
         

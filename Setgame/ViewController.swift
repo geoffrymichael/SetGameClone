@@ -19,12 +19,17 @@ class ViewController: UIViewController {
     
     var chosenCards = [Card]()
     
+    var firstCard = [String]()
+    var secondCard = [String]()
+    var thirdCard = [String]()
     
+    var matchCount = 0
+    var matchCard = [String]()
     
     //    TODO: Able to clear the chosenCards array and clear borders when clicking on third card. This woud be used when the cards dont match set conditions. Need to figure out set conditions.
     @IBAction func cardTouch(_ sender: UIButton) {
         
-        if chosenCards.count < 2 {
+        if chosenCards.count <= 2 {
             if let cardNumber = cardButton.index(of: sender) {
                 
                 cardButton[cardNumber].layer.borderWidth = 3.0
@@ -32,31 +37,47 @@ class ViewController: UIViewController {
                 
                 chosenCards.append(deck.cards[cardNumber])
                 
+                if chosenCards.count == 1 {
+                    firstCard = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue, chosenCards[0].fill.rawValue, chosenCards[0].amount.rawValue]
+                    print(firstCard, "asdfasdfasdfasdfasdf")
+                } else if chosenCards.count == 2 {
+                    secondCard = [chosenCards[1].shape.rawValue, chosenCards[1].color.rawValue, chosenCards[1].fill.rawValue, chosenCards[1].amount.rawValue]
+                    print(secondCard, "this is the second card")
+                } else if chosenCards.count > 2  {
+                    thirdCard = [chosenCards[2].shape.rawValue, chosenCards[2].color.rawValue, chosenCards[2].fill.rawValue, chosenCards[2].amount.rawValue]
+                    print("this is the third card", thirdCard)
+                    
+                    
+                    for i in 0..<chosenCards.count {
+                        
+                        if firstCard.contains(secondCard[i]) {
+                            matchCount += 1
+                            matchCard += [secondCard[i]]
+                            print("this is how many matches we have now", matchCount, matchCard)
+                            
+                            
+                        }
+                        
+                    }
+                }
+                
                 
             }
-
-        } 
-    
-        
-        else {
-            var x = 0
-            for i in cardButton {
-                cardButton[x].layer.borderWidth = 0
-                x += 1
-            }
-            chosenCards = []
+            
+            
+            
         }
-       
         
-        print(chosenCards)
-        print(chosenCards.count)
+        
+        
+        
+        
+        
         
         
         //TODO Still Testing out comparing equatable values. 
-        var firstCard = [String]()
-        firstCard   = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue]
-        var secondCard = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue]
-        print(firstCard.contains(secondCard[0]))
+        //        var firstCard = [String]()
+        
     }
 
     
@@ -92,22 +113,22 @@ class ViewController: UIViewController {
             }
             
             if deck.cards[x].fill.rawValue == "clear" {
-                btStroke = -5
+                btStroke = 5
                 btFloat = 5.00
             } else if deck.cards[x].fill.rawValue == "shaded" {
                 btStroke = -5
                 btFloat = 0.15
             } else if deck.cards[x].fill.rawValue == "filled" {
-                btStroke = 5
+                btStroke = -5
                 btFloat = 5.00
             }
             
             
             
             
-            if deck.cards[x].amount.rawValue == 2 {
+            if deck.cards[x].amount.rawValue == "two" {
                 btShape = btShape + btShape
-            } else if deck.cards[x].amount.rawValue == 3 {
+            } else if deck.cards[x].amount.rawValue == "three" {
                 btShape = btShape + btShape + btShape
             }
             
@@ -134,7 +155,16 @@ class ViewController: UIViewController {
         
             }
     
- 
+    func clearChosen() {
+        var x = 0
+        for i in cardButton {
+            cardButton[x].layer.borderWidth = 0
+            x += 1
+        }
+        chosenCards = []
+        print(chosenCards)
+        print(chosenCards.count)
+    }
     
 }
 
