@@ -29,54 +29,11 @@ class ViewController: UIViewController {
     //    TODO: Able to clear the chosenCards array and clear borders when clicking on third card. This woud be used when the cards dont match set conditions. Need to figure out set conditions.
     @IBAction func cardTouch(_ sender: UIButton) {
         
-        if chosenCards.count <= 2 {
-            if let cardNumber = cardButton.index(of: sender) {
-                
-                cardButton[cardNumber].layer.borderWidth = 3.0
-                cardButton[cardNumber].layer.borderColor = UIColor.blue.cgColor
-                
-                chosenCards.append(deck.cards[cardNumber])
-                
-                if chosenCards.count == 1 {
-                    firstCard = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue, chosenCards[0].fill.rawValue, chosenCards[0].amount.rawValue]
-                    print(firstCard, "asdfasdfasdfasdfasdf")
-                } else if chosenCards.count == 2 {
-                    secondCard = [chosenCards[1].shape.rawValue, chosenCards[1].color.rawValue, chosenCards[1].fill.rawValue, chosenCards[1].amount.rawValue]
-                    print(secondCard, "this is the second card")
-                } else if chosenCards.count > 2  {
-                    thirdCard = [chosenCards[2].shape.rawValue, chosenCards[2].color.rawValue, chosenCards[2].fill.rawValue, chosenCards[2].amount.rawValue]
-                    print("this is the third card", thirdCard)
-                    
-                    
-                    for i in 0..<chosenCards.count {
-                        
-                        if firstCard.contains(secondCard[i]) {
-                            matchCount += 1
-                            matchCard += [secondCard[i]]
-                            print("this is how many matches we have now", matchCount, matchCard)
-                            
-                            
-                        }
-                        
-                    }
-                }
-                
-                
-            }
+        
+            pickCards(pickedCard: sender)
             
-            
-            
-        }
         
         
-        
-        
-        
-        
-        
-        
-        //TODO Still Testing out comparing equatable values. 
-        //        var firstCard = [String]()
         
     }
 
@@ -84,8 +41,8 @@ class ViewController: UIViewController {
     @IBOutlet var cardButton: [UIButton]! {
         didSet {
             
-
             populateCards()
+            
             
         }
     }
@@ -161,9 +118,82 @@ class ViewController: UIViewController {
             cardButton[x].layer.borderWidth = 0
             x += 1
         }
+        for i in 0...chosenCards.count {
+            
+            if firstCard.contains(secondCard[i]) {
+                matchCount += 1
+                matchCard += [secondCard[i]]
+                print("this is how many matches we have now", matchCount, matchCard)
+                
+                
+            }
+            
+        }
+        
+        if matchCount == 0 {
+            for i in 0...3 {
+                if secondCard.contains(thirdCard[i]) {
+                    print("no match first two cards")
+                    break
+                }
+                    
+             }
+                print("No match for all different")
+        } else if matchCount == 1 {
+            matchCount = 0
+            for i in 0...3 {
+                //TODO  Need to figure out the logic for three cards with only one match attribute. Right now the logic below isnt working resulting in a win with more than one matching attribute.
+                if secondCard.contains(thirdCard[i]) {
+                    matchCount += 1
+                    if matchCount == 1 {
+                        print("This is a one match over three cards")
+                        break
+                    }
+                } else {
+                    print("No match of one over three cardfs")
+                }
+            }
+        }
+        
         chosenCards = []
+        matchCount = 0
+        matchCard = []
         print(chosenCards)
         print(chosenCards.count)
+    }
+    
+    func pickCards( pickedCard: UIButton) {
+        
+            if let cardNumber = cardButton.index(of: pickedCard) {
+                
+                cardButton[cardNumber].layer.borderWidth = 3.0
+                cardButton[cardNumber].layer.borderColor = UIColor.blue.cgColor
+                
+                chosenCards.append(deck.cards[cardNumber])
+                
+                if chosenCards.count == 1 {
+                    firstCard = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue, chosenCards[0].fill.rawValue, chosenCards[0].amount.rawValue]
+                    print(firstCard, "asdfasdfasdfasdfasdf")
+                } else if chosenCards.count == 2 {
+                    secondCard = [chosenCards[1].shape.rawValue, chosenCards[1].color.rawValue, chosenCards[1].fill.rawValue, chosenCards[1].amount.rawValue]
+                    print(secondCard, "this is the second card")
+                } else if chosenCards.count == 3  {
+                    thirdCard = [chosenCards[2].shape.rawValue, chosenCards[2].color.rawValue, chosenCards[2].fill.rawValue, chosenCards[2].amount.rawValue]
+                    print("this is the third card", thirdCard)
+                    
+                    clearChosen()
+                    
+                    
+                    
+                }
+                    
+                
+                
+                
+                
+            }
+            
+        
     }
     
 }
