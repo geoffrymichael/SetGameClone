@@ -13,6 +13,9 @@
 
 import UIKit
 
+
+//TODO The basic matching logic seems to be working. I think I may want to refactor some functions out of the view controller before doing the replacing cards logic.
+
 class ViewController: UIViewController {
 
     var deck = SetGameDeck()
@@ -31,9 +34,6 @@ class ViewController: UIViewController {
         
         
             pickCards(pickedCard: sender)
-            
-        
-        
         
     }
 
@@ -42,8 +42,7 @@ class ViewController: UIViewController {
         didSet {
             
             populateCards()
-            
-            
+
         }
     }
     
@@ -79,9 +78,7 @@ class ViewController: UIViewController {
                 btStroke = -5
                 btFloat = 5.00
             }
-            
-            
-            
+           
             
             if deck.cards[x].amount.rawValue == "two" {
                 btShape = btShape + btShape
@@ -133,27 +130,67 @@ class ViewController: UIViewController {
         if matchCount == 0 {
             for i in 0...3 {
                 if secondCard.contains(thirdCard[i]) {
-                    print("no match first two cards")
-                    break
+                    matchCount += 1
+                    if matchCount > 0 {
+                        print("no set of all different")
+                        break
+                    } else {
+                        print("set of no matches")
+                    }
+            
                 }
                     
              }
-                print("No match for all different")
-        } else if matchCount == 1 {
+        
+        }
+        
+        else if matchCount == 1 {
             matchCount = 0
             for i in 0...3 {
-                //TODO  Need to figure out the logic for three cards with only one match attribute. Right now the logic below isnt working resulting in a win with more than one matching attribute.
+                
                 if secondCard.contains(thirdCard[i]) {
                     matchCount += 1
-                    if matchCount == 1 {
-                        print("This is a one match over three cards")
+                    if matchCount > 0 {
+                        print("No set of single attributes")
                         break
+                    } else {
+                        print("Set of single attributes")
                     }
-                } else {
-                    print("No match of one over three cardfs")
                 }
             }
+        
         }
+        
+        else if matchCount == 2 {
+            matchCount = 0
+            for i in 0...3 {
+                if secondCard.contains(thirdCard[i]) {
+                    matchCount += 1
+                }
+            }
+            if matchCount == 2 {
+                print("Set of two attributes")
+            } else {
+                print("No set of two attributes")
+            }
+        }
+        
+        else if matchCount == 3 {
+            matchCount = 0
+            for i in 0...3 {
+                if secondCard.contains(thirdCard[i]) {
+                    matchCount += 1
+                    
+                }
+            }
+            if matchCount == 3 {
+                print("Set of three matches")
+            } else {
+                print("No set of three matches")
+            }
+        }
+        
+        
         
         chosenCards = []
         matchCount = 0
@@ -186,11 +223,7 @@ class ViewController: UIViewController {
                     
                     
                 }
-                    
-                
-                
-                
-                
+
             }
             
         

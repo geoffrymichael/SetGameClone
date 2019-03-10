@@ -30,17 +30,11 @@ struct SetGameDeck {
 
     
     
-    func pickCards() {
+    func cardMatching() {
         
         
+        //TODO Refactor card matching from view controller
         
-        //Need to be able to select a card
-        //Need to be able to select another card
-        //Need to be able to pick a third card
-        
-        //One thing in common and other three not
-        //two things same, two things different
-        //Tree things in common and one different
         
     }
     
