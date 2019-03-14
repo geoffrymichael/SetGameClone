@@ -137,7 +137,7 @@ struct SetGameDeck {
                     
                 }
             }
-            if matchCount == 27 {
+            if matchCount == 9 {
                 print("Set of three matches")
             } else {
                 print("No set of three matches")
