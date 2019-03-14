@@ -78,9 +78,11 @@ struct SetGameDeck {
         
         if matchCount == 0 {
             for i in 0...3 {
-                if secondCard.contains(thirdCard[i]) {
+                if firstCard.contains(thirdCard[i])  {
                     matchCount += 1
-                    
+                    if secondCard.contains(thirdCard[i]) {
+                        matchCount += 1
+                    }
                 }
                 
             }
@@ -92,12 +94,14 @@ struct SetGameDeck {
         }
             
         else if matchCount == 1 {
-            matchCount = 0
+            
             for i in 0...3 {
                 
-                if secondCard.contains(thirdCard[i]) {
+                if firstCard.contains(thirdCard[i]) {
                     matchCount += 1
-                    
+                    if secondCard.contains(thirdCard[i]) {
+                        matchCount += 1
+                    }
                 }
             }
             if matchCount  == 1 {
@@ -108,13 +112,15 @@ struct SetGameDeck {
         }
             
         else if matchCount == 2 {
-            matchCount = 0
             for i in 0...3 {
-                if secondCard.contains(thirdCard[i]) {
+                if firstCard.contains(thirdCard[i])  {
                     matchCount += 1
+                    if secondCard.contains(thirdCard[i]) {
+                        matchCount += 1
+                    }
                 }
             }
-            if matchCount == 2 {
+            if matchCount == 6 {
                 print("Set of two attributes")
             } else {
                 print("No set of two attributes")
@@ -122,14 +128,16 @@ struct SetGameDeck {
         }
             
         else if matchCount == 3 {
-            matchCount = 0
             for i in 0...3 {
-                if secondCard.contains(thirdCard[i]) {
+                if firstCard.contains(thirdCard[i])   {
                     matchCount += 1
+                    if secondCard.contains(thirdCard[i]) {
+                        matchCount += 1
+                    }
                     
                 }
             }
-            if matchCount == 3 {
+            if matchCount == 27 {
                 print("Set of three matches")
             } else {
                 print("No set of three matches")
