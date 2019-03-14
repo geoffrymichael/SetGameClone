@@ -104,7 +104,7 @@ struct SetGameDeck {
                     }
                 }
             }
-            if matchCount  == 1 {
+            if matchCount  == 3 {
                 print("Set of single attributes")
             } else {
                 print("No set of single attributes")

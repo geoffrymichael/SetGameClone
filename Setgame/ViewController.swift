@@ -20,20 +20,19 @@ class ViewController: UIViewController {
 
     var deck = SetGameDeck()
     
-    var chosenCards = [Card]()
-    
-    var firstCard = [String]()
-    var secondCard = [String]()
-    var thirdCard = [String]()
-    
-    var matchCount = 0
-    var matchCard = [String]()
-    
+    var buttonPress = 0
     
     @IBAction func cardTouch(_ sender: UIButton) {
         
         
-            pickCards(pickedCard: sender)
+        pickCards(pickedCard: sender)
+        
+        buttonPress += 1
+        
+        if buttonPress == 3 {
+            clearChosenColor()
+        }
+        
         
     }
 
@@ -113,15 +112,11 @@ class ViewController: UIViewController {
     //TODO Matching seems to be refactored into the setgamedeck. Need to test further. Also need to have the view controller update to clear selected. 
     func clearChosenColor() {
         
-        for i in 0...cardButton.count {
+        for i in 0..<cardButton.count {
             cardButton[i].layer.borderWidth = 0
             
         }
-        
-        
-        
-        
-        
+        buttonPress = 0
         
     }
     
