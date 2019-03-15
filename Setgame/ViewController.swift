@@ -14,11 +14,13 @@
 import UIKit
 
 
-//TODO The basic matching logic seems to be working. I think I may want to refactor some functions out of the view controller before doing the replacing cards logic.
+//TODO I have had the populate function remove cards from the total deck for the cards shown. These cards are then used to pick cards from when clicked on. Need to be able remove these cards and replace these cards in shownCards from the deck and update the view. Also created a unique Int in the card as in identifier. Not sure if this needed or will work to track individual cards. 
 
 class ViewController: UIViewController {
 
     var deck = SetGameDeck()
+    
+    var shownCards = [Card]()
     
     var buttonPress = 0
     
@@ -41,14 +43,14 @@ class ViewController: UIViewController {
         didSet {
             
             populateCards()
-
+            
         }
     }
     
     
     func populateCards() {
        var x = 0
-        
+       
         
         for _ in cardButton{
             var btStroke : Int!
@@ -59,29 +61,31 @@ class ViewController: UIViewController {
             var btColor = UIColor.blue
             
             
-            if deck.cards[x].color.rawValue == "purple" {
+            shownCards += [deck.cards.remove(at: x)]
+            
+            if shownCards[x].color.rawValue == "purple" {
                 btColor = UIColor.purple
-            } else if deck.cards[x].color.rawValue == "red" {
+            } else if shownCards[x].color.rawValue == "red" {
                 btColor = UIColor.red
-            } else if deck.cards[x].fill.rawValue == "blue" {
+            } else if shownCards[x].fill.rawValue == "blue" {
                 btColor = UIColor.blue
             }
             
-            if deck.cards[x].fill.rawValue == "clear" {
+            if shownCards[x].fill.rawValue == "clear" {
                 btStroke = 5
                 btFloat = 5.00
-            } else if deck.cards[x].fill.rawValue == "shaded" {
+            } else if shownCards[x].fill.rawValue == "shaded" {
                 btStroke = -5
                 btFloat = 0.15
-            } else if deck.cards[x].fill.rawValue == "filled" {
+            } else if shownCards[x].fill.rawValue == "filled" {
                 btStroke = -5
                 btFloat = 5.00
             }
            
             
-            if deck.cards[x].amount.rawValue == "two" {
+            if shownCards[x].amount.rawValue == "two" {
                 btShape = btShape + btShape
-            } else if deck.cards[x].amount.rawValue == "three" {
+            } else if shownCards[x].amount.rawValue == "three" {
                 btShape = btShape + btShape + btShape
             }
             
@@ -89,7 +93,9 @@ class ViewController: UIViewController {
             
             x += 1
         }
-        
+        print(deck)
+        print(shownCards.count)
+        print(deck.cards.count)
     }
     
     
@@ -99,8 +105,6 @@ class ViewController: UIViewController {
                     .strokeColor : btColor,
                     .foregroundColor : btColor.withAlphaComponent(CGFloat(btFloat)),
                     .font : UIFont.systemFont(ofSize : 25)
-            
-        
                 ]
         
                 let textAttributes = NSAttributedString(string: text, attributes: textColor)
@@ -109,7 +113,7 @@ class ViewController: UIViewController {
             }
     
     
-    //TODO Matching seems to be refactored into the setgamedeck. Need to test further. Also need to have the view controller update to clear selected. 
+    
     func clearChosenColor() {
         
         for i in 0..<cardButton.count {
@@ -128,7 +132,7 @@ class ViewController: UIViewController {
                 cardButton[cardNumber].layer.borderColor = UIColor.blue.cgColor
                 
                 
-                deck.cardPicking(cardNumber: cardNumber)
+                deck.cardPicking(cardNumber: cardNumber, shownCard: shownCards )
                 
                 
             }

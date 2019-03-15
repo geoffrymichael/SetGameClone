@@ -21,12 +21,15 @@ struct SetGameDeck {
     var matchCount = 0
     var matchCard = [String]()
     
+    var identifier = 0
+    
     init() {
         for shape in Card.Shape.all {
             for color in Card.Color.all {
                 for fill in Card.Fill.all {
                     for amount in Card.Amount.all {
-                        cards.append(Card(shape: shape, color: color, fill: fill, amount: amount, isChosen: false))
+                        cards.append(Card(shape: shape, color: color, fill: fill, amount: amount, isChosen: identifier))
+                        identifier += 1
                     }
                 }
             }
@@ -37,11 +40,11 @@ struct SetGameDeck {
     
    
     
-    mutating func cardPicking(cardNumber: Int) {
+    mutating func cardPicking(cardNumber: Int, shownCard: [Card]) {
         
         
         
-        chosenCards.append(cards[cardNumber])
+        chosenCards.append(shownCard[cardNumber])
         
 
         
@@ -152,6 +155,7 @@ struct SetGameDeck {
         print(chosenCards)
         print(chosenCards.count)
     }
+    
     
 }
 

@@ -37,7 +37,7 @@ struct Card: Equatable {
     var color: Color
     var fill: Fill
     var amount: Amount
-    var isChosen: Bool
+    var isChosen: Int
     
     
     enum Shape: String, Equatable, CustomStringConvertible {
