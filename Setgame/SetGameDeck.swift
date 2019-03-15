@@ -81,13 +81,12 @@ struct SetGameDeck {
         
         if matchCount == 0 {
             for i in 0...3 {
-                if firstCard.contains(thirdCard[i])  {
+                if firstCard.contains(thirdCard[i]) {
                     matchCount += 1
-                    if secondCard.contains(thirdCard[i]) {
-                        matchCount += 1
-                    }
                 }
-                
+                if secondCard.contains(thirdCard[i]) {
+                    matchCount += 1
+                }
             }
             if matchCount > 0 {
                 print("no set of all different")
@@ -99,14 +98,18 @@ struct SetGameDeck {
         else if matchCount == 1 {
             
             for i in 0...3 {
-                
-                if firstCard.contains(thirdCard[i]) {
-                    matchCount += 1
-                    if secondCard.contains(thirdCard[i]) {
+                if thirdCard.contains(firstCard[i]) {
                         matchCount += 1
-                    }
+                    
+                }
+                if thirdCard.contains(secondCard[i]) {
+                    matchCount += 1
                 }
             }
+            
+            
+            print(matchCount)
+            
             if matchCount  == 3 {
                 print("Set of single attributes")
             } else {
@@ -116,12 +119,16 @@ struct SetGameDeck {
             
         else if matchCount == 2 {
             for i in 0...3 {
-                if firstCard.contains(thirdCard[i])  {
+                if firstCard.contains(thirdCard[i]) {
                     matchCount += 1
-                    if secondCard.contains(thirdCard[i]) {
-                        matchCount += 1
-                    }
                 }
+                if matchCount > 2 {
+                    break
+                }
+                if secondCard.contains(thirdCard[i]) {
+                    matchCount += 1
+                }
+                
             }
             if matchCount == 6 {
                 print("Set of two attributes")
@@ -132,13 +139,8 @@ struct SetGameDeck {
             
         else if matchCount == 3 {
             for i in 0...3 {
-                if firstCard.contains(thirdCard[i])   {
-                    matchCount += 1
-                    if secondCard.contains(thirdCard[i]) {
-                        matchCount += 1
-                    }
-                    
-                }
+                
+                
             }
             if matchCount == 9 {
                 print("Set of three matches")
