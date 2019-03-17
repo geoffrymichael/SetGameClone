@@ -97,20 +97,25 @@ struct SetGameDeck {
             
         else if matchCount == 1 {
             
-            for i in 0...3 {
-                if thirdCard.contains(firstCard[i]) {
+            let singleMatchOne = firstCard.filter{ $0 != matchCard[0]}
+            let singleMatchTwo = secondCard.filter{ $0 != matchCard[0]}
+            
+            let compareCard = singleMatchOne + singleMatchTwo
+            
+            if thirdCard.contains(matchCard[0]) {
+                for i in 0..<thirdCard.count {
+                    if compareCard.contains(thirdCard[i]) {
                         matchCount += 1
-                    
+                    }
                 }
-                if thirdCard.contains(secondCard[i]) {
-                    matchCount += 1
-                }
+            } else {
+                matchCount += 1
             }
             
             
-            print(matchCount)
-            
-            if matchCount  == 3 {
+            print(compareCard)
+
+            if matchCount  == 1 {
                 print("Set of single attributes")
             } else {
                 print("No set of single attributes")
@@ -118,19 +123,22 @@ struct SetGameDeck {
         }
             
         else if matchCount == 2 {
-            for i in 0...3 {
-                if firstCard.contains(thirdCard[i]) {
-                    matchCount += 1
+            let doubleMatchOne = firstCard.filter{ $0 != matchCard[0] && $0 != matchCard[1]}
+            let doubleMatchTwo = firstCard.filter{ $0 != matchCard[0] && $0 != matchCard[1]}
+            
+            let compareDoubleMatch = doubleMatchOne + doubleMatchTwo
+            
+            if thirdCard.contains(matchCard[0]) && thirdCard.contains(matchCard[1]) {
+                for i in 0..<thirdCard.count {
+                    if compareDoubleMatch.contains(thirdCard[i]) {
+                        matchCount += 1
+                    }
                 }
-                if matchCount > 2 {
-                    break
-                }
-                if secondCard.contains(thirdCard[i]) {
-                    matchCount += 1
-                }
-                
+            } else {
+                matchCount += 1
             }
-            if matchCount == 6 {
+            
+            if matchCount == 2 {
                 print("Set of two attributes")
             } else {
                 print("No set of two attributes")
@@ -138,16 +146,20 @@ struct SetGameDeck {
         }
             
         else if matchCount == 3 {
-            for i in 0...3 {
-                
-                
+            for i in 0..<thirdCard.count {
+                if matchCard.contains(thirdCard[i]) {
+                    matchCount += 1
+                }
             }
-            if matchCount == 9 {
+            
+            if matchCount == 6 {
                 print("Set of three matches")
             } else {
                 print("No set of three matches")
             }
         }
+       
+        
     }
     
     mutating func clearChosen() {
