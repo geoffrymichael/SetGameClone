@@ -58,7 +58,7 @@ struct SetGameDeck {
             thirdCard = [chosenCards[2].shape.rawValue, chosenCards[2].color.rawValue, chosenCards[2].fill.rawValue, chosenCards[2].amount.rawValue]
             print("this is the third card", thirdCard)
             cardMatching()
-            clearChosen()
+//            clearChosen()
             
         }
 
@@ -170,6 +170,31 @@ struct SetGameDeck {
         print(chosenCards.count)
     }
     
+//    func removeMatched(shownCards: [Card], deck: [Card]) -> [Card]{
+//
+//            var mutatedDic = shownCards
+//            for i in 0..<chosenCards.count {
+//                if shownCards.contains(chosenCards[i]) {
+//                    mutatedDic[i] = deck[i]
+//
+//                }
+//            }
+//
+//            return mutatedDic
+//
+//
+//    }
+    
+    func removeMatchedCards(shownCards: [Card]) -> [Card] {
+        var matchedCard = [Card]()
+        for i in 0..<chosenCards.count {
+            if shownCards.contains(chosenCards[i]) {
+                matchedCard.append(chosenCards[i])
+            }
+        }
+        print(matchedCard)
+        return matchedCard
+    }
     
 }
 

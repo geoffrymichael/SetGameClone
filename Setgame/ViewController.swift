@@ -14,7 +14,7 @@
 import UIKit
 
 
-//TODO I have had the populate function remove cards from the total deck for the cards shown. These cards are then used to pick cards from when clicked on. Need to be able remove these cards and replace these cards in shownCards from the deck and update the view. Also created a unique Int in the card as in identifier. Not sure if this needed or will work to track individual cards. 
+//TODO Started messing around with replacing matched cards. Not really working yet. Cards are getting replaced, but they appear to be at randomm. Also note you have commented out some things in setgamedeck like clearChosen() to test functionality.    OF COURSE, one problem is when you call populate cards again it clears out twelve more cards from deck.
 
 class ViewController: UIViewController {
 
@@ -33,22 +33,42 @@ class ViewController: UIViewController {
         
         if buttonPress == 3 {
             clearChosenColor()
+            var chosenCards = deck.removeMatchedCards(shownCards: shownCards)
+            print(chosenCards)
+            populateShownCards(chosenCards: chosenCards)
+            populateCards(shownCards: shownCards)
+            
         }
         
         
     }
-
+    
     
     @IBOutlet var cardButton: [UIButton]! {
         didSet {
             
-            populateCards()
+            newGame()
+            populateCards(shownCards: shownCards)
             
         }
     }
     
+    func populateShownCards(chosenCards: [Card]) {
+        for i in 0..<chosenCards.count {
+            if shownCards.contains(chosenCards[i]) {
+                shownCards[i] = deck.cards[i]
+            }
+        }
+        
+    }
     
-    func populateCards() {
+    func newGame() {
+        for i in 0..<cardButton.count {
+            shownCards += [deck.cards.remove(at: i)]
+        }
+    }
+    
+    func populateCards(shownCards: [Card]) {
        var x = 0
        
         
@@ -61,7 +81,7 @@ class ViewController: UIViewController {
             var btColor = UIColor.blue
             
             
-            shownCards += [deck.cards.remove(at: x)]
+            
             
             if shownCards[x].color.rawValue == "purple" {
                 btColor = UIColor.purple
