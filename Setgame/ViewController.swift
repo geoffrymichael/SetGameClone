@@ -14,7 +14,7 @@
 import UIKit
 
 
-//TODO Started messing around with replacing matched cards. Not really working yet. Cards are getting replaced, but they appear to be at randomm. Also note you have commented out some things in setgamedeck like clearChosen() to test functionality.    OF COURSE, one problem is when you call populate cards again it clears out twelve more cards from deck.
+//TODO Started messing around with replacing matched cards. Not really working yet. Cards are getting replaced, but they appear to be at randomm. Also note you have commented out some things in setgamedeck like clearChosen() to test functionality.    OF COURSE, one problem is when you call populate cards again it clears out twelve more cards from deck. Other OF COURSE. Currently you are removing from the shown cards via removing via a for sequence. The wrong number card is pulled after the first, I believe. 
 
 class ViewController: UIViewController {
 
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         if buttonPress == 3 {
             clearChosenColor()
             var chosenCards = deck.removeMatchedCards(shownCards: shownCards)
-            print(chosenCards)
+            print("🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔", chosenCards)
             populateShownCards(chosenCards: chosenCards)
             populateCards(shownCards: shownCards)
             
@@ -49,6 +49,7 @@ class ViewController: UIViewController {
             
             newGame()
             populateCards(shownCards: shownCards)
+            print(shownCards)
             
         }
     }
