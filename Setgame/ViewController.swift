@@ -14,7 +14,7 @@
 import UIKit
 
 
-//TODO Started messing around with replacing matched cards. Not really working yet. Cards are getting replaced, but they appear to be at randomm. Also note you have commented out some things in setgamedeck like clearChosen() to test functionality.    OF COURSE, one problem is when you call populate cards again it clears out twelve more cards from deck. Other OF COURSE. Currently you are removing from the shown cards via removing via a for sequence. The wrong number card is pulled after the first, I believe. 
+//TODO Removing and replacing seems to be working now. The issue seemed to be using a random x function in my populate cards instead of changing it to a shown cards count after creating shown cards. Also switched the populateShownCards function so that it checked whether chosenCards contained shownCards, instead of vice/versa. Also, siwtched to a random number for the showncards to populate from as well as new cards after a match.
 
 class ViewController: UIViewController {
 
@@ -55,9 +55,9 @@ class ViewController: UIViewController {
     }
     
     func populateShownCards(chosenCards: [Card]) {
-        for i in 0..<chosenCards.count {
-            if shownCards.contains(chosenCards[i]) {
-                shownCards[i] = deck.cards[i]
+        for i in 0..<shownCards.count {
+            if chosenCards.contains(shownCards[i]) {
+                shownCards[i] = deck.cards.remove(at: i)
             }
         }
         
@@ -65,18 +65,18 @@ class ViewController: UIViewController {
     
     func newGame() {
         for i in 0..<cardButton.count {
-            shownCards += [deck.cards.remove(at: i)]
+            shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
         }
     }
     
     func populateCards(shownCards: [Card]) {
-       var x = 0
+//       var x = 0
        
         
-        for _ in cardButton{
+        for i in 0..<cardButton.count {
             var btStroke : Int!
             var btFloat : Float!
-            var btShape = deck.cards[x].shape.rawValue
+            var btShape = shownCards[i].shape.rawValue
             
             
             var btColor = UIColor.blue
@@ -84,35 +84,35 @@ class ViewController: UIViewController {
             
             
             
-            if shownCards[x].color.rawValue == "purple" {
+            if shownCards[i].color.rawValue == "purple" {
                 btColor = UIColor.purple
-            } else if shownCards[x].color.rawValue == "red" {
+            } else if shownCards[i].color.rawValue == "red" {
                 btColor = UIColor.red
-            } else if shownCards[x].fill.rawValue == "blue" {
+            } else if shownCards[i].fill.rawValue == "blue" {
                 btColor = UIColor.blue
             }
             
-            if shownCards[x].fill.rawValue == "clear" {
+            if shownCards[i].fill.rawValue == "clear" {
                 btStroke = 5
                 btFloat = 5.00
-            } else if shownCards[x].fill.rawValue == "shaded" {
+            } else if shownCards[i].fill.rawValue == "shaded" {
                 btStroke = -5
                 btFloat = 0.15
-            } else if shownCards[x].fill.rawValue == "filled" {
+            } else if shownCards[i].fill.rawValue == "filled" {
                 btStroke = -5
                 btFloat = 5.00
             }
            
             
-            if shownCards[x].amount.rawValue == "two" {
+            if shownCards[i].amount.rawValue == "two" {
                 btShape = btShape + btShape
-            } else if shownCards[x].amount.rawValue == "three" {
+            } else if shownCards[i].amount.rawValue == "three" {
                 btShape = btShape + btShape + btShape
             }
             
-            changeAtt(btShape, place: x, btStroke: btStroke, btFloat: btFloat, btColor: btColor)
+            changeAtt(btShape, place: i, btStroke: btStroke, btFloat: btFloat, btColor: btColor)
             
-            x += 1
+//            x += 1
         }
         print(deck)
         print(shownCards.count)
@@ -163,6 +163,17 @@ class ViewController: UIViewController {
     
 }
 
-
+// This an extension that we will use in emoji function so it can stay cleaner and expressinve instead of that long long chain of modifiers.
+extension Int {
+    var arc4random: Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        } else {
+            return 0
+        }
+    }
+}
 
 
