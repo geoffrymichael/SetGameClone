@@ -24,21 +24,17 @@ class ViewController: UIViewController {
     
     var buttonPress = 0
     
+    
+    var cardIndex = [Int]()
+    
     @IBAction func cardTouch(_ sender: UIButton) {
         
         
         pickCards(pickedCard: sender)
         
-        buttonPress += 1
+       
         
-        if buttonPress == 3 {
-            clearChosenColor()
-            var chosenCards = deck.removeMatchedCards(shownCards: shownCards)
-            print("🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔", chosenCards)
-            populateShownCards(chosenCards: chosenCards)
-            populateCards(shownCards: shownCards)
-            
-        }
+       
         
         
     }
@@ -55,9 +51,10 @@ class ViewController: UIViewController {
     }
     
     func populateShownCards(chosenCards: [Card]) {
-        for i in 0..<shownCards.count {
-            if chosenCards.contains(shownCards[i]) {
-                shownCards[i] = deck.cards.remove(at: i)
+        for i in 0..<chosenCards.count {
+            if chosenCards[i].isChosen == shownCards[i].isChosen {
+                shownCards[i] = deck.cards.remove(at: deck.cards.count.arc4random)
+                populateCards(shownCards: [shownCards[i]])
             }
         }
         
@@ -73,7 +70,7 @@ class ViewController: UIViewController {
 //       var x = 0
        
         
-        for i in 0..<cardButton.count {
+        for i in 0..<shownCards.count {
             var btStroke : Int!
             var btFloat : Float!
             var btShape = shownCards[i].shape.rawValue
@@ -114,7 +111,7 @@ class ViewController: UIViewController {
             
 //            x += 1
         }
-        print(deck)
+//        print(deck)
         print(shownCards.count)
         print(deck.cards.count)
     }
@@ -135,30 +132,40 @@ class ViewController: UIViewController {
     
     
     
-    func clearChosenColor() {
-        
-        for i in 0..<cardButton.count {
-            cardButton[i].layer.borderWidth = 0
-            
-        }
-        buttonPress = 0
-        
-    }
+   
+    
+    
     
     func pickCards( pickedCard: UIButton) {
-        
+        if buttonPress < 3 {
+            buttonPress += 1
             if let cardNumber = cardButton.index(of: pickedCard) {
                 
                 cardButton[cardNumber].layer.borderWidth = 3.0
                 cardButton[cardNumber].layer.borderColor = UIColor.blue.cgColor
                 
+                cardIndex += [cardNumber]
+                
+                print("cardnumber", cardNumber)
                 
                 deck.cardPicking(cardNumber: cardNumber, shownCard: shownCards )
-                
+            
                 
             }
         
-        
+        } else {
+            buttonPress = 0
+            
+            print("shown card", cardIndex[1])
+            print("cardIndex", cardIndex)
+            for i in 0..<cardIndex.count {
+                shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
+                cardButton[cardIndex[i]].layer.borderWidth = 0
+                populateCards(shownCards: shownCards)
+                
+            }
+            cardIndex = []
+        }
     }
     
 }
