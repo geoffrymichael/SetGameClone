@@ -14,7 +14,7 @@
 import UIKit
 
 
-//TODO Removing and replacing seems to be working now. The issue seemed to be using a random x function in my populate cards instead of changing it to a shown cards count after creating shown cards. Also switched the populateShownCards function so that it checked whether chosenCards contained shownCards, instead of vice/versa. Also, siwtched to a random number for the showncards to populate from as well as new cards after a match.
+//TODO Lots of revision happened. I hope I just need some fine tuning on the matching logic. To work on next, is the errors I am getting in the matching function. Things seems to work on the first go around, but not on further rounds. I think I have missed clearing out a type. 
 
 class ViewController: UIViewController {
 
@@ -137,7 +137,7 @@ class ViewController: UIViewController {
     
     
     func pickCards( pickedCard: UIButton) {
-        if buttonPress < 3 {
+        if buttonPress <= 2 {
             buttonPress += 1
             if let cardNumber = cardButton.index(of: pickedCard) {
                 
@@ -153,19 +153,43 @@ class ViewController: UIViewController {
                 
             }
         
-        } else {
-            buttonPress = 0
-            
-            print("shown card", cardIndex[1])
-            print("cardIndex", cardIndex)
-            for i in 0..<cardIndex.count {
-                shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
-                cardButton[cardIndex[i]].layer.borderWidth = 0
-                populateCards(shownCards: shownCards)
+        
+        } else if buttonPress == 3 {
+            if deck.cardMatching() {
                 
+                buttonPress = 0
+                
+                print("shown card", cardIndex[1])
+                print("cardIndex", cardIndex)
+                for i in 0..<cardIndex.count {
+                    shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
+                    cardButton[cardIndex[i]].layer.borderWidth = 0
+                    populateCards(shownCards: shownCards)
+                    
+                    
+                }
+                cardIndex = []
+                deck.clearChosen()
+                
+            } else if !deck.cardMatching() {
+                buttonPress = 0
+                
+                for i in 0..<cardIndex.count {
+                    
+                    cardButton[cardIndex[i]].layer.borderWidth = 0
+                    
+                    
+                    
+                }
+                cardIndex = []
+                deck.clearChosen()
             }
-            cardIndex = []
+            
+    
+            
         }
+        
+        
     }
     
 }

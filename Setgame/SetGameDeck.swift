@@ -57,17 +57,18 @@ struct SetGameDeck {
         } else if chosenCards.count == 3  {
             thirdCard = [chosenCards[2].shape.rawValue, chosenCards[2].color.rawValue, chosenCards[2].fill.rawValue, chosenCards[2].amount.rawValue]
             print("this is the third card", thirdCard)
-            cardMatching()
-            chosenCards = []
             
-        }
+            
+            
+        } 
 
         //TODO Refactor card matching from view controller
         
         
     }
-    mutating func cardMatching() {
-        for i in 0...chosenCards.count {
+    mutating func cardMatching() -> Bool {
+        var isMatched = Bool()
+        for i in 0..<chosenCards.count {
             
             if firstCard.contains(secondCard[i]) {
                 matchCount += 1
@@ -90,8 +91,11 @@ struct SetGameDeck {
             }
             if matchCount > 0 {
                 print("no set of all different")
+                isMatched = false
             } else {
                 print("set of no matches")
+                isMatched = true
+                
             }
         }
             
@@ -117,8 +121,10 @@ struct SetGameDeck {
 
             if matchCount  == 1 {
                 print("Set of single attributes")
+                isMatched = true
             } else {
                 print("No set of single attributes")
+                isMatched = false
             }
         }
             
@@ -140,8 +146,10 @@ struct SetGameDeck {
             
             if matchCount == 2 {
                 print("Set of two attributes")
+                isMatched = true
             } else {
                 print("No set of two attributes")
+                isMatched = false
             }
         }
             
@@ -154,13 +162,20 @@ struct SetGameDeck {
             
             if matchCount == 6 {
                 print("Set of three matches")
+                isMatched = true
             } else {
                 print("No set of three matches")
+                isMatched = false
             }
         }
+        
+        return isMatched
+        
        
         
     }
+    
+    
     
     mutating func clearChosen() {
         chosenCards = []
@@ -170,6 +185,7 @@ struct SetGameDeck {
         print(chosenCards.count)
     }
     
+   
 //    func removeMatched(shownCards: [Card], deck: [Card]) -> [Card]{
 //
 //            var mutatedDic = shownCards
@@ -185,12 +201,7 @@ struct SetGameDeck {
 //
 //    }
     
-    func removeMatchedCards() -> [Card] {
-        let matchedCard = chosenCards
-        
-        
-        return matchedCard
-    }
+    
     
 }
 
