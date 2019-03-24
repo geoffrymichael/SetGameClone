@@ -68,7 +68,7 @@ struct SetGameDeck {
     }
     mutating func cardMatching() -> Bool {
         var isMatched = Bool()
-        for i in 0..<chosenCards.count {
+        for i in 0...chosenCards.count {
             
             if firstCard.contains(secondCard[i]) {
                 matchCount += 1
