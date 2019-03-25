@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     
     var buttonPress = 0
     
+    var hiddenCardCount = 12
     
     var cardIndex = [Int]()
     
@@ -33,9 +34,6 @@ class ViewController: UIViewController {
         pickCards(pickedCard: sender)
         
        
-        
-       
-        
         
     }
     
@@ -50,22 +48,58 @@ class ViewController: UIViewController {
         }
     }
     
+    //This reveals the hidden cards three at a time.
+    @IBAction func dealThreeButton(_ sender: UIButton) {
+        if hiddenCardCount <= 23 {
+            for i in hiddenCardCount...hiddenCardCount + 2 {
+                
+                cardButton[i].backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                cardButton[i].isHidden = false
+                cardButton[i].isEnabled = true
+            }
+        } else {
+            print("No more space")
+        }
+        hiddenCardCount += 3
+        
+        
+    }
+    
+    //This is comparing the unique identifier "isChosen" int to compare chosen cards to cards from the deck and if the same, replace them.
     func populateShownCards(chosenCards: [Card]) {
         for i in 0..<chosenCards.count {
             if chosenCards[i].isChosen == shownCards[i].isChosen {
                 shownCards[i] = deck.cards.remove(at: deck.cards.count.arc4random)
                 populateCards(shownCards: [shownCards[i]])
+                populateShownCards(chosenCards: [shownCards[i]])
             }
         }
         
     }
     
+    //TODO This button does not yet work
+    @IBAction func newGameButton(_ sender: UIButton) {
+        newGame()
+    }
+    
+    
+    //Newgame function which produces 12 shown card buttons with symbols and 12 hidden, non enabled cards. Note that the cards are populated(and 24 total cards removed from deck), but simply inactive and hidden.
     func newGame() {
-        for i in 0..<cardButton.count {
+        for _ in 0..<cardButton.count {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
+        }
+        
+        for i in 12...23 {
+            
+            cardButton[i].isEnabled = false
+            cardButton[i].isHidden = true
+            
+            
         }
     }
     
+    
+    // Iterates through the first 24 cards and reads thier attributes and then shows them via the changeAtt function.
     func populateCards(shownCards: [Card]) {
 //       var x = 0
        
@@ -73,13 +107,13 @@ class ViewController: UIViewController {
         for i in 0..<shownCards.count {
             var btStroke : Int!
             var btFloat : Float!
+            //This data is inherent in the data as text emoji
             var btShape = shownCards[i].shape.rawValue
             
             
             var btColor = UIColor.blue
             
-            
-            
+           
             
             if shownCards[i].color.rawValue == "purple" {
                 btColor = UIColor.purple
@@ -116,7 +150,7 @@ class ViewController: UIViewController {
         print(deck.cards.count)
     }
     
-    
+    //This is the visual function of the game. When used in populateCards it will translate the attirbute data into its visual representation.
     func changeAtt(_ text: String, place: Int, btStroke: Int, btFloat: Float, btColor: UIColor) {
         var textColor: [NSAttributedString.Key: Any] = [
                     .strokeWidth : btStroke,
@@ -135,7 +169,7 @@ class ViewController: UIViewController {
    
     
     
-    
+    //The first three cards are selected and stored. Their borders are also colored to show selection.
     func pickCards( pickedCard: UIButton) {
         if buttonPress <= 2 {
             buttonPress += 1
@@ -154,6 +188,7 @@ class ViewController: UIViewController {
             }
         
         
+        //When a 4th card is pressed, the currently selected cards are compared to see whether they are a set. If they are, three new cards are removed from the deck to replace the matches.
         } else if buttonPress == 3 {
             if deck.cardMatching() {
                 
@@ -170,16 +205,15 @@ class ViewController: UIViewController {
                 }
                 cardIndex = []
                 deck.clearChosen()
-                
+            
+            //If the cards do not constitute a set, the borders are removed.
             } else if !deck.cardMatching() {
                 buttonPress = 0
                 
                 for i in 0..<cardIndex.count {
                     
                     cardButton[cardIndex[i]].layer.borderWidth = 0
-                    
-                    
-                    
+
                 }
                 cardIndex = []
                 deck.clearChosen()
