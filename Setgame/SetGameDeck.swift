@@ -81,7 +81,7 @@ struct SetGameDeck {
                 matchCard += [secondCard[i]]
                 print("this is how many matches we have now", matchCount, matchCard)
                 
-                
+ 
             }
             
         }
@@ -175,14 +175,14 @@ struct SetGameDeck {
             }
         }
         
+        chosenCards = []
         matchCard = []
         matchCount = 0
         return isMatched
 
         
     }
-    
-    
+
     
     mutating func clearChosen() {
         chosenCards = []
@@ -191,24 +191,6 @@ struct SetGameDeck {
         print(chosenCards)
         print(chosenCards.count)
     }
-    
-   
-//    func removeMatched(shownCards: [Card], deck: [Card]) -> [Card]{
-//
-//            var mutatedDic = shownCards
-//            for i in 0..<chosenCards.count {
-//                if shownCards.contains(chosenCards[i]) {
-//                    mutatedDic[i] = deck[i]
-//
-//                }
-//            }
-//
-//            return mutatedDic
-//
-//
-//    }
-    
-    
     
 }
 

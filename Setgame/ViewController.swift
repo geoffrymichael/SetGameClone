@@ -79,6 +79,8 @@ class ViewController: UIViewController {
     
     //TODO This button does not yet work
     @IBAction func newGameButton(_ sender: UIButton) {
+        shownCards = []
+        deck.clearChosen()
         newGame()
     }
     
