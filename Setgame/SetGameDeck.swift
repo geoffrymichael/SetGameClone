@@ -12,15 +12,19 @@ struct SetGameDeck {
     
     var cards = [Card]()
     
+    //Keeps track of the selected cards
     var chosenCards = [Card]()
     
+    //Raw comparison data for the cards. Extracts the data into three equatable dictionaries.
     var firstCard = [String]()
     var secondCard = [String]()
     var thirdCard = [String]()
     
+    //Keeps track of matchcount and what those matched attributes are.
     var matchCount = 0
     var matchCard = [String]()
     
+    //A unique intiger attached to each card to keep track of them.
     var identifier = 0
     
     init() {
@@ -39,7 +43,7 @@ struct SetGameDeck {
 
     
    
-    
+    //Extracts the raw data of selected cards into equatable dictionary and also keeps track of selected cards.
     mutating func cardPicking(cardNumber: Int, shownCard: [Card]) {
         
         
@@ -66,6 +70,8 @@ struct SetGameDeck {
         
         
     }
+    
+    //Depending on the first two cards picked, compares three cards against eachother against set conditions. If there is a set, the function will evaluate to true. Else, false.
     mutating func cardMatching() -> Bool {
         var isMatched = Bool()
         for i in 0...chosenCards.count {
@@ -169,9 +175,10 @@ struct SetGameDeck {
             }
         }
         
+        matchCard = []
+        matchCount = 0
         return isMatched
-        
-       
+
         
     }
     
