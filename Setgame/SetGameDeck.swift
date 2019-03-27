@@ -73,8 +73,8 @@ struct SetGameDeck {
     
     //Depending on the first two cards picked, compares three cards against eachother against set conditions. If there is a set, the function will evaluate to true. Else, false.
     mutating func cardMatching() -> Bool {
-        var isMatched = Bool()
-        for i in 0...chosenCards.count {
+        var isMatched = true
+        for i in 0...3 {
             
             if firstCard.contains(secondCard[i]) {
                 matchCount += 1

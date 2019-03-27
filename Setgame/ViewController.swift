@@ -51,12 +51,15 @@ class ViewController: UIViewController {
     //This reveals the hidden cards three at a time.
     @IBAction func dealThreeButton(_ sender: UIButton) {
         if hiddenCardCount <= 23 {
-            for i in hiddenCardCount...hiddenCardCount + 2 {
-                
-                cardButton[i].backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                cardButton[i].isHidden = false
-                cardButton[i].isEnabled = true
+            if deck.cards.count > 0 {
+                for i in hiddenCardCount...hiddenCardCount + 2 {
+                    
+                    cardButton[i].backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    cardButton[i].isHidden = false
+                    cardButton[i].isEnabled = true
+                }
             }
+            
         } else {
             print("No more space")
         }
@@ -192,7 +195,7 @@ class ViewController: UIViewController {
         
         //When a 4th card is pressed, the currently selected cards are compared to see whether they are a set. If they are, three new cards are removed from the deck to replace the matches.
         } else if buttonPress == 3 {
-            if deck.cardMatching() {
+            if deck.cardMatching() && deck.cards.count > 0 {
                 
                 buttonPress = 0
                 
@@ -208,8 +211,21 @@ class ViewController: UIViewController {
                 cardIndex = []
                 deck.clearChosen()
             
+            
+            }
+            //If there are no more cards in the deck, hide them.
+            else if deck.cardMatching() && deck.cards.count == 0 {
+                buttonPress = 0
+                for i in 0..<cardIndex.count {
+                    cardButton[cardIndex[i]].isEnabled = false
+                    cardButton[cardIndex[i]].isHidden = true
+                }
+                cardIndex = []
+                deck.clearChosen()
+            }
+            
             //If the cards do not constitute a set, the borders are removed.
-            } else if !deck.cardMatching() {
+            else {
                 buttonPress = 0
                 
                 for i in 0..<cardIndex.count {
