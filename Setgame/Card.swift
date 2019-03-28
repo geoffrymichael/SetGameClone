@@ -87,8 +87,9 @@ struct Card: Equatable {
         
     }
     
-    enum Amount: String, Equatable {
+    enum Amount: String, Equatable, CustomStringConvertible {
         
+        var description: String { return rawValue }
         
         case one = "one"
         case two = "two"
