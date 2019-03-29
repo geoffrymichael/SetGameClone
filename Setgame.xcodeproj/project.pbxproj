@@ -14,6 +14,7 @@
 		63A1AA86220106A800758C94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A1AA84220106A800758C94 /* Main.storyboard */; };
 		63A1AA88220106A900758C94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A1AA87220106A900758C94 /* Assets.xcassets */; };
 		63A1AA8B220106A900758C94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A1AA89220106A900758C94 /* LaunchScreen.storyboard */; };
+		63BA1667224D74F900BEAF0C /* SetgameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BA1666224D74F900BEAF0C /* SetgameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		63A1AA87220106A900758C94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A1AA8A220106A900758C94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63A1AA8C220106A900758C94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63BA1666224D74F900BEAF0C /* SetgameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetgameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				63A1AA92220106CE00758C94 /* Supporting Documents */,
 				63A1AA8C220106A900758C94 /* Info.plist */,
 				63A1AA82220106A800758C94 /* ViewController.swift */,
+				63BA1666224D74F900BEAF0C /* SetgameView.swift */,
 				63A1AA84220106A800758C94 /* Main.storyboard */,
 				630134292205344400D81DF3 /* Card.swift */,
 				633A524D2213C087000AD19D /* SetGameDeck.swift */,
@@ -152,6 +155,7 @@
 				63A1AA83220106A800758C94 /* ViewController.swift in Sources */,
 				633A524E2213C087000AD19D /* SetGameDeck.swift in Sources */,
 				6301342A2205344400D81DF3 /* Card.swift in Sources */,
+				63BA1667224D74F900BEAF0C /* SetgameView.swift in Sources */,
 				63A1AA81220106A800758C94 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
