@@ -100,8 +100,18 @@ class SetgameView: UIView {
         UIColor.white.setFill()
         roundedRect.fill()
         
-        drawShapes()
+       
         
+        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: triangle)
+        
+//        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
+//
+//        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
+//
+//        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY))
+       
+        
+//        drawOne(origin: bounds)
 //        let path = UIBezierPath()
 //        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: bounds.height * 0.10, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
 //        UIColor.red.setFill()
@@ -147,36 +157,73 @@ class SetgameView: UIView {
         
     }
     
-    func drawShapes() {
+    var triangle: UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: bounds.midX, y: bounds.midY + radius))
+
+        path.addLine(to: CGPoint(x: (path.currentPoint.x + radius), y: path.currentPoint.y))
+        path.addLine(to: CGPoint(x: bounds.midX, y: bounds.midX + radius))
+        path.addLine(to: CGPoint(x: bounds.midX - radius, y: bounds.midY + radius))
+        path.addLine(to: CGPoint(x: bounds.midX, y: bounds.midY + radius))
         
-        func drawCircle(origin: CGPoint) -> UIBezierPath {
-            let path = UIBezierPath()
-            path.addArc(withCenter: origin, radius: bounds.height * 0.10, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+        
+        return path
+    }
+    
+
+    //radius of the circle is computed property because I am basing other shape's dimensions off of it. If it was not computed, when card changes size, the other shapes would not resize accordingly.
+    var radius: CGFloat {
+        let radius = bounds.height * 0.10
+        return radius
+    }
+    
+    
+    
+    
+    var circle: UIBezierPath {
+        let path = UIBezierPath()
+        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: radius, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+        print(bounds.height * 0.10)
+        
+        return path
+    }
+        
+    func drawCircle(origin: CGPoint, shape: UIBezierPath) -> UIBezierPath {
+            let path = shape
+//
             UIColor.red.setFill()
             UIColor.black.setStroke()
             path.lineWidth = 5.0
             path.stroke()
             path.fill()
             path.move(to: origin)
+        
             return path
+        
+        
         }
         
-        var drawCirc = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 1.2))
-        
-        drawCirc.stroke()
-        drawCirc.fill()
-        
-        drawCirc = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.3))
-        
-        drawCirc.stroke()
-        drawCirc.fill()
-        
-        
-//        drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), path: UIBezierPath())
+//    func drawOne(bounds: CGPoint) {
+//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY))
+//        }
 //
-//        drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.5), path: UIBezierPath())
-        
-    }
+//        func drawTwo() {
+//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
+//
+//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
+//        }
+//
+//        func drawThree() {
+//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
+//
+//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
+//
+//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY))
+//
+//
+//
+//
+//    }
     
 
 }
