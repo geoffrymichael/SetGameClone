@@ -102,7 +102,7 @@ class SetgameView: UIView {
         
        
         
-        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: circle)
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: square)
         
 //        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
 //
@@ -159,27 +159,22 @@ class SetgameView: UIView {
     
 
     //Computed center origin point so it changes when the card size changes
-    var centerPoint: CGPoint {
+    var originMiddle: CGPoint {
         let point = CGPoint(x: bounds.midX, y: bounds.midY)
         return point
     }
     
-    
-    //Computed, middle, top, and bottom origin point properties
-    var originMiddle: CGPoint {
-        let point = centerPoint
-        return point
-    }
-    
     var originTop: CGPoint {
-        let point = CGPoint(x: centerPoint.x, y: centerPoint.y / 2)
+        let point = CGPoint(x: originMiddle.x, y: originMiddle.y / 2)
         return point
     }
     
     var originBottom: CGPoint {
-        let point = CGPoint(x: centerPoint.x, y: centerPoint.y * 1.5)
+        let point = CGPoint(x: originMiddle.x, y: originMiddle.y * 1.5)
         return point
     }
+    
+    
     
     //radius of the circle is computed property because I am basing other shape's dimensions off of it. If it was not computed, when card changes size, the other shapes would not resize accordingly.
     var radius: CGFloat {
@@ -187,6 +182,26 @@ class SetgameView: UIView {
         return radius
     }
 
+    
+    
+    
+    func drawSquare(path: UIBezierPath, originPoint: CGPoint) {
+        
+        path.move(to: CGPoint(x: originPoint.x - radius, y: originPoint.y + radius))
+        
+        path.addLine(to: CGPoint(x: path.currentPoint.x + radius*2, y: path.currentPoint.y))
+        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - radius*2))
+        path.addLine(to: CGPoint(x: path.currentPoint.x - radius * 2, y: path.currentPoint.y))
+        
+        path.close()
+        
+    
+    
+    
+    }
+    
+    
+    
     
     
     func drawTriangle(path: UIBezierPath, originPoint: CGPoint) {
@@ -205,18 +220,30 @@ class SetgameView: UIView {
     func drawCircle(path: UIBezierPath, originPoint: CGPoint ) {
 
         path.addArc(withCenter: originPoint, radius: radius, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
-   
+    }
+    
+    var square: UIBezierPath {
+        let path = UIBezierPath()
+        drawSquare(path: path, originPoint: originMiddle)
+        drawSquare(path: path, originPoint: originTop)
+        drawSquare(path: path, originPoint: originBottom)
         
+        return path
     }
     
     var circle: UIBezierPath {
         let path = UIBezierPath()
+
         
         drawCircle(path: path, originPoint: originTop)
-        path.move(to: CGPoint(x: centerPoint.x + radius, y: centerPoint.y))
+        addLines(path: path)
+        path.move(to: CGPoint(x: originMiddle.x + radius, y: originMiddle.y))
         drawCircle(path: path, originPoint: originMiddle)
+        addLines(path: path)
         path.move(to: CGPoint(x: originBottom.x + radius, y: originBottom.y))
         drawCircle(path: path, originPoint: originBottom)
+        addLines(path: path)
+        
         
         return path
     }
@@ -226,22 +253,45 @@ class SetgameView: UIView {
         
        
         drawTriangle(path: path, originPoint: originTop)
+        addLines(path: path)
         drawTriangle(path: path, originPoint: originMiddle)
+        addLines(path: path)
         drawTriangle(path: path, originPoint: originBottom)
+        addLines(path: path)
 
         return path
     }
     
-  
+    
+    
+    //This is the function to make a shape shaded. It uses the height of the shape to segment.
+    func addLines(path: UIBezierPath) {
+        var moreLines: CGFloat = path.bounds.minY
+        while moreLines < path.bounds.maxY{
+            
+            path.move(to: CGPoint(x: path.bounds.minX, y: moreLines))
+            path.addLine(to: CGPoint(x: path.bounds.maxX, y: moreLines))
+            moreLines += 10.0
+            print(moreLines)
+        }
         
-    func drawCircle(origin: CGPoint, shape: UIBezierPath) -> UIBezierPath {
+    }
+    
+    
+        
+    func drawShape(origin: CGPoint, shape: UIBezierPath) -> UIBezierPath {
             let path = shape
         
         
             UIColor.red.setFill()
             UIColor.red.setStroke()
             path.lineWidth = 5.0
+            path.addClip()
             path.stroke()
+        
+        
+        
+        
 //            path.fill()
         
         
