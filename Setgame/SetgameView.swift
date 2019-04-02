@@ -213,9 +213,9 @@ class SetgameView: UIView {
         let path = UIBezierPath()
         
         drawCircle(path: path, originPoint: originTop)
-        path.move(to: centerPoint)
+        path.move(to: CGPoint(x: centerPoint.x + radius, y: centerPoint.y))
         drawCircle(path: path, originPoint: originMiddle)
-        path.move(to: originBottom)
+        path.move(to: CGPoint(x: originBottom.x + radius, y: originBottom.y))
         drawCircle(path: path, originPoint: originBottom)
         
         return path
@@ -239,10 +239,10 @@ class SetgameView: UIView {
         
         
             UIColor.red.setFill()
-            UIColor.black.setStroke()
+            UIColor.red.setStroke()
             path.lineWidth = 5.0
             path.stroke()
-            path.fill()
+//            path.fill()
         
         
             return path
