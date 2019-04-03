@@ -102,7 +102,7 @@ class SetgameView: UIView {
         
        
         
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: square)
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: oval)
         
 //        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
 //
@@ -185,30 +185,31 @@ class SetgameView: UIView {
     
     
     
-    func drawSquare(path: UIBezierPath, originPoint: CGPoint) {
-        
-        
-        path.move(to: CGPoint(x: originPoint.x - radius, y: originPoint.y + radius*1.5))
-        
-//        path = UIBezierPath(roundedRect: CGRect(origin: path.currentPoint, size: CGSize(width: radius, height: radius)), cornerRadius: 16)
-        
-        
-        path.addLine(to: CGPoint(x: path.currentPoint.x + radius*2, y: path.currentPoint.y))
-        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - radius))
-        path.addLine(to: CGPoint(x: path.currentPoint.x - radius * 2, y: path.currentPoint.y))
-
-       
-        path.close()
+//    func drawSquare(path: UIBezierPath, originPoint: CGPoint) -> UIBezierPath {
+//
+//
+//
+//
+//       let path = UIBezierPath(roundedRect: CGRect(origin: path.currentPoint, size: CGSize(width: radius, height: radius)), cornerRadius: 16)
+//
+//
+////        path.addLine(to: CGPoint(x: path.currentPoint.x + radius*2, y: path.currentPoint.y))
+////        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - radius))
+////        path.addLine(to: CGPoint(x: path.currentPoint.x - radius * 2, y: path.currentPoint.y))
+////
+////
+////        path.close()
+//
+//        return path
+//
+//
+//    }
     
     
     
-    }
     
     
-    
-    
-    
-    func drawTriangle(path: UIBezierPath, originPoint: CGPoint) {
+    func drawDiamond(path: UIBezierPath, originPoint: CGPoint) {
         
         
         path.move(to: CGPoint(x: originPoint.x, y: originPoint.y - radius))
@@ -228,13 +229,12 @@ class SetgameView: UIView {
         path.addArc(withCenter: originPoint, radius: radius, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
     }
     
-    var square: UIBezierPath {
-        let path = UIBezierPath()
-        drawSquare(path: path, originPoint: CGPoint(x: originMiddle.x, y: originMiddle.y - (radius / 1.30)))
-        drawSquare(path: path, originPoint: originTop)
-        drawSquare(path: path, originPoint: CGPoint(x: originMiddle.x, y: originMiddle.y + radius))
+    var oval: UIBezierPath {
+        let path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+        
         
         return path
+        
     }
     
     var circle: UIBezierPath {
@@ -254,15 +254,15 @@ class SetgameView: UIView {
         return path
     }
     
-    var triangle: UIBezierPath {
+    var diamond: UIBezierPath {
         let path = UIBezierPath()
         
        
-        drawTriangle(path: path, originPoint: originTop)
+        drawDiamond(path: path, originPoint: originTop)
         addLines(path: path)
-        drawTriangle(path: path, originPoint: originMiddle)
+        drawDiamond(path: path, originPoint: originMiddle)
         addLines(path: path)
-        drawTriangle(path: path, originPoint: originBottom)
+        drawDiamond(path: path, originPoint: originBottom)
         addLines(path: path)
 
         return path
