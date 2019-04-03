@@ -10,6 +10,7 @@ import UIKit
 
 class SetgameView: UIView {
     
+    lazy var grid = Grid(layout: Grid.Layout.fixedCellSize(CGSize(width: 20, height: 20)), frame: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY), size: CGSize(width: 100, height: 100)))
     
     
     
@@ -102,7 +103,9 @@ class SetgameView: UIView {
         
        
         
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: oval)
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: circle)
+        
+       
         
 //        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
 //
@@ -230,7 +233,22 @@ class SetgameView: UIView {
     }
     
     var oval: UIBezierPath {
-        let path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+        var path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+        path.move(to: CGPoint(x: originBottom.x + radius, y: originBottom.y))
+        
+        path.move(to: originBottom)
+        
+        path.stroke()
+        path.fill()
+        
+        
+        return path
+        
+    }
+    
+    var ovalTwo: UIBezierPath {
+        
+        var path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius * 1.5), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
         
         
         return path
@@ -259,11 +277,11 @@ class SetgameView: UIView {
         
        
         drawDiamond(path: path, originPoint: originTop)
-        addLines(path: path)
+        
         drawDiamond(path: path, originPoint: originMiddle)
-        addLines(path: path)
+        
         drawDiamond(path: path, originPoint: originBottom)
-        addLines(path: path)
+        
 
         return path
     }
@@ -293,6 +311,9 @@ class SetgameView: UIView {
             UIColor.red.setStroke()
             path.lineWidth = 5.0
             path.addClip()
+        
+            addLines(path: path)
+        
             path.stroke()
         
         
