@@ -187,14 +187,18 @@ class SetgameView: UIView {
     
     func drawSquare(path: UIBezierPath, originPoint: CGPoint) {
         
-        path.move(to: CGPoint(x: originPoint.x - radius, y: originPoint.y + radius))
+        
+        path.move(to: CGPoint(x: originPoint.x - radius, y: originPoint.y + radius*1.5))
+        
+//        path = UIBezierPath(roundedRect: CGRect(origin: path.currentPoint, size: CGSize(width: radius, height: radius)), cornerRadius: 16)
+        
         
         path.addLine(to: CGPoint(x: path.currentPoint.x + radius*2, y: path.currentPoint.y))
-        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - radius*2))
+        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - radius))
         path.addLine(to: CGPoint(x: path.currentPoint.x - radius * 2, y: path.currentPoint.y))
-        
+
+       
         path.close()
-        
     
     
     
@@ -206,10 +210,12 @@ class SetgameView: UIView {
     
     func drawTriangle(path: UIBezierPath, originPoint: CGPoint) {
         
+        
         path.move(to: CGPoint(x: originPoint.x, y: originPoint.y - radius))
         
-        path.addLine(to: CGPoint(x: path.currentPoint.x + radius, y: path.currentPoint.y + radius*2))
-        path.addLine(to: CGPoint(x: path.currentPoint.x - radius*2, y: path.currentPoint.y))
+        path.addLine(to: CGPoint(x: path.currentPoint.x + radius, y: path.currentPoint.y + radius))
+        path.addLine(to: CGPoint(x: path.currentPoint.x - radius, y: path.currentPoint.y + radius))
+        path.addLine(to: CGPoint(x: path.currentPoint.x - radius, y: path.currentPoint.y - radius))
         
         path.close()
   
@@ -224,9 +230,9 @@ class SetgameView: UIView {
     
     var square: UIBezierPath {
         let path = UIBezierPath()
-        drawSquare(path: path, originPoint: originMiddle)
+        drawSquare(path: path, originPoint: CGPoint(x: originMiddle.x, y: originMiddle.y - (radius / 1.30)))
         drawSquare(path: path, originPoint: originTop)
-        drawSquare(path: path, originPoint: originBottom)
+        drawSquare(path: path, originPoint: CGPoint(x: originMiddle.x, y: originMiddle.y + radius))
         
         return path
     }
