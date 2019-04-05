@@ -102,8 +102,9 @@ class SetgameView: UIView {
         UIColor.white.setFill()
         roundedRect.fill()
         
+        buidShown()
     
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: squiggle, color: UIColor.blue, fill: addLines(path: shape))
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: squiggle(amount: "two"), color: UIColor.purple, fill: "shaded")
     
         
         
@@ -255,54 +256,99 @@ class SetgameView: UIView {
         
     }
     
-    var squiggle: UIBezierPath {
-        let path = UIBezierPath()
+    func squiggle(amount: String) -> UIBezierPath {
+        let squiggle = UIBezierPath()
         
-        
+        let amountName: String = amount
+        switch amountName {
+        case "one":
+            drawSquiggle(path: squiggle, originPoint: originMiddle)
+        case "two":
+            drawSquiggle(path: squiggle, originPoint: CGPoint(x: originTop.x, y: originTop.y + radius))
+            drawSquiggle(path: squiggle, originPoint: CGPoint(x: originBottom.x, y: originBottom.y - radius))
+        case "three":
+            drawSquiggle(path: squiggle, originPoint: originTop)
+            drawSquiggle(path: squiggle, originPoint: originMiddle)
+            drawSquiggle(path: squiggle, originPoint: originBottom)
+        default:
+            print("no such amount")
+        }
 
-        drawSquiggle(path: path, originPoint: originTop)
+//        drawSquiggle(path: squiggle, originPoint: originTop)
+//
+//        drawSquiggle(path: squiggle, originPoint: originMiddle)
+//
+//        drawSquiggle(path: squiggle, originPoint: originBottom)
 
-        drawSquiggle(path: path, originPoint: originMiddle)
         
-        drawSquiggle(path: path, originPoint: originBottom)
-
-        
-        return path
+        return squiggle
     }
     
-    var diamond: UIBezierPath {
-        let path = UIBezierPath()
+//    let someCharacter: Character = "z"
+//    switch someCharacter {
+//    case "a":
+//    print("The first letter of the alphabet")
+//    case "z":
+//    print("The last letter of the alphabet")
+//    default:
+//    print("Some other character")
+//    }
+
+    
+    
+    func diamond(amount: String) -> UIBezierPath {
+        let diamond = UIBezierPath()
         
-       
-        drawDiamond(path: path, originPoint: originTop)
+        let amountName: String = amount
+        switch amountName {
+        case "one":
+            drawDiamond(path: diamond, originPoint: originMiddle)
+        case "two":
+            drawDiamond(path: diamond, originPoint: CGPoint(x: originTop.x, y: originTop.y + radius))
+            drawDiamond(path: diamond, originPoint: CGPoint(x: originBottom.x, y: originBottom.y - radius))
+        case "three":
+            drawDiamond(path: diamond, originPoint: originTop)
+            drawDiamond(path: diamond, originPoint: originMiddle)
+            drawDiamond(path: diamond, originPoint: originBottom)
+        default:
+            print("no such amount")
+        }
         
-        drawDiamond(path: path, originPoint: originMiddle)
-        
-        drawDiamond(path: path, originPoint: originBottom)
+//        drawDiamond(path: diamond, originPoint: originTop)
+//
+//        drawDiamond(path: diamond, originPoint: originMiddle)
+//
+//        drawDiamond(path: diamond, originPoint: originBottom)
         
 
-        return path
+        return diamond
     }
     
     
     
     //This is the function to make a shape shaded. It uses the height of the shape to segment.
-    func addLines(path: UIBezierPath) -> UIBezierPath{
+    
+    func addLines(path: UIBezierPath) -> UIBezierPath {
+        
         var moreLines: CGFloat = path.bounds.minY
         while moreLines < path.bounds.maxY{
-            
+
             path.move(to: CGPoint(x: path.bounds.minX, y: moreLines))
             path.addLine(to: CGPoint(x: path.bounds.maxX, y: moreLines))
             moreLines += 10.0
-            print(moreLines)
-            return path
+            
+            path.stroke()
+            
+            
         }
+        return path
         
     }
     
     
+    
         
-    func drawShape(origin: CGPoint, shape: UIBezierPath, color: UIColor, fill: UIBezierPath) -> UIBezierPath {
+    func drawShape(origin: CGPoint, shape: UIBezierPath, color: UIColor, fill: String ) -> UIBezierPath {
             let path = shape
         
         
@@ -311,17 +357,97 @@ class SetgameView: UIView {
             path.lineWidth = 5.0
             path.addClip()
         //        TODO: Adding properties to drawShape. Currently does not compile because of addlines. 
-        addLines(path: path)
+//        addLines(path: path)
 //            path.fill()
-            path.stroke()
         
+        
+//            path.stroke()
+            print(shownCards[1].shape.rawValue)
+        
+        
+        if fill == "shaded" {
+            return addLines(path: path)
+        } else if fill == "clear" {
+            path.stroke()
+        } else if fill == "filled" {
+           path.fill()
+        }
+        
+        
+        return path
 
         
-            return path
+        
         
         
         }
-        
+    
+        var shownCards = [Card]()
+    
+    func buidShown() {
+        for i in 0...11 {
+            shownCards.append(deck.cards[i])
+        }
+    }
+    
+
+    
+//        func populateCards(shownCards: [Card]) {
+//
+//
+//
+//            for i in 0..<shownCards.count {
+////                var btStroke : Int!
+//                var btFill = UIBezierPath()
+//                var btShape = UIBezierPath()
+//                //This data is inherent in the data as text emoji
+//
+//
+//
+//                var btColor = UIColor.blue
+//
+//                if shownCards[i].shape.rawValue == "■" {
+//                    btShape = oval
+//                } else if shownCards[i].shape.rawValue == "●" {
+//                    btShape = squiggle
+//                } else if shownCards[i].shape.rawValue == "▲" {
+//                    btShape = diamond
+//                }
+//
+//
+//
+//                if shownCards[i].color.rawValue == "purple" {
+//                    btColor = UIColor.purple
+//                } else if shownCards[i].color.rawValue == "red" {
+//                    btColor = UIColor.red
+//                } else if shownCards[i].color.rawValue == "blue" {
+//                    btColor = UIColor.blue
+//                }
+//
+//                if shownCards[i].fill.rawValue == "clear" {
+//                    btFill = addLines(path: <#T##UIBezierPath#>)
+//                } else if shownCards[i].fill.rawValue == "shaded" {
+//                    btStroke = -5
+//                    btFloat = 0.15
+//                } else if shownCards[i].fill.rawValue == "filled" {
+//                    btStroke = -5
+//                    btFloat = 5.00
+//                }
+//
+//
+////                if shownCards[i].amount.rawValue == "two" {
+////                    btShape = btShape + btShape
+////                } else if shownCards[i].amount.rawValue == "three" {
+////                    btShape = btShape + btShape + btShape
+////                }
+//
+//
+//            }
+//    //        print(deck)
+//            print(shownCards.count)
+//            print(deck.cards.count)
+//        }
+    
 //    func drawOne(bounds: CGPoint) {
 //            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY))
 //        }
