@@ -102,7 +102,7 @@ class SetgameView: UIView {
         
        
         
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: oval)
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: squiggle)
         
 //        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
 //
@@ -224,32 +224,44 @@ class SetgameView: UIView {
     
 //    let amountArray = [0,1,2,3]
     
-    func drawCircle(path: UIBezierPath, originPoint: CGPoint ) {
+    func drawSquiggle(path: UIBezierPath, originPoint: CGPoint) {
+        
+        path.move(to: CGPoint(x: originPoint.x - (radius*0.25), y: originPoint.y - (radius*0.25)))
+        
+        let startPoint = CGPoint(x: path.currentPoint.x + radius / (0.45*CGFloat.pi), y: path.currentPoint.y + radius / (0.45*CGFloat.pi))
+        
+        let arcCenter = CGPoint(x: path.currentPoint.x, y: path.currentPoint.y)
+        
+        path.move(to: startPoint)
+        
+        path.addArc(withCenter: arcCenter, radius: radius, startAngle: 0.25*CGFloat.pi, endAngle: 1.25*CGFloat.pi, clockwise: true)
 
-        path.addArc(withCenter: originPoint, radius: radius, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+        path.addLine(to: arcCenter)
+      
+        path.move(to: startPoint)
+
+        path.addArc(withCenter: path.currentPoint, radius: radius, startAngle: 0.25*CGFloat.pi, endAngle: 1.25*CGFloat.pi, clockwise: false)
+        
     }
     
     var oval: UIBezierPath {
         let path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
-        
-        
+
         return path
         
     }
     
-    var circle: UIBezierPath {
+    var squiggle: UIBezierPath {
         let path = UIBezierPath()
+        
+        
 
+        drawSquiggle(path: path, originPoint: originTop)
+
+        drawSquiggle(path: path, originPoint: originMiddle)
         
-        drawCircle(path: path, originPoint: originTop)
-        addLines(path: path)
-        path.move(to: CGPoint(x: originMiddle.x + radius, y: originMiddle.y))
-        drawCircle(path: path, originPoint: originMiddle)
-        addLines(path: path)
-        path.move(to: CGPoint(x: originBottom.x + radius, y: originBottom.y))
-        drawCircle(path: path, originPoint: originBottom)
-        addLines(path: path)
-        
+        drawSquiggle(path: path, originPoint: originBottom)
+
         
         return path
     }
@@ -293,13 +305,10 @@ class SetgameView: UIView {
             UIColor.red.setStroke()
             path.lineWidth = 5.0
             path.addClip()
+            addLines(path: path)
             path.stroke()
         
-        
-        
-        
-//            path.fill()
-        
+
         
             return path
         
