@@ -104,7 +104,7 @@ class SetgameView: UIView {
         
         buidShown()
     
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: squiggle(amount: "two"), color: UIColor.purple, fill: "shaded")
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: drawOval(amount: "two"), color: UIColor.purple, fill: "shaded")
     
         
         
@@ -249,12 +249,46 @@ class SetgameView: UIView {
         
     }
     
-    var oval: UIBezierPath {
-        let path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
-
-        return path
+    func drawOval(amount: String) -> UIBezierPath {
+        var oval = UIBezierPath()
+        let amountName = amount
+        switch amountName {
+        case "one":
+            oval = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+        case "two":
+            oval = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y + radius), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+            
+            oval.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originTop.x - radius*1.5, y: originTop.y + radius), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100))
+        case "three":
+            oval = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+            
+            oval.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originTop.x - radius*1.5, y: originTop.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100))
+            
+            oval.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originBottom.x - radius*1.5, y: originBottom.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100))
+            default:
+            print("No such amount")
+            
+            
+            
+        }
         
+        
+        
+//        let oval = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+//
+//        oval.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originTop.x - radius*1.5, y: originTop.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100))
+
+        return oval
     }
+    
+//    var oval: UIBezierPath {
+//        var path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+//
+//        path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
+//
+//        return path
+//
+//    }
     
     func squiggle(amount: String) -> UIBezierPath {
         let squiggle = UIBezierPath()
