@@ -12,6 +12,7 @@ class SetgameView: UIView {
     
     lazy var grid = Grid(layout: Grid.Layout.fixedCellSize(CGSize(width: 20, height: 20)), frame: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY), size: CGSize(width: 100, height: 100)))
     
+    let deck = SetGameDeck()
     
     
 //    private lazy var upperLeftCornerLabel = createCornerLabel()
@@ -101,9 +102,11 @@ class SetgameView: UIView {
         UIColor.white.setFill()
         roundedRect.fill()
         
-       
+    
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: squiggle, color: UIColor.blue, fill: addLines(path: shape))
+    
         
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2), shape: squiggle)
+        
         
 //        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
 //
@@ -158,7 +161,9 @@ class SetgameView: UIView {
         
     }
     
-
+    
+    
+    
     //Computed center origin point so it changes when the card size changes
     var originMiddle: CGPoint {
         let point = CGPoint(x: bounds.midX, y: bounds.midY)
@@ -282,7 +287,7 @@ class SetgameView: UIView {
     
     
     //This is the function to make a shape shaded. It uses the height of the shape to segment.
-    func addLines(path: UIBezierPath) {
+    func addLines(path: UIBezierPath) -> UIBezierPath{
         var moreLines: CGFloat = path.bounds.minY
         while moreLines < path.bounds.maxY{
             
@@ -290,23 +295,24 @@ class SetgameView: UIView {
             path.addLine(to: CGPoint(x: path.bounds.maxX, y: moreLines))
             moreLines += 10.0
             print(moreLines)
+            return path
         }
         
     }
     
     
         
-    func drawShape(origin: CGPoint, shape: UIBezierPath) -> UIBezierPath {
+    func drawShape(origin: CGPoint, shape: UIBezierPath, color: UIColor, fill: UIBezierPath) -> UIBezierPath {
             let path = shape
         
         
-            UIColor.red.setFill()
-            UIColor.red.setStroke()
+            color.setFill()
+            color.setStroke()
             path.lineWidth = 5.0
             path.addClip()
-        
-            addLines(path: path)
-        
+        //        TODO: Adding properties to drawShape. Currently does not compile because of addlines. 
+        addLines(path: path)
+//            path.fill()
             path.stroke()
         
 
