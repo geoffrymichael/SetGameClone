@@ -205,9 +205,7 @@ class SetgameView: UIView {
 //
 //    }
     
-    
-    
-    
+
     
     func drawDiamond(path: UIBezierPath, originPoint: CGPoint) {
         
