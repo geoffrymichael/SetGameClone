@@ -41,11 +41,11 @@ struct Card: Equatable {
     
     
     enum Shape: String, Equatable, CustomStringConvertible {
-        case triangle = "▲"
-        case square = "■"
-        case circle = "●"
+        case diamond = "diamond"
+        case oval = "oval"
+        case squiggle = "squiggle"
         
-        static var all = [Shape.triangle, .square, .circle]
+        static var all = [Shape.diamond, .oval, .squiggle]
         
         var description: String { return rawValue }
         
@@ -59,11 +59,11 @@ struct Card: Equatable {
         
         
         
-        case blue = "blue"
+        case green = "green"
         case red = "red"
         case purple = "purple"
         
-        static var all = [Color.blue, .red, .purple]
+        static var all = [Color.green, .red, .purple]
         
         static func == (lhs: Card.Color, rhs: Card.Color) -> Bool {
             return lhs.rawValue == rhs.rawValue

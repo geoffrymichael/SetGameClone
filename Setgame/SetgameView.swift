@@ -94,7 +94,16 @@ class SetgameView: UIView {
 //        upperLeftCornerLabel.backgroundColor = UIColor.red
 //
 //    }
-
+    
+    @IBInspectable
+    var shape: String = "diamond" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    @IBInspectable
+    var color: String = "green" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    @IBInspectable
+    var fill: String = "clear" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    @IBInspectable
+    var amount: String = "two" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    
     
     override func draw(_ rect: CGRect) {
         let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: 16)
@@ -102,9 +111,9 @@ class SetgameView: UIView {
         UIColor.white.setFill()
         roundedRect.fill()
         
-        buidShown()
+        
     
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: drawOval(amount: "two"), color: UIColor.purple, fill: "shaded")
+        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: shape, color: color, fill: fill, amount: amount)
     
         
         
@@ -227,7 +236,7 @@ class SetgameView: UIView {
   
     }
     
-//    let amountArray = [0,1,2,3]
+
     
     func drawSquiggle(path: UIBezierPath, originPoint: CGPoint) {
         
@@ -249,7 +258,7 @@ class SetgameView: UIView {
         
     }
     
-    func drawOval(amount: String) -> UIBezierPath {
+    func oval(amount: String) -> UIBezierPath {
         var oval = UIBezierPath()
         let amountName = amount
         switch amountName {
@@ -267,28 +276,13 @@ class SetgameView: UIView {
             oval.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originBottom.x - radius*1.5, y: originBottom.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100))
             default:
             print("No such amount")
-            
-            
+ 
             
         }
-        
-        
-        
-//        let oval = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
-//
-//        oval.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originTop.x - radius*1.5, y: originTop.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100))
 
         return oval
     }
-    
-//    var oval: UIBezierPath {
-//        var path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
-//
-//        path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: originMiddle.x - radius*1.5, y: originMiddle.y - radius / 2), size: CGSize(width: radius*3, height: radius)), cornerRadius: 100)
-//
-//        return path
-//
-//    }
+
     
     func squiggle(amount: String) -> UIBezierPath {
         let squiggle = UIBezierPath()
@@ -308,25 +302,11 @@ class SetgameView: UIView {
             print("no such amount")
         }
 
-//        drawSquiggle(path: squiggle, originPoint: originTop)
-//
-//        drawSquiggle(path: squiggle, originPoint: originMiddle)
-//
-//        drawSquiggle(path: squiggle, originPoint: originBottom)
-
-        
+       
         return squiggle
     }
     
-//    let someCharacter: Character = "z"
-//    switch someCharacter {
-//    case "a":
-//    print("The first letter of the alphabet")
-//    case "z":
-//    print("The last letter of the alphabet")
-//    default:
-//    print("Some other character")
-//    }
+
 
     
     
@@ -362,7 +342,7 @@ class SetgameView: UIView {
     
     //This is the function to make a shape shaded. It uses the height of the shape to segment.
     
-    func addLines(path: UIBezierPath) -> UIBezierPath {
+    func addLines(path: UIBezierPath)  {
         
         var moreLines: CGFloat = path.bounds.minY
         while moreLines < path.bounds.maxY{
@@ -375,55 +355,93 @@ class SetgameView: UIView {
             
             
         }
-        return path
+        
         
     }
     
     
     
         
-    func drawShape(origin: CGPoint, shape: UIBezierPath, color: UIColor, fill: String ) -> UIBezierPath {
-            let path = shape
+    func drawShape(origin: CGPoint, shape: String, color: String, fill: String, amount: String ) -> UIBezierPath {
         
         
-            color.setFill()
-            color.setStroke()
+        var path = UIBezierPath()
+        var shapeColor = UIColor()
+        
+        
+        let pathName: String = shape
+        switch pathName {
+        case "diamond":
+            path = diamond(amount: amount)
+        case "oval":
+            path = oval(amount: amount)
+        case "squiggle":
+            path = squiggle(amount: amount)
+        default:
+            path = diamond(amount: amount)
+        }
+        
+        print(path)
+        print(shape)
+        
+//        let colorSwitch: String = "color"
+//        switch colorSwitch {
+//        case color:
+//        }
+        let colorName: String = color
+        switch colorName {
+        case "green":
+            shapeColor = UIColor.green
+        case "red":
+            shapeColor = UIColor.red
+        case "purple":
+            shapeColor = UIColor.purple
+        default:
+            shapeColor = UIColor.yellow
+        }
+        
+            shapeColor.setFill()
+            shapeColor.setStroke()
             path.lineWidth = 5.0
             path.addClip()
-        //        TODO: Adding properties to drawShape. Currently does not compile because of addlines. 
+        
+        let fillName: String = fill
+        switch fillName {
+        case "clear":
+            path.stroke()
+        case "shaded":
+            addLines(path: path)
+        case "filled":
+            path.fill()
+            path.stroke()
+        default:
+            path.stroke()
+            
+        }
+        
+//        path.stroke()
+//            path.fill()
+        //        TODO: Adding properties to drawShape. Currently does not compile because of addlines.
 //        addLines(path: path)
 //            path.fill()
         
         
-//            path.stroke()
-            print(shownCards[1].shape.rawValue)
+//
         
         
-        if fill == "shaded" {
-            return addLines(path: path)
-        } else if fill == "clear" {
-            path.stroke()
-        } else if fill == "filled" {
-           path.fill()
-        }
         
         
         return path
 
         
         
-        
-        
         }
     
-        var shownCards = [Card]()
     
-    func buidShown() {
-        for i in 0...11 {
-            shownCards.append(deck.cards[i])
-        }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setNeedsDisplay()
+        setNeedsLayout()
     }
-    
 
     
 //        func populateCards(shownCards: [Card]) {
