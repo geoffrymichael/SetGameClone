@@ -18,13 +18,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hhk-6X-Qvk" customClass="SetBackgroundView" customModule="Setgame" customModuleProvider="target">
-                                <rect key="frame" x="16" y="44" width="343" height="750"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Hhk-6X-Qvk" customClass="SetBackgroundView" customModule="Setgame" customModuleProvider="target">
+                                <rect key="frame" x="-212.66666666666666" y="28" width="800.33333333333337" height="766"/>
+                                <subviews>
+                                    <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gOK-yR-WFb" customClass="SetgameView" customModule="Setgame" customModuleProvider="target">
+                                        <rect key="frame" x="228.66666666666663" y="108.66666666666669" width="343" height="548.66666666666652"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="250" constant="800" id="DAd-7D-XZ2"/>
+                                            <constraint firstAttribute="width" secondItem="gOK-yR-WFb" secondAttribute="height" multiplier="5:8" id="eKS-3a-YmW"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="gOK-yR-WFb" firstAttribute="centerY" secondItem="Hhk-6X-Qvk" secondAttribute="centerY" id="8df-WX-TDU"/>
+                                    <constraint firstItem="gOK-yR-WFb" firstAttribute="top" secondItem="Hhk-6X-Qvk" secondAttribute="top" constant="108.66666666666669" id="G17-a2-Pf8"/>
+                                    <constraint firstAttribute="bottom" secondItem="gOK-yR-WFb" secondAttribute="bottom" constant="108.66666666666674" id="Lhi-4j-Xos"/>
+                                    <constraint firstAttribute="width" priority="250" constant="800" id="lno-l6-fRB"/>
+                                    <constraint firstItem="gOK-yR-WFb" firstAttribute="centerX" secondItem="Hhk-6X-Qvk" secondAttribute="centerX" id="yHK-fq-skT"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gOK-yR-WFb" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="PHz-cz-FfY"/>
+                            <constraint firstItem="gOK-yR-WFb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hK6-H2-tDI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gOK-yR-WFb" secondAttribute="trailing" constant="16" id="hox-kk-AVO"/>
+                            <constraint firstItem="gOK-yR-WFb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="nz9-iD-XzA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
