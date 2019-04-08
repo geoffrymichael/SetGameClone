@@ -18,24 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view opaque="NO" contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ctb-Pt-6lm" customClass="SetgameView" customModule="Setgame" customModuleProvider="target">
-                                <rect key="frame" x="16" y="51" width="343" height="711"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="750" constant="800" id="0zg-dp-VbW"/>
-                                    <constraint firstAttribute="width" secondItem="Ctb-Pt-6lm" secondAttribute="height" multiplier="5:8" id="r8K-IZ-9Lh"/>
-                                </constraints>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hhk-6X-Qvk" customClass="SetBackgroundView" customModule="Setgame" customModuleProvider="target">
+                                <rect key="frame" x="16" y="44" width="343" height="750"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ctb-Pt-6lm" secondAttribute="trailing" constant="16" id="PHO-T0-SAd"/>
-                            <constraint firstItem="Ctb-Pt-6lm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="hcz-u2-xBW"/>
-                            <constraint firstItem="Ctb-Pt-6lm" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="rtC-Jq-J9z"/>
-                            <constraint firstItem="Ctb-Pt-6lm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uIm-MF-m01"/>
-                            <constraint firstItem="Ctb-Pt-6lm" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="viI-GI-Lz0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ctb-Pt-6lm" secondAttribute="bottom" constant="16" id="zML-LU-7gr"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
