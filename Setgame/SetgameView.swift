@@ -10,90 +10,6 @@ import UIKit
 
 class SetgameView: UIView {
     
-    lazy var grid = Grid(layout: Grid.Layout.fixedCellSize(CGSize(width: 20, height: 20)), frame: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY), size: CGSize(width: 100, height: 100)))
-    
-    let deck = SetGameDeck()
-    
-    
-//    private lazy var upperLeftCornerLabel = createCornerLabel()
-//
-//    private func createCornerLabel() -> UILabel {
-//        let label = UILabel()
-//        label.numberOfLines = 0
-//        addSubview(label)
-//
-//        return label
-//    }
-//
-//
-//
-//    private func configureCornerLabel(_ label: UILabel) {
-//        label.text = "🐮\n🐮\n🐮\n🐮\n🐮\n🐮\n🐮\n🐮\n🐮\n🐮\n🐮\n🐮"
-//
-//
-//        var shapeRect = CGRect(origin: label.center, size: CGSize.init(width: 50, height: 50))
-//
-//
-//
-//
-//
-//
-//        label.frame.size = CGSize.zero
-//        label.sizeToFit()
-//
-//    }
-    
-    
-//    lazy var viewSquare = CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY), size: CGSize.init(width: 100.0, height: 100.0))
-//
-//
-//
-//
-//
-//    override func layoutSubviews() {
-//
-//
-//        let shapeView = UIView(frame: viewSquare)
-//        shapeView.backgroundColor = UIColor.blue
-//
-//
-//
-//
-//        addSubview(shapeView)
-//
-//
-//
-//
-//
-////        let newView = UIView(frame: path)
-////
-////
-////
-////        newView.backgroundColor = UIColor.blue
-////        addSubview(newView)
-////
-//
-//
-//
-//
-////        func draw(_rect: CGRect) {
-////            let path = UIBezierPath()
-////                    path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: bounds.height * 0.10, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
-////                    UIColor.red.setFill()
-////                    UIColor.black.setStroke()
-////                    path.lineWidth = 5.0
-////                    path.stroke()
-////                    path.fill()
-////                    path.move(to: CGPoint(x: bounds.midX, y: bounds.midY / 2))
-////        }
-//
-//        configureCornerLabel(upperLeftCornerLabel)
-//
-//
-//        upperLeftCornerLabel.center = CGPoint(x: bounds.midX, y: bounds.midY)
-//        upperLeftCornerLabel.backgroundColor = UIColor.red
-//
-//    }
     
     @IBInspectable
     var shape: String = "diamond" { didSet { setNeedsDisplay(); setNeedsLayout() } }
@@ -104,70 +20,25 @@ class SetgameView: UIView {
     @IBInspectable
     var amount: String = "two" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
+   
     
     override func draw(_ rect: CGRect) {
+        
+        //TODO this is programatically making setgame background view transparent but it will not load on startup. Need to bug test.
+        self.backgroundColor = UIColor.clear
+        self.isOpaque = true
         let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: 16)
         roundedRect.addClip()
-        UIColor.white.setFill()
+        UIColor.gray.setFill()
         roundedRect.fill()
+        
+        
+        
         
         
     
         _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: shape, color: color, fill: fill, amount: amount)
-    
-        
-        
-        
-//        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
-//
-//        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
-//
-//        _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY))
-       
-        
-//        drawOne(origin: bounds)
-//        let path = UIBezierPath()
-//        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: bounds.height * 0.10, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
-//        UIColor.red.setFill()
-//        UIColor.black.setStroke()
-//        path.lineWidth = 5.0
-//        path.stroke()
-//        path.fill()
-//        path.move(to: CGPoint(x: bounds.midX, y: bounds.midY / 2))
-//
-//        path.addLine(to: path.currentPoint)
-//        path.stroke()
-//        path.fill()
-//        path.move(to: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
-//        path.stroke()
-//        path.fill()
-        
 
-//        path.addArc(withCenter: path.currentPoint, radius: bounds.height * 0.10, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
-//        path.stroke()
-//        path.fill()
-//        path.move(to: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
-//
-//        path.addArc(withCenter: path.currentPoint, radius: bounds.height * 0.10, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
-//        path.stroke()
-//        path.fill()
-        
-//        var shapeRect = CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY), size: CGSize(width: 100, height: 100))
-//
-//
-//
-//
-//        var squareView = UILabel(frame: shapeRect)
-//
-//        squareView.transform = CGAffineTransform.identity.translatedBy(x: -50, y: -50)
-//
-//        squareView.backgroundColor = UIColor.yellow
-//
-//        addSubview(squareView)
-//
-        
-        
-        
         
     }
     
@@ -201,26 +72,7 @@ class SetgameView: UIView {
     
     
     
-//    func drawSquare(path: UIBezierPath, originPoint: CGPoint) -> UIBezierPath {
-//
-//
-//
-//
-//       let path = UIBezierPath(roundedRect: CGRect(origin: path.currentPoint, size: CGSize(width: radius, height: radius)), cornerRadius: 16)
-//
-//
-////        path.addLine(to: CGPoint(x: path.currentPoint.x + radius*2, y: path.currentPoint.y))
-////        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - radius))
-////        path.addLine(to: CGPoint(x: path.currentPoint.x - radius * 2, y: path.currentPoint.y))
-////
-////
-////        path.close()
-//
-//        return path
-//
-//
-//    }
-    
+  
 
     
     func drawDiamond(path: UIBezierPath, originPoint: CGPoint) {
@@ -328,12 +180,6 @@ class SetgameView: UIView {
             print("no such amount")
         }
         
-//        drawDiamond(path: diamond, originPoint: originTop)
-//
-//        drawDiamond(path: diamond, originPoint: originMiddle)
-//
-//        drawDiamond(path: diamond, originPoint: originBottom)
-        
 
         return diamond
     }
@@ -341,7 +187,6 @@ class SetgameView: UIView {
     
     
     //This is the function to make a shape shaded. It uses the height of the shape to segment.
-    
     func addLines(path: UIBezierPath)  {
         
         var moreLines: CGFloat = path.bounds.minY
@@ -384,10 +229,7 @@ class SetgameView: UIView {
         print(path)
         print(shape)
         
-//        let colorSwitch: String = "color"
-//        switch colorSwitch {
-//        case color:
-//        }
+
         let colorName: String = color
         switch colorName {
         case "green":
@@ -418,22 +260,10 @@ class SetgameView: UIView {
             path.stroke()
             
         }
-        
-//        path.stroke()
-//            path.fill()
-        //        TODO: Adding properties to drawShape. Currently does not compile because of addlines.
-//        addLines(path: path)
-//            path.fill()
-        
-        
-//
-        
-        
-        
+
         
         return path
 
-        
         
         }
     
@@ -444,83 +274,6 @@ class SetgameView: UIView {
     }
 
     
-//        func populateCards(shownCards: [Card]) {
-//
-//
-//
-//            for i in 0..<shownCards.count {
-////                var btStroke : Int!
-//                var btFill = UIBezierPath()
-//                var btShape = UIBezierPath()
-//                //This data is inherent in the data as text emoji
-//
-//
-//
-//                var btColor = UIColor.blue
-//
-//                if shownCards[i].shape.rawValue == "■" {
-//                    btShape = oval
-//                } else if shownCards[i].shape.rawValue == "●" {
-//                    btShape = squiggle
-//                } else if shownCards[i].shape.rawValue == "▲" {
-//                    btShape = diamond
-//                }
-//
-//
-//
-//                if shownCards[i].color.rawValue == "purple" {
-//                    btColor = UIColor.purple
-//                } else if shownCards[i].color.rawValue == "red" {
-//                    btColor = UIColor.red
-//                } else if shownCards[i].color.rawValue == "blue" {
-//                    btColor = UIColor.blue
-//                }
-//
-//                if shownCards[i].fill.rawValue == "clear" {
-//                    btFill = addLines(path: <#T##UIBezierPath#>)
-//                } else if shownCards[i].fill.rawValue == "shaded" {
-//                    btStroke = -5
-//                    btFloat = 0.15
-//                } else if shownCards[i].fill.rawValue == "filled" {
-//                    btStroke = -5
-//                    btFloat = 5.00
-//                }
-//
-//
-////                if shownCards[i].amount.rawValue == "two" {
-////                    btShape = btShape + btShape
-////                } else if shownCards[i].amount.rawValue == "three" {
-////                    btShape = btShape + btShape + btShape
-////                }
-//
-//
-//            }
-//    //        print(deck)
-//            print(shownCards.count)
-//            print(deck.cards.count)
-//        }
-    
-//    func drawOne(bounds: CGPoint) {
-//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY))
-//        }
-//
-//        func drawTwo() {
-//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
-//
-//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
-//        }
-//
-//        func drawThree() {
-//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY / 2))
-//
-//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY * 1.5))
-//
-//            _ = drawCircle(origin: CGPoint(x: bounds.midX, y: bounds.midY))
-//
-//
-//
-//
-//    }
     
 
 }

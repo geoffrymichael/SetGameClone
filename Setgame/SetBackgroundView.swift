@@ -41,9 +41,13 @@ class SetBackgroundView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        configureCornerLabel(cardOne, size: CGSize(width: bounds.width / 5, height: bounds.height / 8), center: CGPoint(x: bounds.midX,y: bounds.midY))
         
-        configureCornerLabel(cardTwo, size: CGSize(width: bounds.width / 5, height: bounds.height / 8), center: CGPoint(x: bounds.midX / 2,y: bounds.midY / 2))
+        
+        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY), size: CGSize(width: bounds.width, height: bounds.height)))
+        
+        configureCornerLabel(cardOne, size: CGSize(width: grid[0]?.width ?? bounds.width, height: grid[0]?.height ?? bounds.height),center: CGPoint(x: grid[0]?.midX ?? bounds.midX, y: grid[0]?.midY ?? bounds.midY) )
+        
+        configureCornerLabel(cardTwo, size: CGSize(width: grid[1]?.width ?? bounds.width, height: grid[1]?.height ?? bounds.height),center: CGPoint(x: grid[1]?.midX ?? bounds.midX, y: grid[1]?.midY ?? bounds.midY) )
         
         
     }
