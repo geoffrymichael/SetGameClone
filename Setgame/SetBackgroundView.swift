@@ -12,7 +12,7 @@ import UIKit
 
 class SetBackgroundView: UIView {
 
-    
+    let deck = SetGameDeck()
     
 //    private lazy var cardOne = createCard()
 //    private lazy var cardTwo = createCard()
@@ -22,6 +22,8 @@ class SetBackgroundView: UIView {
     //Create an array of cardViews(Setgameviews)
     private func createCard() {
         let label = SetgameView()
+        
+        
         
 
         addSubview(label)
