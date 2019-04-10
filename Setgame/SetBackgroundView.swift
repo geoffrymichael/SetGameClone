@@ -43,11 +43,12 @@ class SetBackgroundView: UIView {
         
         
         
-        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: bounds.minX, y: bounds.minY), size: CGSize(width: bounds.width, height: bounds.height)))
         
-        configureCornerLabel(cardOne, size: CGSize(width: grid[0]?.width ?? bounds.width, height: grid[0]?.height ?? bounds.height),center: CGPoint(x: grid[0]?.midX ?? bounds.midX, y: grid[0]?.midY ?? bounds.midY) )
+        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: bounds.minX, y: bounds.maxY), size: CGSize(width: bounds.width, height: bounds.height)))
         
-        configureCornerLabel(cardTwo, size: CGSize(width: grid[1]?.width ?? bounds.width, height: grid[1]?.height ?? bounds.height),center: CGPoint(x: grid[1]?.midX ?? bounds.midX, y: grid[1]?.midY ?? bounds.midY) )
+//        configureCornerLabel(cardOne, size: CGSize(width: grid[0]?.width ?? bounds.width, height: grid[0]?.height ?? bounds.height),center: CGPoint(x: grid[0]?.midX ?? bounds.midX, y: grid[0]?.midY ?? bounds.midY) )
+//
+//        configureCornerLabel(cardTwo, size: CGSize(width: grid[1]?.width ?? bounds.width, height: grid[1]?.height ?? bounds.height),center: CGPoint(x: grid[1]?.midX ?? bounds.midX, y: grid[1]?.midY ?? bounds.midY) )
         
         
     }
