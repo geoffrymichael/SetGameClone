@@ -20,6 +20,8 @@ class ViewController: UIViewController {
 
     var deck = SetGameDeck()
     
+    
+    
 //    var shownCards = [Card]()
 //
 //    var buttonPress = 0

@@ -43,7 +43,7 @@ class SetBackgroundView: UIView {
         
         
         
-        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY), size: CGSize(width: bounds.width, height: bounds.height)))
+        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: bounds.minX, y: bounds.minY), size: CGSize(width: bounds.width, height: bounds.height)))
         
         configureCornerLabel(cardOne, size: CGSize(width: grid[0]?.width ?? bounds.width, height: grid[0]?.height ?? bounds.height),center: CGPoint(x: grid[0]?.midX ?? bounds.midX, y: grid[0]?.midY ?? bounds.midY) )
         
