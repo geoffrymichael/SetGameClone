@@ -22,20 +22,8 @@ class ViewController: UIViewController {
     
     var backgroundView = SetBackgroundView()
     
-    @IBOutlet weak var SetgameView: SetgameView! {
-        didSet {
-            SetgameView.amount = "one"
-            
-            var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 5, columnCount: 5), frame: CGRect(origin: CGPoint(x: backgroundView.bounds.minX, y: backgroundView.bounds.minY), size: CGSize(width: backgroundView.bounds.width, height: backgroundView.bounds.height)))
-            
-            SetgameView.updateConstraints()
-            
-            SetgameView.bounds.origin = CGPoint(x: grid[0]?.midX ?? backgroundView.bounds.midX, y: grid[0]?.midX ?? backgroundView.bounds.midY)
-            
-            
-            
-        }
-    }
+    
+    
     
 //    var shownCards = [Card]()
 //

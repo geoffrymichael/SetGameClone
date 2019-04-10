@@ -227,8 +227,7 @@ class SetgameView: UIView {
             path = diamond(amount: amount)
         }
         
-        print(path)
-        print(shape)
+       
         
 
         let colorName: String = color

@@ -8,8 +8,11 @@
 
 import UIKit
 
+
+
 class SetBackgroundView: UIView {
 
+    
     
     private lazy var cardOne = createCard()
     private lazy var cardTwo = createCard()
@@ -38,13 +41,30 @@ class SetBackgroundView: UIView {
     }
     
     
+    
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         
         
         
-        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: bounds.minX, y: bounds.maxY), size: CGSize(width: bounds.width, height: bounds.height)))
+        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.bounds.minX, y: self.bounds.minY), size: CGSize(width: self.bounds.width, height: self.bounds.height)))
+        
+        print(subviews[0].tag)
+        
+        let firstCard = subviews[0]
+        
+        print(firstCard)
+        
+        
+        
+        
+        configureCornerLabel(firstCard, size: CGSize(width: grid[11]?.width ?? bounds.width, height: grid[11]?.height ?? bounds.height),center: CGPoint(x: grid[11]?.midX ?? bounds.midX, y: grid[11]?.midY ?? bounds.midY) )
+        
+        
+        
+        
         
 //        configureCornerLabel(cardOne, size: CGSize(width: grid[0]?.width ?? bounds.width, height: grid[0]?.height ?? bounds.height),center: CGPoint(x: grid[0]?.midX ?? bounds.midX, y: grid[0]?.midY ?? bounds.midY) )
 //

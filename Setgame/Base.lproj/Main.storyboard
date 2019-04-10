@@ -18,16 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzM-y6-3vQ" customClass="SetBackgroundView" customModule="Setgame" customModuleProvider="target">
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yzM-y6-3vQ" customClass="SetBackgroundView" customModule="Setgame" customModuleProvider="target">
                                 <rect key="frame" x="16" y="44" width="343" height="734"/>
                                 <subviews>
-                                    <view contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k4w-Zy-Zoa" customClass="SetgameView" customModule="Setgame" customModuleProvider="target">
-                                        <rect key="frame" x="51" y="80" width="125" height="178"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="32j-IB-88a" customClass="SetgameView" customModule="Setgame" customModuleProvider="target">
+                                        <rect key="frame" x="51" y="303" width="240" height="308"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="32j-IB-88a" firstAttribute="leading" secondItem="yzM-y6-3vQ" secondAttribute="leading" constant="51" id="HO2-t8-ns4"/>
+                                    <constraint firstAttribute="trailing" secondItem="32j-IB-88a" secondAttribute="trailing" constant="52" id="Tac-Bu-gsf"/>
+                                    <constraint firstAttribute="bottom" secondItem="32j-IB-88a" secondAttribute="bottom" constant="123" id="VPZ-Vo-IF7"/>
+                                    <constraint firstItem="32j-IB-88a" firstAttribute="top" secondItem="yzM-y6-3vQ" secondAttribute="top" constant="303" id="iwJ-Zs-oDj"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,9 +44,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="SetgameView" destination="k4w-Zy-Zoa" id="p7Z-TU-frS"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
