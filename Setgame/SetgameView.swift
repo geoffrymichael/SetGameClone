@@ -15,11 +15,11 @@ class SetgameView: UIView {
     @IBInspectable
     var shape: String = "squiggle" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     @IBInspectable
-    var color: String = "red" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var color: String = "purple" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     @IBInspectable
     var fill: String = "shaded" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     @IBInspectable
-    var amount: String = "three" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var amount: String = "two" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
    
     

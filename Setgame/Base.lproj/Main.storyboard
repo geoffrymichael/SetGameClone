@@ -19,24 +19,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yzM-y6-3vQ" customClass="SetBackgroundView" customModule="Setgame" customModuleProvider="target">
-                                <rect key="frame" x="16" y="44" width="343" height="734"/>
+                                <rect key="frame" x="16" y="44" width="343" height="529.33333333333337"/>
                                 <subviews>
                                     <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="32j-IB-88a" customClass="SetgameView" customModule="Setgame" customModuleProvider="target">
-                                        <rect key="frame" x="51" y="303" width="240" height="308"/>
+                                        <rect key="frame" x="16" y="15.999999999999972" width="311" height="497.33333333333326"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="32j-IB-88a" secondAttribute="height" multiplier="5:8" id="BkO-7x-I9E"/>
+                                            <constraint firstAttribute="width" priority="250" constant="800" id="gha-cR-tsU"/>
+                                            <constraint firstAttribute="height" priority="250" constant="800" id="gzN-A4-iwf"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="32j-IB-88a" firstAttribute="leading" secondItem="yzM-y6-3vQ" secondAttribute="leading" constant="51" id="HO2-t8-ns4"/>
-                                    <constraint firstAttribute="trailing" secondItem="32j-IB-88a" secondAttribute="trailing" constant="52" id="Tac-Bu-gsf"/>
-                                    <constraint firstAttribute="bottom" secondItem="32j-IB-88a" secondAttribute="bottom" constant="123" id="VPZ-Vo-IF7"/>
-                                    <constraint firstItem="32j-IB-88a" firstAttribute="top" secondItem="yzM-y6-3vQ" secondAttribute="top" constant="303" id="iwJ-Zs-oDj"/>
+                                    <constraint firstItem="32j-IB-88a" firstAttribute="leading" secondItem="yzM-y6-3vQ" secondAttribute="leading" constant="16" id="HO2-t8-ns4"/>
+                                    <constraint firstItem="32j-IB-88a" firstAttribute="centerX" secondItem="yzM-y6-3vQ" secondAttribute="centerX" id="LLm-Se-30t"/>
+                                    <constraint firstAttribute="trailing" secondItem="32j-IB-88a" secondAttribute="trailing" constant="16" id="Tac-Bu-gsf"/>
+                                    <constraint firstAttribute="bottom" secondItem="32j-IB-88a" secondAttribute="bottom" constant="16" id="VPZ-Vo-IF7"/>
+                                    <constraint firstItem="32j-IB-88a" firstAttribute="top" secondItem="yzM-y6-3vQ" secondAttribute="top" constant="16" id="iwJ-Zs-oDj"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="yzM-y6-3vQ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6w5-38-YgP"/>
                             <constraint firstItem="yzM-y6-3vQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="CY0-mC-oVr"/>
                             <constraint firstItem="yzM-y6-3vQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IbJ-Ls-Nwf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yzM-y6-3vQ" secondAttribute="bottom" id="hSw-9c-giD"/>
