@@ -20,7 +20,73 @@ class ViewController: UIViewController {
 
     var deck = SetGameDeck()
     
-    var backgroundView = SetBackgroundView()
+    
+    
+    var viewBounds = CGRect()
+    
+    override func viewDidLoad() {
+//        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height)))
+        
+        viewBounds = self.view.bounds
+    }
+    
+    var viewArray = [UIView]()
+    
+    //Create an array of cardViews(Setgameviews)
+    private func createCard() {
+        let label = SetgameView()
+        
+        
+        
+        self.view.addSubview(label)
+        
+        
+        
+        viewArray.append(label)
+        
+        
+    }
+    
+    //Configure the Setviewcard and override its layout and position
+    private func configureCornerLabel(_ label: UIView, size: CGSize, center: CGPoint) {
+        
+        label.frame.size = size
+        label.center = center
+        label.sizeToFit()
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        
+        
+        
+        
+        //Declare a grid. This is a standin as it is static for a 12 view grid
+        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.view.bounds.minX, y: self.view.bounds.minY), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height)))
+        
+        //The 0...11 here is just a standin for initially putting twelve cards in the view
+        for card in 0...11 {
+            createCard()
+            configureCornerLabel(viewArray[card], size: CGSize(width: grid[card]?.width ?? self.view.bounds.width, height: grid[card]?.height ?? self.view.bounds.height),center: CGPoint(x: grid[card]?.midX ?? self.view.bounds.midX, y: grid[card]?.midY ?? self.view.bounds.midY) )
+        }
+        
+//        print(subviews[0].tag)
+        
+        
+        //TODO This is accessing the autolayout card. Maybe it should be replaced by attributes of first card in deck data set.
+//
+        
+//        let firstCard = subviews[0]
+//
+//        print(firstCard)
+//
+//
+//
+//
+//        configureCornerLabel(firstCard, size: CGSize(width: grid[11]?.width ?? bounds.width, height: grid[11]?.height ?? bounds.height),center: CGPoint(x: grid[11]?.midX ?? bounds.midX, y: grid[11]?.midY ?? bounds.midY) )
+    }
     
     
     
