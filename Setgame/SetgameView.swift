@@ -12,6 +12,10 @@ class SetgameView: UIView {
     
     
     
+    
+    
+    
+    
     @IBInspectable
     var shape: String = "squiggle" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     @IBInspectable

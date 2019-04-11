@@ -22,21 +22,50 @@ class ViewController: UIViewController {
     
     
     
+    var shownCards = [Card]()
+    
+    
+    
+    
+    @IBOutlet weak var Setgameview: SetgameView! {
+        didSet {
+            
+        }
+    }
+    
+   
+    
     var viewBounds = CGRect()
     
     override func viewDidLoad() {
 //        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height)))
         
         viewBounds = self.view.bounds
+        newGame()
+        
     }
+    
+    
     
     var viewArray = [UIView]()
     
     //Create an array of cardViews(Setgameviews)
-    private func createCard() {
+    private func createCard(cardNum: Int) {
+        
+        
         let label = SetgameView()
         
+        label.shape = shownCards[cardNum].shape.rawValue
+        label.color = shownCards[cardNum].color.rawValue
+        label.fill = shownCards[cardNum].fill.rawValue
+        label.amount = shownCards[cardNum].amount.rawValue
         
+        //TODO I have hooked up a gesture controller to each UIview with borlerplate print command when a Setgame view is clicked.
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        
+        
+        
+        label.addGestureRecognizer(tap)
         
         self.view.addSubview(label)
         
@@ -46,6 +75,12 @@ class ViewController: UIViewController {
         
         
     }
+    
+    
+    @objc func handleTap(cardId: Int) {
+        print("I pressed a card view")
+    }
+    
     
     //Configure the Setviewcard and override its layout and position
     private func configureCornerLabel(_ label: UIView, size: CGSize, center: CGPoint) {
@@ -67,8 +102,8 @@ class ViewController: UIViewController {
         var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.view.bounds.minX, y: self.view.bounds.minY), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height)))
         
         //The 0...11 here is just a standin for initially putting twelve cards in the view
-        for card in 0...11 {
-            createCard()
+        for card in 0..<shownCards.count {
+            createCard(cardNum: card)
             configureCornerLabel(viewArray[card], size: CGSize(width: grid[card]?.width ?? self.view.bounds.width, height: grid[card]?.height ?? self.view.bounds.height),center: CGPoint(x: grid[card]?.midX ?? self.view.bounds.midX, y: grid[card]?.midY ?? self.view.bounds.midY) )
         }
         
@@ -78,31 +113,43 @@ class ViewController: UIViewController {
         //TODO This is accessing the autolayout card. Maybe it should be replaced by attributes of first card in deck data set.
 //
         
-//        let firstCard = subviews[0]
+//        let firstCard = view.subviews[0]
 //
-//        print(firstCard)
-//
-//
-//
-//
-//        configureCornerLabel(firstCard, size: CGSize(width: grid[11]?.width ?? bounds.width, height: grid[11]?.height ?? bounds.height),center: CGPoint(x: grid[11]?.midX ?? bounds.midX, y: grid[11]?.midY ?? bounds.midY) )
+//        print("Thisisisiisisis first card",firstCard)
+////
+////
+////
+////
+//        configureCornerLabel(firstCard, size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height), center: CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY))
+//        firstCard.bringSubviewToFront(viewArray[0])
     }
     
     
     
     
-//    var shownCards = [Card]()
-//
-//    var buttonPress = 0
-//
-//    var hiddenCardCount = 12
-//
-//    var cardIndex = [Int]()
-//
-//    @IBAction func cardTouch(_ sender: UIButton) {
-//
-//
+    
+
+    var buttonPress = 0
+
+    var hiddenCardCount = 12
+
+    var cardIndex = [Int]()
+
+    @IBAction func cardTouch(_ sender: UIButton) {
+
+
 //        pickCards(pickedCard: sender)
+
+
+
+    }
+    
+    
+    
+    
+//    @objc func handleTap() {
+//
+//        print("I pressed a view")
 //
 //
 //
@@ -160,19 +207,13 @@ class ViewController: UIViewController {
 //
 //
 //    //Newgame function which produces 12 shown card buttons with symbols and 12 hidden, non enabled cards. Note that the cards are populated(and 24 total cards removed from deck), but simply inactive and hidden.
-//    func newGame() {
-//        for _ in 0..<cardButton.count {
-//            shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
-//        }
-//
-//        for i in 12...23 {
-//
-//            cardButton[i].isEnabled = false
-//            cardButton[i].isHidden = true
-//
-//
-//        }
-//    }
+    func newGame() {
+        for _ in 0...11 {
+            shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
+        }
+
+        
+    }
 //
 //
 //    // Iterates through the first 24 cards and reads thier attributes and then shows them via the changeAtt function.
@@ -246,88 +287,89 @@ class ViewController: UIViewController {
 //
 //
 //    //The first three cards are selected and stored. Their borders are also colored to show selection.
-//    func pickCards( pickedCard: UIButton) {
-//        if buttonPress <= 2 {
-//            buttonPress += 1
-//            if let cardNumber = cardButton.index(of: pickedCard) {
-//
-//                cardButton[cardNumber].layer.borderWidth = 3.0
-//                cardButton[cardNumber].layer.borderColor = UIColor.blue.cgColor
-//
-//                cardIndex += [cardNumber]
-//
-//                print("cardnumber", cardNumber)
-//
-//                deck.cardPicking(cardNumber: cardNumber, shownCard: shownCards )
-//
-//
-//            }
-//
-//
+    func pickCards( pickedCard: UIView) {
+        if buttonPress <= 2 {
+            buttonPress += 1
+            if let cardNumber = viewArray.index(of: pickedCard) {
+
+                viewArray[cardNumber].layer.borderWidth = 3.0
+                viewArray[cardNumber].layer.borderColor = UIColor.blue.cgColor
+
+                cardIndex += [cardNumber]
+
+                print("cardnumber", cardNumber)
+
+                deck.cardPicking(cardNumber: cardNumber, shownCard: shownCards )
+
+
+            }
+
+
 //        //When a 4th card is pressed, the currently selected cards are compared to see whether they are a set. If they are, three new cards are removed from the deck to replace the matches.
-//        } else if buttonPress == 3 {
-//            if deck.cardMatching() && deck.cards.count > 0 {
-//
-//                buttonPress = 0
-//
-//                print("shown card", cardIndex[1])
-//                print("cardIndex", cardIndex)
-//                for i in 0..<cardIndex.count {
-//                    shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
-//                    cardButton[cardIndex[i]].layer.borderWidth = 0
-//                    populateCards(shownCards: shownCards)
-//
-//
-//                }
-//                cardIndex = []
-//                deck.clearChosen()
-//
-//
-//            }
-//            //If there are no more cards in the deck, hide them.
-//            else if deck.cardMatching() && deck.cards.count == 0 {
-//                buttonPress = 0
-//                for i in 0..<cardIndex.count {
-//                    cardButton[cardIndex[i]].isEnabled = false
-//                    cardButton[cardIndex[i]].isHidden = true
-//                }
-//                cardIndex = []
-//                deck.clearChosen()
-//            }
+        } else if buttonPress == 3 {
+            if deck.cardMatching() && deck.cards.count > 0 {
+
+                buttonPress = 0
+
+                print("shown card", cardIndex[1])
+                print("cardIndex", cardIndex)
+                for i in 0..<cardIndex.count {
+                    shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
+                    viewArray[cardIndex[i]].layer.borderWidth = 0
+                    
+
+
+                }
+                cardIndex = []
+                deck.clearChosen()
+
+
+            }
+            //If there are no more cards in the deck, hide them.
+            else if deck.cardMatching() && deck.cards.count == 0 {
+                buttonPress = 0
+                for i in 0..<cardIndex.count {
+//                    viewArray[cardIndex[i]].isEnabled = false
+                    viewArray[cardIndex[i]].isHidden = true
+                }
+                cardIndex = []
+                deck.clearChosen()
+            }
 //
 //            //If the cards do not constitute a set, the borders are removed.
-//            else {
-//                buttonPress = 0
-//
-//                for i in 0..<cardIndex.count {
-//
-//                    cardButton[cardIndex[i]].layer.borderWidth = 0
-//
-//                }
-//                cardIndex = []
-//                deck.clearChosen()
-//            }
-//
-//
-//
-//        }
-//
-//
-//    }
-//
-//}
+            else {
+                buttonPress = 0
+
+                for i in 0..<cardIndex.count {
+
+                    viewArray[cardIndex[i]].layer.borderWidth = 0
+
+                }
+                cardIndex = []
+                deck.clearChosen()
+            }
+
+
+
+        }
+
+
+    }
+
+}
 //
 //// This an extension that we will use in emoji function so it can stay cleaner and expressinve instead of that long long chain of modifiers.
-//extension Int {
-//    var arc4random: Int {
-//        if self > 0 {
-//            return Int(arc4random_uniform(UInt32(self)))
-//        } else if self < 0 {
-//            return -Int(arc4random_uniform(UInt32(abs(self))))
-//        } else {
-//            return 0
-//        }
-//    }
+
+
+
+extension Int {
+    var arc4random: Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        } else {
+            return 0
+        }
+    }
 }
-
-

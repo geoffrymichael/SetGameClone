@@ -21,10 +21,14 @@
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2ey-xm-f8b" customClass="SetgameView" customModule="Setgame" customModuleProvider="target" colorLabel="IBBuiltInLabel-Yellow">
                                 <rect key="frame" x="16" y="136.66666666666669" width="343" height="548.66666666666652"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="800" id="Aci-Bq-0mv"/>
                                     <constraint firstAttribute="width" secondItem="2ey-xm-f8b" secondAttribute="height" multiplier="5:8" id="Ixe-mJ-n6P"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Pus-JU-0rJ" appends="YES" id="aC8-jf-SVa"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -44,8 +48,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="Setgameview" destination="2ey-xm-f8b" id="yEf-0c-MKA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Pus-JU-0rJ"/>
             </objects>
             <point key="canvasLocation" x="-335.19999999999999" y="-326.60098522167488"/>
         </scene>
