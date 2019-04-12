@@ -296,7 +296,11 @@ class ViewController: UIViewController {
 //
 //
 //
-//    //The first three cards are selected and stored. Their borders are also colored to show selection.
+//
+
+    //TODO Need to refine the card selecting logic (Having borders removed after three cards are selected)
+    
+//The first three cards are selected and stored. Their borders are also colored to show selection.
     @objc func handleTap(_ pickedCard: UIGestureRecognizer) {
         
         if buttonPress <= 2 {
