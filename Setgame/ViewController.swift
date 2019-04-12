@@ -60,6 +60,8 @@ class ViewController: UIViewController {
         label.fill = shownCards[cardNum].fill.rawValue
         label.amount = shownCards[cardNum].amount.rawValue
         
+        label.tag = cardNum
+        
         //TODO I have hooked up a gesture controller to each UIview with borlerplate print command when a Setgame view is clicked.
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         
@@ -77,9 +79,17 @@ class ViewController: UIViewController {
     }
     
     
-    @objc func handleTap(cardId: Int) {
-        print("I pressed a card view")
-    }
+//    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
+//        print("I pressed a card view")
+//        if let viewPressed = recognizer.view {
+//            print("This is a view pressed", viewPressed, "Tagged Number", viewPressed.tag)
+//            viewPressed.layer.borderWidth = 3.0
+//            viewPressed.layer.borderColor = UIColor.blue.cgColor
+//        } else {
+//            print("Something went wrong")
+//        }
+//
+//    }
     
     
     //Configure the Setviewcard and override its layout and position
@@ -287,19 +297,20 @@ class ViewController: UIViewController {
 //
 //
 //    //The first three cards are selected and stored. Their borders are also colored to show selection.
-    func pickCards( pickedCard: UIView) {
+    @objc func handleTap(_ pickedCard: UIGestureRecognizer) {
+        
         if buttonPress <= 2 {
             buttonPress += 1
-            if let cardNumber = viewArray.index(of: pickedCard) {
+            if let cardNumber = pickedCard.view {
 
-                viewArray[cardNumber].layer.borderWidth = 3.0
-                viewArray[cardNumber].layer.borderColor = UIColor.blue.cgColor
+                cardNumber.layer.borderWidth = 3.0
+                cardNumber.layer.borderColor = UIColor.blue.cgColor
 
-                cardIndex += [cardNumber]
+                cardIndex += [cardNumber.tag]
 
                 print("cardnumber", cardNumber)
 
-                deck.cardPicking(cardNumber: cardNumber, shownCard: shownCards )
+                deck.cardPicking(cardNumber: cardNumber.tag, shownCard: shownCards )
 
 
             }
