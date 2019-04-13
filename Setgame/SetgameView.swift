@@ -25,6 +25,8 @@ class SetgameView: UIView {
     @IBInspectable
     var amount: String = "two" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
+    var isChosen: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    
    
     
     override func draw(_ rect: CGRect) {

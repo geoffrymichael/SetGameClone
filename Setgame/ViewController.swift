@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     
     
     
-    var viewArray = [UIView]()
+    var viewArray = [SetgameView]()
     
     //Create an array of cardViews(Setgameviews)
     private func createCard(cardNum: Int) {
@@ -93,11 +93,12 @@ class ViewController: UIViewController {
     
     
     //Configure the Setviewcard and override its layout and position
-    private func configureCornerLabel(_ label: UIView, size: CGSize, center: CGPoint) {
-        
-        label.frame.size = size
-        label.center = center
-        label.sizeToFit()
+    private func configureCornerLabel(_ label: UIView, gridNum: Int) {
+        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.view.bounds.minX, y: self.view.bounds.minY), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height)))
+
+        label.frame.size = grid[gridNum]?.size ?? self.view.bounds.size
+        label.center = CGPoint(x: grid[gridNum]?.midX ?? self.view.bounds.midX, y: grid[gridNum]?.midY ?? self.view.bounds.midY)
+//        label.sizeToFit()
         
         
     }
@@ -109,12 +110,12 @@ class ViewController: UIViewController {
         
         
         //Declare a grid. This is a standin as it is static for a 12 view grid
-        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.view.bounds.minX, y: self.view.bounds.minY), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height)))
+        
         
         //The 0...11 here is just a standin for initially putting twelve cards in the view
         for card in 0..<shownCards.count {
             createCard(cardNum: card)
-            configureCornerLabel(viewArray[card], size: CGSize(width: grid[card]?.width ?? self.view.bounds.width, height: grid[card]?.height ?? self.view.bounds.height),center: CGPoint(x: grid[card]?.midX ?? self.view.bounds.midX, y: grid[card]?.midY ?? self.view.bounds.midY) )
+            configureCornerLabel(viewArray[card], gridNum: card)
         }
         
 //        print(subviews[0].tag)
@@ -332,9 +333,20 @@ class ViewController: UIViewController {
                     shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
                     viewArray[cardIndex[i]].layer.borderWidth = 0
                     
+                    
+                    
+                
+                    
 
 
                 }
+                viewArray = []
+                
+                for i in 0..<shownCards.count {
+                    createCard(cardNum: i)
+                    configureCornerLabel(viewArray[i], gridNum: i)
+                }
+                
                 cardIndex = []
                 deck.clearChosen()
 
@@ -358,6 +370,15 @@ class ViewController: UIViewController {
                 for i in 0..<cardIndex.count {
 
                     viewArray[cardIndex[i]].layer.borderWidth = 0
+                    
+                    
+                    print("Cardindex hash", viewArray[cardIndex[i]].hash)
+                    print("Straight Away", viewArray[0].hash)
+                    print("Fifth Array", viewArray[5].hash)
+                    
+                    
+                    
+                    
 
                 }
                 cardIndex = []
