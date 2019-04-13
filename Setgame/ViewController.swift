@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var Setgameview: SetgameView! {
         didSet {
-            
+            Setgameview.removeFromSuperview()
         }
     }
     
@@ -94,7 +94,29 @@ class ViewController: UIViewController {
     
     //Configure the Setviewcard and override its layout and position
     private func configureCornerLabel(_ label: UIView, gridNum: Int) {
-        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: 3, columnCount: 4), frame: CGRect(origin: CGPoint(x: self.view.bounds.minX, y: self.view.bounds.minY), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height)))
+        
+        var phoneFrame = self.view.bounds
+        
+        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
+        
+        phoneFrame = phoneFrame.inset(by: phoneOffsets)
+        
+        var rows = 0
+        var columns = 0
+        
+        while rows * columns <= shownCards.count {
+            while columns <= 3 {
+                columns += 1
+            }
+            
+            rows += 1
+        }
+        
+        
+        
+        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: rows, columnCount: columns), frame: CGRect(origin: CGPoint(x: phoneFrame.minX, y: phoneFrame.minY), size: CGSize(width: phoneFrame.width, height: phoneFrame.height)))
+        
+        
 
         label.frame.size = grid[gridNum]?.size ?? self.view.bounds.size
         label.center = CGPoint(x: grid[gridNum]?.midX ?? self.view.bounds.midX, y: grid[gridNum]?.midY ?? self.view.bounds.midY)
@@ -336,10 +358,8 @@ class ViewController: UIViewController {
                     
                     
                 
-                    
-
-
                 }
+                
                 viewArray = []
                 
                 for i in 0..<shownCards.count {
