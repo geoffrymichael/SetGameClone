@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         self.view.addSubview(playingCardView)
     }
     
+    
+    
 }
 //
 //// This an extension that we will use in emoji function so it can stay cleaner and expressinve instead of that long long chain of modifiers.
