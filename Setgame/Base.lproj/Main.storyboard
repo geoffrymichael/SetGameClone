@@ -18,38 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2ey-xm-f8b" customClass="SetgameView" customModule="Setgame" customModuleProvider="target" colorLabel="IBBuiltInLabel-Yellow">
-                                <rect key="frame" x="16" y="136.66666666666669" width="343" height="548.66666666666652"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="250" constant="800" id="Aci-Bq-0mv"/>
-                                    <constraint firstAttribute="width" secondItem="2ey-xm-f8b" secondAttribute="height" multiplier="5:8" id="Ixe-mJ-n6P"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Pus-JU-0rJ" appends="YES" id="aC8-jf-SVa"/>
-                                </connections>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SSj-vc-hfK" customClass="playingCardView" customModule="Setgame" customModuleProvider="target">
+                                <rect key="frame" x="16" y="44" width="343" height="660"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="2ey-xm-f8b" firstAttribute="centerX" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="16" id="9eD-nV-ruj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2ey-xm-f8b" secondAttribute="trailing" constant="16" id="ENI-3m-jN5"/>
-                            <constraint firstItem="2ey-xm-f8b" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KJp-hF-8dR"/>
-                            <constraint firstItem="2ey-xm-f8b" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="VHc-ck-rFL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2ey-xm-f8b" secondAttribute="bottom" constant="16" id="gpN-hg-ZeL"/>
-                            <constraint firstItem="2ey-xm-f8b" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="hR7-bf-Dj1"/>
-                            <constraint firstItem="2ey-xm-f8b" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="pnz-y7-XW3"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="9eD-nV-ruj"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="Setgameview" destination="2ey-xm-f8b" id="yEf-0c-MKA"/>
+                        <outlet property="playingCardView" destination="SSj-vc-hfK" id="Kf5-0l-oyv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
