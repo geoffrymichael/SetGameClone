@@ -27,6 +27,8 @@ class SetgameView: UIView {
     
     var isChosen: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
+    var arrayOrder: Int = 0
+    
    
     
     override func draw(_ rect: CGRect) {

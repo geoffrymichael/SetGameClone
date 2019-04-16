@@ -14,27 +14,43 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Setgame" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="redraw" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fO5-Sn-KJ1">
-                                <rect key="frame" x="16" y="44" width="343" height="660"/>
+                            <stackView opaque="NO" contentMode="redraw" fixedFrame="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cCb-Sx-X1R">
+                                <rect key="frame" x="16" y="44" width="343" height="678"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSj-vc-hfK" customClass="playingCardView" customModule="Setgame" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="660"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ePB-RU-7rR">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="640"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fO5-Sn-KJ1">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="640"/>
+                                                <subviews>
+                                                    <view contentMode="redraw" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SSj-vc-hfK" customClass="playingCardView" customModule="Setgame" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="640"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMi-DX-DES">
+                                        <rect key="frame" x="0.0" y="648" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.014628942124545574" green="0.67953431606292725" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="drawThreeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ecq-aM-aRl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SSj-vc-hfK" secondAttribute="trailing" constant="16" id="B2P-2t-v1C"/>
-                            <constraint firstItem="SSj-vc-hfK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mbn-u0-sAa"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SSj-vc-hfK" secondAttribute="bottom" constant="74" id="oZl-v0-k7q"/>
-                            <constraint firstItem="SSj-vc-hfK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sin-YW-eXv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SSj-vc-hfK" secondAttribute="trailing" constant="16" id="HTE-yB-2aj"/>
+                            <constraint firstItem="SSj-vc-hfK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="jWz-KY-LeP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

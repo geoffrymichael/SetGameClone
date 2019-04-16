@@ -25,9 +25,10 @@ class playingCardView: UIView {
     
     var shownCards = [Card]()
     
+    var phoneFrame = CGRect()
     
-    
-    
+    var arrayPlace = 0
+   
    
     
     
@@ -51,7 +52,11 @@ class playingCardView: UIView {
         label.fill = shownCards[cardNum].fill.rawValue
         label.amount = shownCards[cardNum].amount.rawValue
         
+        label.arrayOrder = arrayPlace
+        
         label.tag = cardNum
+        
+        arrayPlace += 1
         
         //TODO I have hooked up a gesture controller to each UIview with borlerplate print command when a Setgame view is clicked.
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -86,11 +91,11 @@ class playingCardView: UIView {
     //Configure the Setviewcard and override its layout and position
     private func configureCornerLabel(_ label: UIView, gridNum: Int) {
         
-        var phoneFrame = bounds
+        let phoneFrame = bounds
         
-        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
-        
-        phoneFrame = phoneFrame.inset(by: phoneOffsets)
+//        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
+//        
+//        phoneFrame = phoneFrame.inset(by: phoneOffsets)
         
         var rows = 0
         var columns = 0
@@ -126,11 +131,12 @@ class playingCardView: UIView {
         
         
         //The 0...11 here is just a standin for initially putting twelve cards in the view
-        for card in 0..<shownCards.count {
-            createCard(cardNum: card)
-            configureCornerLabel(viewArray[card], gridNum: card)
-        }
+//        for card in 0..<shownCards.count {
+//            createCard(cardNum: card)
+//            configureCornerLabel(viewArray[card], gridNum: card)
+//        }
         
+        print("Am I getting triggered again")
         //        print(subviews[0].tag)
         
         
@@ -227,6 +233,14 @@ class playingCardView: UIView {
     func newGame() {
         for _ in 0...11 {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
+            
+            
+            
+
+        }
+        for card in 0..<shownCards.count {
+            createCard(cardNum: card)
+            configureCornerLabel(viewArray[card], gridNum: card)
         }
         
         
@@ -394,6 +408,34 @@ class playingCardView: UIView {
         }
         
         
+    }
+    
+    //Some function to draw three additional cards
+    //Must add grids to playing area
+    func drawThree() {
+        if deck.cards.count > 0 {
+            //To draw thee cards
+            
+            viewArray = []
+            for cardIndex in 1...3 {
+                shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
+            
+            }
+            
+            for card in 0..<shownCards.count {
+                createCard(cardNum: card)
+                configureCornerLabel(viewArray[card], gridNum: card)
+            }
+            
+            
+//            configureCornerLabel(viewArray[viewArray  cardIndex], gridNum: viewArray.endIndex - cardIndex)
+        }
+        print("remaining cards in deck" , deck.cards.count)
+        print("Showncards array" , shownCards, shownCards.count)
+        print("View Array Count", viewArray.count)
+        
+//        setNeedsDisplay()
+//        setNeedsLayout()
     }
     
     

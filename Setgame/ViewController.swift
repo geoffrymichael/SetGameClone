@@ -25,11 +25,24 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func drawThreeButton(_ sender: UIButton) {
+        
+        playingCardView.drawThree()
+        
+        
+    }
+    
     
     
     override func viewDidLoad() {
-        self.view.addSubview(playingCardView)
+        
+        print("Count at load", playingCardView.shownCards.count)
     }
+    
+    
+//    override func viewDidLoad() {
+//        self.view.addSubview(playingCardView)
+//    }
     
     
     
