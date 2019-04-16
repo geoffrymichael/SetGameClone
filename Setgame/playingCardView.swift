@@ -413,16 +413,24 @@ class playingCardView: UIView {
     //Some function to draw three additional cards
     //Must add grids to playing area
     func drawThree() {
+        
         if deck.cards.count > 0 {
             //To draw thee cards
             
+            //This will clean he slate of our subivews so there are no artifacts.
+            viewArray.forEach { card in
+                card.removeFromSuperview()
+            }
+            //Clear are array of cards to start over
             viewArray = []
+            //Draw three random cards from deck and at them to the end of our showncards data
             for cardIndex in 1...3 {
                 shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
             
             }
-            
+            //This will repopulate the viewarray and display accordingly
             for card in 0..<shownCards.count {
+                
                 createCard(cardNum: card)
                 configureCornerLabel(viewArray[card], gridNum: card)
             }
@@ -433,6 +441,8 @@ class playingCardView: UIView {
         print("remaining cards in deck" , deck.cards.count)
         print("Showncards array" , shownCards, shownCards.count)
         print("View Array Count", viewArray.count)
+        
+        layoutIfNeeded()
         
 //        setNeedsDisplay()
 //        setNeedsLayout()
