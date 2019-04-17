@@ -91,12 +91,20 @@ class playingCardView: UIView {
     //Configure the Setviewcard and override its layout and position
     private func configureCornerLabel(_ label: UIView, gridNum: Int) {
         
-        let phoneFrame = bounds
+        phoneFrame = bounds
         
-//        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
-//        
-//        phoneFrame = phoneFrame.inset(by: phoneOffsets)
         
+        
+//        phoneFrame = bounds.offsetBy(dx: 20, dy: 20)
+        
+        label.backgroundColor = UIColor.clear
+        
+        //Autolayout was not filling the width correctly so flexiblewidth had to be manually turned on below
+//        label.autoresizesSubviews = true
+//        label.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue)
+
+        
+        //This is a while loop that configures the grid to dynamically expand to a 4 column grid of infinte necesssary rows.
         var rows = 0
         var columns = 0
         
@@ -114,7 +122,7 @@ class playingCardView: UIView {
         
         
         
-        label.frame.size = grid[gridNum]?.size ?? bounds.size
+        label.frame.size = grid[gridNum]?.insetBy(dx: 10, dy: 10).size ?? bounds.size
         label.center = CGPoint(x: grid[gridNum]?.midX ?? bounds.midX, y: grid[gridNum]?.midY ?? bounds.midY)
         //        label.sizeToFit()
         
@@ -230,7 +238,8 @@ class playingCardView: UIView {
     //
     //
     //    //Newgame function which produces 12 shown card buttons with symbols and 12 hidden, non enabled cards. Note that the cards are populated(and 24 total cards removed from deck), but simply inactive and hidden.
-    func newGame() {
+   func newGame() {
+    
         for _ in 0...11 {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
             
@@ -241,6 +250,7 @@ class playingCardView: UIView {
         for card in 0..<shownCards.count {
             createCard(cardNum: card)
             configureCornerLabel(viewArray[card], gridNum: card)
+            
         }
         
         
