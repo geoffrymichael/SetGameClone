@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var playingCardView: playingCardView! {
         didSet {
             playingCardView.newGame()
+            playingCardView.drawThree()
         }
     }
     

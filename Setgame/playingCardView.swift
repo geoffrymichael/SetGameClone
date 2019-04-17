@@ -26,7 +26,11 @@ class playingCardView: UIView {
     var shownCards = [Card]()
     
     
+    var buttonPress = 0
     
+    var hiddenCardCount = 12
+    
+    var cardIndex = [Int]()
     
    
     
@@ -139,11 +143,7 @@ class playingCardView: UIView {
     
     
     
-    var buttonPress = 0
     
-    var hiddenCardCount = 12
-    
-    var cardIndex = [Int]()
     
    
     
@@ -164,6 +164,16 @@ class playingCardView: UIView {
     //TODO Need to refine the card selecting logic (Having borders removed after three cards are selected)
     
     //The first three cards are selected and stored. Their borders are also colored to show selection.
+    
+    
+    func drawThree() {
+        for i in 1...3 {
+            shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
+            createCard(cardNum: shownCards.endIndex - i)
+        }
+        
+    }
+    
     @objc func handleTap(_ pickedCard: UIGestureRecognizer) {
         
         if buttonPress <= 2 {
