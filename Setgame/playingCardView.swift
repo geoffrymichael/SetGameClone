@@ -74,6 +74,11 @@ class playingCardView: UIView {
         
     }
     
+    //This waits until after the layour is set to get the bounds of the playingcardview
+    override func setNeedsDisplay() {
+           
+        phoneFrame = bounds.offsetBy(dx: 20, dy: 0)
+    }
     
     //    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
     //        print("I pressed a card view")
@@ -89,9 +94,9 @@ class playingCardView: UIView {
     
     
     //Configure the Setviewcard and override its layout and position
-    private func configureCornerLabel(_ label: UIView, gridNum: Int) {
+    private func configureCard(_ label: UIView, gridNum: Int) {
         
-        phoneFrame = bounds
+//        phoneFrame = bounds
         
         
         
@@ -249,7 +254,7 @@ class playingCardView: UIView {
         }
         for card in 0..<shownCards.count {
             createCard(cardNum: card)
-            configureCornerLabel(viewArray[card], gridNum: card)
+            configureCard(viewArray[card], gridNum: card)
             
         }
         
@@ -372,7 +377,7 @@ class playingCardView: UIView {
                 
                 for i in 0..<shownCards.count {
                     createCard(cardNum: i)
-                    configureCornerLabel(viewArray[i], gridNum: i)
+                    configureCard(viewArray[i], gridNum: i)
                 }
                 
                 cardIndex = []
@@ -442,7 +447,7 @@ class playingCardView: UIView {
             for card in 0..<shownCards.count {
                 
                 createCard(cardNum: card)
-                configureCornerLabel(viewArray[card], gridNum: card)
+                configureCard(viewArray[card], gridNum: card)
             }
             
             

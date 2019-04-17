@@ -19,13 +19,15 @@ import UIKit
 class ViewController: UIViewController {
 
     
+
     @IBOutlet weak var playingCardView: playingCardView! {
         didSet {
-//            playingCardView.autoresizesSubviews = true
             playingCardView.newGame()
+
         }
     }
     
+       
     @IBAction func drawThreeButton(_ sender: UIButton) {
         
         playingCardView.drawThree()
@@ -35,15 +37,7 @@ class ViewController: UIViewController {
     
     
     
-    override func viewDidLoad() {
-        
-        print("Count at load", playingCardView.shownCards.count)
-    }
     
-    
-//    override func viewDidLoad() {
-//        self.view.addSubview(playingCardView)
-//    }
     
     
     
