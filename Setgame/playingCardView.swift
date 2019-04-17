@@ -167,9 +167,9 @@ class playingCardView: UIView {
     
     
     func drawThree() {
-        for i in 1...3 {
+        for i in 0...5 {
             shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
-            createCard(cardNum: shownCards.endIndex - i)
+//            createCard(cardNum: shownCards.endIndex - 1)
         }
         
     }
@@ -212,11 +212,11 @@ class playingCardView: UIView {
                 for i in 0..<viewArray.count {
                     viewArray[i].removeFromSuperview()
                 }
+                
                 viewArray = []
                 
                 for i in 0..<shownCards.count {
-                    createCard(cardNum: i)
-                    configureCornerLabel(viewArray[i], gridNum: i)
+                    self.layoutSubviews()
                 }
                 
                 cardIndex = []
