@@ -24,28 +24,29 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSj-vc-hfK" customClass="playingCardView" customModule="Setgame" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="660"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euM-Qr-erO">
-                                                <rect key="frame" x="18" y="602" width="120" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="drawThreeButton:" destination="nyh-3L-0pN" eventType="touchUpInside" id="FRM-xF-hsX"/>
-                                                    <action selector="drawThreeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zcd-3b-7gV"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
                                         <color key="backgroundColor" red="0.014628942124545574" green="0.67953431606292725" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euM-Qr-erO">
+                                <rect key="frame" x="16" y="712" width="120" height="66"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="drawThreeButton:" destination="nyh-3L-0pN" eventType="touchUpInside" id="FRM-xF-hsX"/>
+                                    <action selector="drawThreeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zcd-3b-7gV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SSj-vc-hfK" secondAttribute="trailing" constant="16" id="B2P-2t-v1C"/>
                             <constraint firstItem="SSj-vc-hfK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mbn-u0-sAa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="euM-Qr-erO" secondAttribute="bottom" id="jYi-kL-bnt"/>
+                            <constraint firstItem="euM-Qr-erO" firstAttribute="leading" secondItem="SSj-vc-hfK" secondAttribute="leading" id="nZG-7U-fBt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SSj-vc-hfK" secondAttribute="bottom" constant="74" id="oZl-v0-k7q"/>
                             <constraint firstItem="SSj-vc-hfK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sin-YW-eXv"/>
+                            <constraint firstItem="euM-Qr-erO" firstAttribute="top" secondItem="SSj-vc-hfK" secondAttribute="bottom" constant="8" id="uPh-xL-HtT"/>
+                            <constraint firstItem="euM-Qr-erO" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="30:203" id="wqj-vI-rTW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

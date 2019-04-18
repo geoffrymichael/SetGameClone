@@ -173,9 +173,14 @@ class playingCardView: UIView {
     
     
     func drawThree() {
+        
         for i in 0...3 {
-            shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
-            createCard(cardNum: shownCards.endIndex - 1)
+            if deck.cards.count > 0 {
+                shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
+                createCard(cardNum: shownCards.endIndex - 1)
+
+            }
+            
 //            createCard(cardNum: shownCards.endIndex - 1)
         }
         for i in 0..<shownCards.count {
