@@ -28,12 +28,16 @@ class SetgameView: UIView {
     var isChosen: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
    
+    private var cornerRadius: CGFloat {
+        return bounds.size.height * 0.06
+    }
     
     override func draw(_ rect: CGRect) {
         
+        
         //TODO this is programatically making setgame background view transparent but it will not load on startup. Need to bug test.
         
-        let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width * 0.085)
+        let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         roundedRect.addClip()
         UIColor.white.setFill()
         roundedRect.fill()
@@ -48,6 +52,27 @@ class SetgameView: UIView {
         
     }
     
+//    func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+//        var text=""
+//        switch UIDevice.current.orientation{
+//        case .portrait:
+//            text="Portrait"
+//        case .portraitUpsideDown:
+//            text="PortraitUpsideDown"
+//        case .landscapeLeft:
+//            text="LandscapeLeft"
+//        case .landscapeRight:
+//            text="LandscapeRight"
+//        default:
+//            text="Another"
+//        }
+//        NSLog("You have moved: \(text)")
+//        if text == "Portrait" || text == "PortraitUpsideDown" {
+//            currentOrientation = bounds.width
+//        } else {
+//            currentOrientation = bounds.height
+//        }
+//    }
     
     
     
@@ -283,4 +308,7 @@ class SetgameView: UIView {
 
 }
 
+
+
+    
 

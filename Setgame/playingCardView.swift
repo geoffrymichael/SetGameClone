@@ -32,15 +32,7 @@ class playingCardView: UIView {
     
     var cardIndex = [Int]()
     
-   
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     var viewArray = [SetgameView]()
     
@@ -94,7 +86,7 @@ class playingCardView: UIView {
     //Configure the Setviewcard and override its layout and position
     private func configureCornerLabel(_ label: UIView, gridNum: Int) {
         
-        var phoneFrame = bounds
+        let phoneFrame = bounds
         
 //        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
 //
@@ -113,12 +105,13 @@ class playingCardView: UIView {
         
         
         
-        var grid = Grid(layout: Grid.Layout.dimensions(rowCount: rows, columnCount: columns), frame: CGRect(origin: CGPoint(x: phoneFrame.minX, y: phoneFrame.minY), size: CGSize(width: phoneFrame.width, height: phoneFrame.height)))
+        let grid = Grid(layout: Grid.Layout.dimensions(rowCount: rows, columnCount: columns), frame: CGRect(origin: CGPoint(x: phoneFrame.minX, y: phoneFrame.minY), size: CGSize(width: phoneFrame.width, height: phoneFrame.height)))
         
         
         
-        label.frame.size = grid[gridNum]?.insetBy(dx: label.bounds.width * 0.05, dy: label.bounds.width * 0.05).size ?? bounds.size
+        label.frame.size = grid[gridNum]?.insetBy(dx: 5, dy: 5).size ?? bounds.size
         label.center = CGPoint(x: grid[gridNum]?.midX ?? bounds.midX, y: grid[gridNum]?.midY ?? bounds.midY)
+        
         //        label.sizeToFit()
         
         
@@ -128,6 +121,7 @@ class playingCardView: UIView {
     
         
         print("I am pressed")
+        
         
         
         //Declare a grid. This is a standin as it is static for a 12 view grid
@@ -175,7 +169,7 @@ class playingCardView: UIView {
     
     func drawThree() {
         
-        for i in 0...3 {
+        for _ in 0...3 {
             if deck.cards.count > 0 {
                 shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
                 createCard(cardNum: shownCards.endIndex - 1)
@@ -232,6 +226,7 @@ class playingCardView: UIView {
                     
                     
                 }
+                
                 
 //                for i in 0..<viewArray.count {
 //                    viewArray[i].removeFromSuperview()
