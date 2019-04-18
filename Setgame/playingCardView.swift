@@ -58,6 +58,7 @@ class playingCardView: UIView {
         label.tag = cardNum
         
         label.backgroundColor = UIColor.clear
+        label.contentMode = .redraw
         
         //TODO I have hooked up a gesture controller to each UIview with borlerplate print command when a Setgame view is clicked.
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -116,7 +117,7 @@ class playingCardView: UIView {
         
         
         
-        label.frame.size = grid[gridNum]?.size ?? bounds.size
+        label.frame.size = grid[gridNum]?.insetBy(dx: label.bounds.width * 0.05, dy: label.bounds.width * 0.05).size ?? bounds.size
         label.center = CGPoint(x: grid[gridNum]?.midX ?? bounds.midX, y: grid[gridNum]?.midY ?? bounds.midY)
         //        label.sizeToFit()
         

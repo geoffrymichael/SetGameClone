@@ -33,7 +33,7 @@ class SetgameView: UIView {
         
         //TODO this is programatically making setgame background view transparent but it will not load on startup. Need to bug test.
         
-        let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: 16)
+        let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width * 0.085)
         roundedRect.addClip()
         UIColor.white.setFill()
         roundedRect.fill()
