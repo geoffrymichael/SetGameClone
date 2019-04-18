@@ -66,9 +66,10 @@ class playingCardView: UIView {
         
         addSubview(label)
         
-        
-        
         viewArray.append(label)
+        
+        
+        
         
         
     }
@@ -123,17 +124,19 @@ class playingCardView: UIView {
     override func layoutSubviews() {
     
         
-        
+        print("I am pressed")
         
         
         //Declare a grid. This is a standin as it is static for a 12 view grid
         
         
         //The 0...11 here is just a standin for initially putting twelve cards in the view
+        
         for card in 0..<shownCards.count {
-            createCard(cardNum: card)
+            
             configureCornerLabel(viewArray[card], gridNum: card)
         }
+        
         
        
     }
@@ -153,8 +156,9 @@ class playingCardView: UIView {
     
     //    //Newgame function which produces 12 shown card buttons with symbols and 12 hidden, non enabled cards. Note that the cards are populated(and 24 total cards removed from deck), but simply inactive and hidden.
     func newGame() {
-        for _ in 0...11 {
+        for card in 0...11 {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
+            createCard(cardNum: card)
         }
         
         
@@ -167,10 +171,16 @@ class playingCardView: UIView {
     
     
     func drawThree() {
-        for i in 0...5 {
+        for i in 0...3 {
             shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
+            createCard(cardNum: shownCards.endIndex - 1)
 //            createCard(cardNum: shownCards.endIndex - 1)
         }
+        for i in 0..<shownCards.count {
+            
+            configureCornerLabel(viewArray[i], gridNum: i)
+        }
+        
         
     }
     
@@ -205,19 +215,25 @@ class playingCardView: UIView {
                     shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
                     viewArray[cardIndex[i]].layer.borderWidth = 0
                     
+                    createCard(cardNum: cardIndex[i])
+                    viewArray[cardIndex[i]].removeFromSuperview()
+                    viewArray[cardIndex[i]] = viewArray.remove(at: viewArray.endIndex - 1)
                     
                     
                     
-                }
-                for i in 0..<viewArray.count {
-                    viewArray[i].removeFromSuperview()
+                    
+                    
                 }
                 
-                viewArray = []
+//                for i in 0..<viewArray.count {
+//                    viewArray[i].removeFromSuperview()
+//                }
                 
-                for i in 0..<shownCards.count {
-                    self.layoutSubviews()
-                }
+//                viewArray = []
+                
+//                for i in 0..<shownCards.count {
+//                    self.layoutSubviews()
+//                }
                 
                 cardIndex = []
                 deck.clearChosen()
