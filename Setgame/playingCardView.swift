@@ -57,6 +57,8 @@ class playingCardView: UIView {
         
         label.tag = cardNum
         
+        label.backgroundColor = UIColor.clear
+        
         //TODO I have hooked up a gesture controller to each UIview with borlerplate print command when a Setgame view is clicked.
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         
@@ -93,9 +95,9 @@ class playingCardView: UIView {
         
         var phoneFrame = bounds
         
-        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
-        
-        phoneFrame = phoneFrame.inset(by: phoneOffsets)
+//        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
+//
+//        phoneFrame = phoneFrame.inset(by: phoneOffsets)
         
         var rows = 0
         var columns = 0
