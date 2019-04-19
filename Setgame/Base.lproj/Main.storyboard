@@ -40,7 +40,6 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SSj-vc-hfK" secondAttribute="trailing" constant="16" id="B2P-2t-v1C"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="euM-Qr-erO" secondAttribute="trailing" constant="239" id="HYJ-wt-zdB"/>
                             <constraint firstItem="SSj-vc-hfK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mbn-u0-sAa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="euM-Qr-erO" secondAttribute="bottom" id="jYi-kL-bnt"/>
                             <constraint firstItem="euM-Qr-erO" firstAttribute="leading" secondItem="SSj-vc-hfK" secondAttribute="leading" id="nZG-7U-fBt"/>
