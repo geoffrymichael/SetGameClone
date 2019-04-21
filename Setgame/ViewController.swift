@@ -19,24 +19,36 @@ import UIKit
 class ViewController: UIViewController {
     
     
-    @IBOutlet weak var playingCardView: playingCardView! {
-        didSet {
-            playingCardView.newGame()
-//            playingCardView.drawThree()
-        
-        }
-    }
+    @IBOutlet weak var gameView: playingCardView!
     
     @IBAction func drawThreeButton(_ sender: UIButton) {
-        playingCardView.drawThree()
+        gameView.drawThree()
     }
     
+    @IBOutlet weak var scoreLabel: UILabel!
     
     override func viewDidLoad() {
-        self.view.addSubview(playingCardView)
+        super.viewDidLoad()
+        
+        
+        gameView.newGame()
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        changeScore()
+        
+    
+        
     }
     
     
+    func changeScore() {
+        scoreLabel.text = "\(gameView.score)"
+    
+        
+    }
     
 }
 //

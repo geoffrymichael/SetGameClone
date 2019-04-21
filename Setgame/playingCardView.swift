@@ -32,7 +32,11 @@ class playingCardView: UIView {
     
     var cardIndex = [Int]()
     
- 
+    var score = 0 {
+        didSet {
+            layoutSubviews()
+        }
+    }
     
     var viewArray = [SetgameView]()
     
@@ -188,6 +192,9 @@ class playingCardView: UIView {
     
     @objc func handleTap(_ pickedCard: UIGestureRecognizer) {
         
+        
+        print(score)
+        
         if buttonPress <= 2 {
             buttonPress += 1
             if let cardNumber = pickedCard.view {
@@ -210,6 +217,7 @@ class playingCardView: UIView {
             if deck.cardMatching() && deck.cards.count > 0 {
                 
                 buttonPress = 0
+                score += 1
                 
                 print("shown card", cardIndex[1])
                 print("cardIndex", cardIndex)
