@@ -14,11 +14,16 @@
 import UIKit
 
 
-//TODO Lots of revision happened. I hope I just need some fine tuning on the matching logic. To work on next, is the errors I am getting in the matching function. Things seems to work on the first go around, but not on further rounds. I think I have missed clearing out a type. Everything copied out for core graphics implimentation
 
-class ViewController: UIViewController {
+
+class ViewController: UIViewController, changeLabelDelegate {
     
+    //Calling the playingCardView score changed function to update the label on this viewcontroller with the data created in out from the playingCardView.
+    func scoreChanged(score: Int) {
+        scoreLabel.text = "Score: \(gameView.score)"
+    }
     
+   
     @IBOutlet weak var gameView: playingCardView!
     
     @IBAction func drawThreeButton(_ sender: UIButton) {
@@ -30,25 +35,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.gameView.delegate = self
+        
+        scoreLabel.text = "Score: 0"
         
         gameView.newGame()
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        changeScore()
-        
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//
+//
+//
+//    }
     
-        
-    }
     
     
-    func changeScore() {
-        scoreLabel.text = "\(gameView.score)"
-    
-        
-    }
     
 }
 //

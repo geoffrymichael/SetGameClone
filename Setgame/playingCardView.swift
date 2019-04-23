@@ -8,6 +8,11 @@
 
 import UIKit
 
+//A protocol that allows this view to affect our ViewController. In this case I need it to be able to update the UILabel text that is an IBOutlet of the ViewController. Also make sure to declare a delegate and then call the delgate where we want it happen on this view.
+protocol changeLabelDelegate: class {
+    func scoreChanged(score: Int)
+}
+
 class playingCardView: UIView {
 
     /*
@@ -17,6 +22,9 @@ class playingCardView: UIView {
         // Drawing code
     }
     */
+    
+    //Declaring the delegate
+    weak var delegate: changeLabelDelegate? = nil
 
     
     var deck = SetGameDeck()
@@ -218,6 +226,9 @@ class playingCardView: UIView {
                 
                 buttonPress = 0
                 score += 1
+                
+                //I believe that this triggers the delegate function to trigger in view controller to update viewcontrollers score label uilabel with the current score.
+                delegate?.scoreChanged(score: score)
                 
                 print("shown card", cardIndex[1])
                 print("cardIndex", cardIndex)
