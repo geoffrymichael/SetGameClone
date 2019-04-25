@@ -218,15 +218,18 @@ class SetgameView: UIView {
     
     
     //This is the function to make a shape shaded. It uses the height of the shape to segment.
+    // The line amount is derived from the height of an object which I may need to further fine-tune
     func addLines(path: UIBezierPath)  {
         
         var moreLines: CGFloat = path.bounds.minY
+        let lineAmount = path.bounds.height / 15
         while moreLines < path.bounds.maxY{
 
             path.move(to: CGPoint(x: path.bounds.minX, y: moreLines))
             path.addLine(to: CGPoint(x: path.bounds.maxX, y: moreLines))
-            moreLines += 10.0
+            moreLines += lineAmount
             
+            path.lineWidth = 2.0
             path.stroke()
             
             
