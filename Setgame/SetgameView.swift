@@ -222,7 +222,7 @@ class SetgameView: UIView {
     func addLines(path: UIBezierPath)  {
         
         var moreLines: CGFloat = path.bounds.minY
-        let lineAmount = path.bounds.height / 15
+        let lineAmount = self.bounds.height / 25
         while moreLines < path.bounds.maxY{
 
             path.move(to: CGPoint(x: path.bounds.minX, y: moreLines))
