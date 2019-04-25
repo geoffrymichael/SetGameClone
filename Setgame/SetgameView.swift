@@ -125,7 +125,7 @@ class SetgameView: UIView {
         
         path.move(to: CGPoint(x: originPoint.x - (radius*0.25), y: originPoint.y - (radius*0.25)))
         
-        let startPoint = CGPoint(x: path.currentPoint.x + radius / (0.45*CGFloat.pi), y: path.currentPoint.y + radius / (0.45*CGFloat.pi))
+        let startPoint = CGPoint(x: path.currentPoint.x + radius / (0.50*CGFloat.pi), y: path.currentPoint.y + radius / (0.50*CGFloat.pi))
         
         let arcCenter = CGPoint(x: path.currentPoint.x, y: path.currentPoint.y)
         
