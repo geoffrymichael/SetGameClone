@@ -50,6 +50,7 @@ class SetgameView: UIView {
         _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: shape, color: color, fill: fill, amount: amount)
 
         
+        
     }
     
 //    func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {

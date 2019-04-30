@@ -48,6 +48,32 @@ class playingCardView: UIView {
     
     var viewArray = [SetgameView]()
     
+    
+   
+    
+    var grid: Grid {
+        let phoneFrame = self.bounds
+        
+        var rows = 0
+        var columns = 0
+        
+        while rows * columns <= shownCards.count {
+            while columns <= 3 {
+                columns += 1
+            }
+            
+            rows += 1
+        }
+        
+        let grid = Grid(layout: Grid.Layout.dimensions(rowCount: rows, columnCount: columns), frame: CGRect(origin: CGPoint(x: phoneFrame.minX, y: phoneFrame.minY), size: CGSize(width: phoneFrame.width, height: phoneFrame.height)))
+        
+        return grid
+    }
+    
+    
+    
+    
+    
     //Create an array of cardViews(Setgameviews)
     private func createCard(cardNum: Int) {
         
@@ -63,6 +89,8 @@ class playingCardView: UIView {
         
         label.backgroundColor = UIColor.clear
         label.contentMode = .redraw
+        
+        
         
         //TODO I have hooked up a gesture controller to each UIview with borlerplate print command when a Setgame view is clicked.
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -98,26 +126,17 @@ class playingCardView: UIView {
     //Configure the Setviewcard and override its layout and position
     private func configureCornerLabel(_ label: UIView, gridNum: Int) {
         
-        let phoneFrame = bounds
+        
         
 //        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
 //
 //        phoneFrame = phoneFrame.inset(by: phoneOffsets)
         
-        var rows = 0
-        var columns = 0
-        
-        while rows * columns <= shownCards.count {
-            while columns <= 3 {
-                columns += 1
-            }
-            
-            rows += 1
-        }
         
         
+//        label.frame.size = CGSize.zero
+//        label.center = CGPoint(x: bounds.midY, y: bounds.midY)
         
-        let grid = Grid(layout: Grid.Layout.dimensions(rowCount: rows, columnCount: columns), frame: CGRect(origin: CGPoint(x: phoneFrame.minX, y: phoneFrame.minY), size: CGSize(width: phoneFrame.width, height: phoneFrame.height)))
         
         
         
@@ -165,9 +184,18 @@ class playingCardView: UIView {
     
     //    //Newgame function which produces 12 shown card buttons with symbols and 12 hidden, non enabled cards. Note that the cards are populated(and 24 total cards removed from deck), but simply inactive and hidden.
     func newGame() {
+        var delay = 0.5
         for card in 0...11 {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
             createCard(cardNum: card)
+            
+        }
+        //This sets the initial card origin at the bottom left of the board and animates them being dealt into their grid positions. 
+        for card in 0..<viewArray.count {
+            self.viewArray[card].center = CGPoint(x: self.bounds.minX, y: self.bounds.maxY)
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: delay, options: [.transitionFlipFromLeft], animations: { self.viewArray[card].frame.size = self.grid[card]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size
+                self.viewArray[card].center = CGPoint(x: self.grid[card]?.midX ?? self.bounds.midX, y: self.grid[card]?.midY ?? self.bounds.midY)})
+            delay += 0.5
         }
         
         
