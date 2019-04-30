@@ -260,15 +260,30 @@ class playingCardView: UIView {
                 
                 print("shown card", cardIndex[1])
                 print("cardIndex", cardIndex)
+                
+                //TODO: This is a placeholder for animating matched cards being replaced by new cards from the deck. Currently, the chosen cards fade out to alpha 0 then the new cards come in with alpha zero and animates into alpha 1. I imagine I need to clean up some stuff because possibly alpha doesnt do the same job of removing from the superview I don't think. Also must make sure to handle when the deck runs out of cards. 
+                
+                
                 for i in 0..<cardIndex.count {
+                    if deck.cards.count > 0 {
+                        
+                    
                     shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
                     viewArray[cardIndex[i]].layer.borderWidth = 0
                     
                     createCard(cardNum: cardIndex[i])
-                    viewArray[cardIndex[i]].removeFromSuperview()
+                    
+                    UIViewPropertyAnimator.runningPropertyAnimator(
+                        withDuration: 1.0,
+                        delay: 0.0, options:
+                        [.transitionFlipFromLeft],
+                        animations: {self.viewArray[self.cardIndex[i]].alpha = 0 })
+                    
                     viewArray[cardIndex[i]] = viewArray.remove(at: viewArray.endIndex - 1)
+                    viewArray[cardIndex[i]].alpha = 0
+                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[self.cardIndex[i]].alpha = 1 })
                     
-                    
+                    }
                     
                     
                     
