@@ -31,7 +31,7 @@ class playingCardView: UIView {
     //Tracking which card has been selected
     var cardIndex = [Int]()
     
-    //A basic score count that += to 1 if a match occirs. For now the visual display of this is done through a protocol because the programs score and draw buttons are seperate from this playingCardView. Not sure if this is best practice or not.
+    //A basic score count that += to 1 if a match occurs. For now the visual display of this is done through a protocol because the programs score and draw buttons are seperate from this playingCardView. Not sure if this is best practice or not.
     var score = 0 {
         didSet {
             layoutSubviews()
@@ -167,7 +167,7 @@ class playingCardView: UIView {
         
         for _ in 0...3 {
             if deck.cards.count > 0 {
-                //Adding three cards to the dataset
+                //Adding three cards to the dataset by removing them from the deck
                 shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
                 //Creating the visual representation of our card from the data.
                 createCard(cardNum: shownCards.endIndex - 1)
