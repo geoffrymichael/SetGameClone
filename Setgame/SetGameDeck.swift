@@ -50,19 +50,25 @@ struct SetGameDeck {
         
         chosenCards.append(shownCard[cardNumber])
         
+        //A function to extract the raw values of our cards
+        func rawValue(card: Card) -> [String] {
+            var chosenCard = [String]()
+            chosenCard += [card.shape.rawValue, card.color.rawValue, card.fill.rawValue, card.amount.rawValue]
+            
+            return chosenCard
+        }
 
         
         if chosenCards.count == 1 {
-            firstCard = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue, chosenCards[0].fill.rawValue, chosenCards[0].amount.rawValue]
-            print(firstCard, "asdfasdfasdfasdfasdf")
+            firstCard = rawValue(card: chosenCards[0])
+//            firstCard = [chosenCards[0].shape.rawValue, chosenCards[0].color.rawValue, chosenCards[0].fill.rawValue, chosenCards[0].amount.rawValue]
+//            print(firstCard, "asdfasdfasdfasdfasdf")
         } else if chosenCards.count == 2 {
-            secondCard = [chosenCards[1].shape.rawValue, chosenCards[1].color.rawValue, chosenCards[1].fill.rawValue, chosenCards[1].amount.rawValue]
-            print(secondCard, "this is the second card")
+            secondCard = rawValue(card: chosenCards[1])
         } else if chosenCards.count == 3  {
-            thirdCard = [chosenCards[2].shape.rawValue, chosenCards[2].color.rawValue, chosenCards[2].fill.rawValue, chosenCards[2].amount.rawValue]
-            print("this is the third card", thirdCard)
-            
-            
+            thirdCard = rawValue(card: chosenCards[2])
+//            thirdCard = [chosenCards[2].shape.rawValue, chosenCards[2].color.rawValue, chosenCards[2].fill.rawValue, chosenCards[2].amount.rawValue]
+//            print("this is the third card", thirdCard)
             
         } 
 
