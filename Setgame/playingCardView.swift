@@ -15,48 +15,41 @@ protocol changeLabelDelegate: class {
 
 class playingCardView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
-    //Declaring the delegate
+    
+    //Declaring the protocol delegate
     weak var delegate: changeLabelDelegate? = nil
 
     
     var deck = SetGameDeck()
-    
-    
-    
+
     var shownCards = [Card]()
-    
-    
+
+    //Tracking how many cards have been selected
     var buttonPress = 0
     
-    var hiddenCardCount = 12
-    
+    //Tracking which card has been selected
     var cardIndex = [Int]()
     
+    //A basic score count that += to 1 if a match occirs. For now the visual display of this is done through a protocol because the programs score and draw buttons are seperate from this playingCardView. Not sure if this is best practice or not.
     var score = 0 {
         didSet {
             layoutSubviews()
         }
     }
     
+    //Storing card views in an array. These are the visual representations of the cards currently on the board.
     var viewArray = [SetgameView]()
     
     
-   
-    
+    //This is the grid framework. It is a computed property theat uses playingCardView as the bounds. It dynamically adjust for rows and columns depending on amount of cards currently in view.
     var grid: Grid {
         let phoneFrame = self.bounds
         
         var rows = 0
         var columns = 0
         
+        //This establishes rows of no more than three cards. This is more a stylistic choice and can be altered as desired.
         while rows * columns <= shownCards.count {
             while columns <= 3 {
                 columns += 1
@@ -65,13 +58,11 @@ class playingCardView: UIView {
             rows += 1
         }
         
+        //Setting up the grid dimensions.
         let grid = Grid(layout: Grid.Layout.dimensions(rowCount: rows, columnCount: columns), frame: CGRect(origin: CGPoint(x: phoneFrame.minX, y: phoneFrame.minY), size: CGSize(width: phoneFrame.width, height: phoneFrame.height)))
         
         return grid
     }
-    
-    
-    
     
     
     //Create an array of cardViews(Setgameviews)
@@ -91,37 +82,22 @@ class playingCardView: UIView {
         label.contentMode = .redraw
         
         
-        
-        //TODO I have hooked up a gesture controller to each UIview with borlerplate print command when a Setgame view is clicked.
+        //decalring  a tap gesture to each of our cards views.
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         
-        
-        
+        //Adding the gesture to each card.
         label.addGestureRecognizer(tap)
         
+        //Adding the card view as a subview of playingCardView
         addSubview(label)
         
+        //Adding each card view to an array. This will represent what cards are currently on the table.
         viewArray.append(label)
-        
-        
-        
-        
+
         
     }
     
-    
-    //    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
-    //        print("I pressed a card view")
-    //        if let viewPressed = recognizer.view {
-    //            print("This is a view pressed", viewPressed, "Tagged Number", viewPressed.tag)
-    //            viewPressed.layer.borderWidth = 3.0
-    //            viewPressed.layer.borderColor = UIColor.blue.cgColor
-    //        } else {
-    //            print("Something went wrong")
-    //        }
-    //
-    //    }
-    
+
     
     //Configure the Setviewcard and override its layout and position
     private func configureCornerLabel(_ label: UIView, gridNum: Int) {
@@ -139,7 +115,7 @@ class playingCardView: UIView {
         
         
         
-        
+        //Currently this is used to establish a basic layout for the cards in the grid and have them redraw when views are laidout. The initial twelve cards being dealt are in the newGame function and impliment annimation that starts from bottom left of the view and animates as they move into place in the grid.
         label.frame.size = grid[gridNum]?.insetBy(dx: 5, dy: 5).size ?? bounds.size
         label.center = CGPoint(x: grid[gridNum]?.midX ?? bounds.midX, y: grid[gridNum]?.midY ?? bounds.midY)
         
@@ -150,15 +126,8 @@ class playingCardView: UIView {
     
     override func layoutSubviews() {
     
-        
+        //Just for debugging and tracking when subviews are laid out
         print("I am pressed")
-        
-        
-        
-        //Declare a grid. This is a standin as it is static for a 12 view grid
-        
-        
-        //The 0...11 here is just a standin for initially putting twelve cards in the view
         
         for card in 0..<shownCards.count {
             
@@ -168,22 +137,11 @@ class playingCardView: UIView {
         
        
     }
+
     
-    
-    
-    
-    
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    //    //Newgame function which produces 12 shown card buttons with symbols and 12 hidden, non enabled cards. Note that the cards are populated(and 24 total cards removed from deck), but simply inactive and hidden.
+    //    //Newgame function which produces 12 shown card view buttons with symbols. These card subviews animate from the lower left corner into their respective places in the grid.
     func newGame() {
+        //The animation delay that will be += through the interation to stutter the animation for each card so it delineates each card being dealt visually.
         var delay = 0.5
         for card in 0...11 {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
@@ -202,22 +160,23 @@ class playingCardView: UIView {
     }
     
     
-    //TODO Need to refine the card selecting logic (Having borders removed after three cards are selected)
-    
-    //The first three cards are selected and stored. Their borders are also colored to show selection.
     
     
+    //A function to draw three new cards from the deck and put them into our shownCards data array as well as visually representing on the board.
     func drawThree() {
         
         for _ in 0...3 {
             if deck.cards.count > 0 {
+                //Adding three cards to the dataset
                 shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
+                //Creating the visual representation of our card from the data.
                 createCard(cardNum: shownCards.endIndex - 1)
 
             }
             
-//            createCard(cardNum: shownCards.endIndex - 1)
+
         }
+        //Configuring the new cards and laying it out into out grid.
         for i in 0..<shownCards.count {
             
             configureCornerLabel(viewArray[i], gridNum: i)
@@ -226,10 +185,10 @@ class playingCardView: UIView {
         
     }
     
+    
+    //This is what happens when a card is pressed. Currently, visually the card gets a blue border and its data is added into an array so that the cards can be matched against each other according to the logic laid out in the SetGameDeck.
     @objc func handleTap(_ pickedCard: UIGestureRecognizer) {
-        
-        
-        print(score)
+   
         
         if buttonPress <= 2 {
             buttonPress += 1
@@ -290,16 +249,8 @@ class playingCardView: UIView {
                 }
                 
                 
-//                for i in 0..<viewArray.count {
-//                    viewArray[i].removeFromSuperview()
-//                }
-                
-//                viewArray = []
-                
-//                for i in 0..<shownCards.count {
-//                    self.layoutSubviews()
-//                }
-                
+      
+                //Clearing the arrays the keep track of selected cards
                 cardIndex = []
                 deck.clearChosen()
                 
@@ -315,8 +266,8 @@ class playingCardView: UIView {
                 cardIndex = []
                 deck.clearChosen()
             }
-                //
-                //            //If the cards do not constitute a set, the borders are removed.
+                
+                //If the cards do not constitute a set, the borders are removed.
             else {
                 buttonPress = 0
                 
@@ -350,7 +301,7 @@ class playingCardView: UIView {
     
 }
 
-
+//An extension that is used to draw four cards at random from our card array data set.
 extension Int {
     var arc4random: Int {
         if self > 0 {
