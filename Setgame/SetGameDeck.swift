@@ -32,8 +32,9 @@ struct SetGameDeck {
             for color in Card.Color.all {
                 for fill in Card.Fill.all {
                     for amount in Card.Amount.all {
-                        cards.append(Card(shape: shape, color: color, fill: fill, amount: amount, isChosen: identifier))
+                        cards.append(Card(shape: shape, color: color, fill: fill, amount: amount, uniqueIdentifier: identifier, isChosen: false))
                         identifier += 1
+                        
                     }
                 }
             }
@@ -44,11 +45,13 @@ struct SetGameDeck {
     
    
     //Extracts the raw data of selected cards into equatable dictionary and also keeps track of selected cards.
-    mutating func cardPicking(cardNumber: Int, shownCard: [Card]) {
+    mutating func cardPicking(selectedCard: Card) {
         
         
         
-        chosenCards.append(shownCard[cardNumber])
+        chosenCards.append(selectedCard)
+        
+        
         
         //A function to extract the raw values of our cards
         func rawValue(card: Card) -> [String] {
@@ -72,7 +75,8 @@ struct SetGameDeck {
             
         } 
 
-        //TODO Refactor card matching from view controller
+        
+        
         
         
     }

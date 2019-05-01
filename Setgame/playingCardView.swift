@@ -100,7 +100,7 @@ class playingCardView: UIView {
 
     
     //Configure the Setviewcard and override its layout and position
-    private func configureCornerLabel(_ label: UIView, gridNum: Int) {
+    private func configureCard(_ label: UIView, gridNum: Int) {
         
         
         
@@ -131,7 +131,7 @@ class playingCardView: UIView {
         
         for card in 0..<shownCards.count {
             
-            configureCornerLabel(viewArray[card], gridNum: card)
+            configureCard(viewArray[card], gridNum: card)
         }
         
         
@@ -179,7 +179,7 @@ class playingCardView: UIView {
         //Configuring the new cards and laying it out into out grid.
         for i in 0..<shownCards.count {
             
-            configureCornerLabel(viewArray[i], gridNum: i)
+            configureCard(viewArray[i], gridNum: i)
         }
         
         
@@ -192,16 +192,22 @@ class playingCardView: UIView {
         
         if buttonPress <= 2 {
             buttonPress += 1
-            if let cardNumber = pickedCard.view {
+            if let cardSelectedView = pickedCard.view {
                 
-                cardNumber.layer.borderWidth = 3.0
-                cardNumber.layer.borderColor = UIColor.blue.cgColor
+                cardIndex += [cardSelectedView.tag]
                 
-                cardIndex += [cardNumber.tag]
+                var cardData = shownCards[cardSelectedView.tag]
+                cardData.isChosen = true
                 
-                print("cardnumber", cardNumber)
+                cardSelectedView.layer.borderWidth = 3.0
+                cardSelectedView.layer.borderColor = UIColor.blue.cgColor
                 
-                deck.cardPicking(cardNumber: cardNumber.tag, shownCard: shownCards )
+                
+                
+                print("cardnumber", cardSelectedView)
+
+                
+                deck.cardPicking(selectedCard: cardData)
                 
                 
             }
