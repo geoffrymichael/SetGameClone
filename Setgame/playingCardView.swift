@@ -25,9 +25,7 @@ class playingCardView: UIView {
 
     var shownCards = [Card]()
 
-    //Tracking how many cards have been selected
-    var buttonPress = 0
-    
+       
     //Tracking which card has been selected
     var cardIndex = [Int]()
     
@@ -190,8 +188,9 @@ class playingCardView: UIView {
     @objc func handleTap(_ pickedCard: UIGestureRecognizer) {
    
         
-        if buttonPress <= 2 {
-            buttonPress += 1
+        
+        if deck.chosenCards.count <= 2 {
+            
             if let cardSelectedView = pickedCard.view {
                 
                 cardIndex += [cardSelectedView.tag]
@@ -214,10 +213,10 @@ class playingCardView: UIView {
             
             
             //        //When a 4th card is pressed, the currently selected cards are compared to see whether they are a set. If they are, three new cards are removed from the deck to replace the matches.
-        } else if buttonPress == 3 {
+        } else if deck.chosenCards.count == 3 {
             if deck.cardMatching() && deck.cards.count > 0 {
                 
-                buttonPress = 0
+                
                 score += 1
                 
                 //I believe that this triggers the delegate function to trigger in view controller to update viewcontrollers score label uilabel with the current score.
@@ -264,7 +263,7 @@ class playingCardView: UIView {
             }
                 //If there are no more cards in the deck, hide them.
             else if deck.cardMatching() && deck.cards.count == 0 {
-                buttonPress = 0
+                
                 for i in 0..<cardIndex.count {
                     //                    viewArray[cardIndex[i]].isEnabled = false
                     viewArray[cardIndex[i]].isHidden = true
@@ -275,7 +274,7 @@ class playingCardView: UIView {
                 
                 //If the cards do not constitute a set, the borders are removed.
             else {
-                buttonPress = 0
+                
                 
                 for i in 0..<cardIndex.count {
                     

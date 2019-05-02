@@ -48,8 +48,10 @@ struct SetGameDeck {
     mutating func cardPicking(selectedCard: Card) {
         
         
+        if selectedCard.isChosen == true {
+            chosenCards.append(selectedCard)
+        }
         
-        chosenCards.append(selectedCard)
         
         
         
