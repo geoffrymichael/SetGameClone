@@ -40,6 +40,10 @@ class playingCardView: UIView {
     var viewArray = [SetgameView]()
     
     
+    //The animation delay that will be += through the interation to stutter the animation for each card so it delineates each card being dealt visually.
+    private var delay = 0.5
+    
+    
     //This is the grid framework. It is a computed property theat uses playingCardView as the bounds. It dynamically adjust for rows and columns depending on amount of cards currently in view.
     var grid: Grid {
         let phoneFrame = self.bounds
@@ -135,34 +139,42 @@ class playingCardView: UIView {
         
        
     }
-
+    
+    
     
     //    //Newgame function which produces 12 shown card view buttons with symbols. These card subviews animate from the lower left corner into their respective places in the grid.
     func newGame() {
-        //The animation delay that will be += through the interation to stutter the animation for each card so it delineates each card being dealt visually.
-        var delay = 0.5
+        
+        
         for card in 0...11 {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
             createCard(cardNum: card)
             
         }
-        //This sets the initial card origin at the bottom left of the board and animates them being dealt into their grid positions. 
-        for card in 0..<viewArray.count {
-            self.viewArray[card].center = CGPoint(x: self.bounds.minX, y: self.bounds.maxY)
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: delay, animations: { self.viewArray[card].frame.size = self.grid[card]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size
-                self.viewArray[card].center = CGPoint(x: self.grid[card]?.midX ?? self.bounds.midX, y: self.grid[card]?.midY ?? self.bounds.midY) }, completion: { finished in
-                    
-                        UIView.transition(with: self.viewArray[card], duration: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[card].isChosen = true } )
-                    
-                    }
-            
-            )
-            delay += 0.5
+        
+     
+        viewArray.forEach { view in
+            drawAnimatio(view: view)
+
         }
-        
-        
+     
     }
     
+    func drawAnimatio(view: SetgameView) {
+        
+        var card = 0
+        //This sets the initial card origin at the bottom left of the board and animates them being dealt into their grid positions.
+        view.center = CGPoint(x: self.bounds.minX, y: self.bounds.maxY)
+        
+        //Here is where the cards are animated to in the grid
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: delay, animations: { view.frame.size = self.grid[card]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size
+            view.center = CGPoint(x: self.grid[card]?.midX ?? self.bounds.midX, y: self.grid[card]?.midY ?? self.bounds.midY) }, completion: { finisehd in
+                UIView.transition(with: view, duration: 1.0, options: [.transitionFlipFromLeft], animations: { view.isChosen = true })
+        })
+        card += 1
+        //The animation delay that will be += through the interation to stutter the animation for each card so it delineates each card being dealt visually.
+        delay += 0.5
+    }
     
     
     
