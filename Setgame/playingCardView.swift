@@ -169,7 +169,7 @@ class playingCardView: UIView {
     //A function to draw three new cards from the deck and put them into our shownCards data array as well as visually representing on the board.
     func drawThree() {
         
-        for _ in 0...3 {
+        for _ in 0...2 {
             if deck.cards.count > 0 {
                 //Adding three cards to the dataset by removing them from the deck
                 shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
@@ -177,6 +177,7 @@ class playingCardView: UIView {
                 createCard(cardNum: shownCards.endIndex - 1)
 
             }
+            
             
 
         }
