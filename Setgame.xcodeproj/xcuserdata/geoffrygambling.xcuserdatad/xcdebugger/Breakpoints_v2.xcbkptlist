@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Setgame/ViewController.swift"
-            timestampString = "578387982.194518"
+            timestampString = "578816191.491756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Setgame/playingCardView.swift"
-            timestampString = "578531552.673016"
+            timestampString = "578816191.491814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "handleTap(_:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -149,8 +149,14 @@ class playingCardView: UIView {
         //This sets the initial card origin at the bottom left of the board and animates them being dealt into their grid positions. 
         for card in 0..<viewArray.count {
             self.viewArray[card].center = CGPoint(x: self.bounds.minX, y: self.bounds.maxY)
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: delay, options: [.transitionFlipFromLeft], animations: { self.viewArray[card].frame.size = self.grid[card]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size
-                self.viewArray[card].center = CGPoint(x: self.grid[card]?.midX ?? self.bounds.midX, y: self.grid[card]?.midY ?? self.bounds.midY)})
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: delay, animations: { self.viewArray[card].frame.size = self.grid[card]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size
+                self.viewArray[card].center = CGPoint(x: self.grid[card]?.midX ?? self.bounds.midX, y: self.grid[card]?.midY ?? self.bounds.midY) }, completion: { finished in
+                    
+                        UIView.transition(with: self.viewArray[card], duration: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[card].isChosen = true } )
+                    
+                    }
+            
+            )
             delay += 0.5
         }
         

@@ -25,7 +25,9 @@ class SetgameView: UIView {
     @IBInspectable
     var amount: String = "two" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
-    var isChosen: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var uniqueIdentifier: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    
+    var isChosen: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
    
     private var cornerRadius: CGFloat {
@@ -37,19 +39,22 @@ class SetgameView: UIView {
         
         //TODO this is programatically making setgame background view transparent but it will not load on startup. Need to bug test.
         
-        let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
-        roundedRect.addClip()
-        UIColor.white.setFill()
-        roundedRect.fill()
+        if isChosen == true {
+            let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+            roundedRect.addClip()
+            UIColor.white.setFill()
+            roundedRect.fill()
+            
+            _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: shape, color: color, fill: fill, amount: amount)
+        } else {
+            let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+            roundedRect.addClip()
+            UIColor.gray.setFill()
+            roundedRect.fill()
+        }
         
-        
-        
-        
-        
-    
-        _ = drawShape(origin: CGPoint(x: bounds.midX, y: bounds.midY), shape: shape, color: color, fill: fill, amount: amount)
 
-        
+
         
     }
     
