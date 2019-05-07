@@ -154,14 +154,14 @@ class playingCardView: UIView {
         
      
         viewArray.forEach { view in
-            drawAnimatio(view: view)
+            drawAnimation(view: view)
 
         }
+        delay = 0.5
      
     }
     
-    func drawAnimatio(view: SetgameView) {
-        
+    func drawAnimation(view: SetgameView) {
         var card = 0
         //This sets the initial card origin at the bottom left of the board and animates them being dealt into their grid positions.
         view.center = CGPoint(x: self.bounds.minX, y: self.bounds.maxY)
@@ -187,17 +187,14 @@ class playingCardView: UIView {
                 shownCards.append(deck.cards.remove(at: deck.cards.count.arc4random))
                 //Creating the visual representation of our card from the data.
                 createCard(cardNum: shownCards.endIndex - 1)
-
+                drawAnimation(view: viewArray[viewArray.endIndex - 1])
             }
             
             
 
         }
-        //Configuring the new cards and laying it out into out grid.
-        for i in 0..<shownCards.count {
-            
-            configureCard(viewArray[i], gridNum: i)
-        }
+        
+        delay = 0.5
         
         
     }
@@ -264,7 +261,7 @@ class playingCardView: UIView {
                     
                     viewArray[cardIndex[i]] = viewArray.remove(at: viewArray.endIndex - 1)
                     viewArray[cardIndex[i]].alpha = 0
-                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[self.cardIndex[i]].alpha = 1 })
+                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[self.cardIndex[i]].alpha = 1; self.viewArray[self.cardIndex[i]].isChosen = true })
                     
                     }
                     
