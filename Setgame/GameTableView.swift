@@ -142,7 +142,7 @@ class GameTableView: UIView {
             drawAnimation(view: view)
 
         }
-        delay = 0.5
+        delay = 0
      
     }
     
@@ -152,7 +152,7 @@ class GameTableView: UIView {
         view.center = CGPoint(x: self.bounds.minX, y: self.bounds.maxY)
         
         //Here is where the cards are animated to in the grid
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: delay, animations: { view.frame.size = self.grid[card]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: delay, animations: { view.frame.size = self.grid[card]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size
             view.center = CGPoint(x: self.grid[card]?.midX ?? self.bounds.midX, y: self.grid[card]?.midY ?? self.bounds.midY) }, completion: { finisehd in
                 UIView.transition(with: view, duration: 1.0, options: [.transitionFlipFromLeft], animations: { view.isChosen = true })
         })
@@ -246,7 +246,18 @@ class GameTableView: UIView {
 //                        [.transitionFlipFromLeft],
 //                        animations: { } )
                         
-                    self.viewArray[self.cardIndex[i]].alpha = 0
+//                    self.viewArray[self.cardIndex[i]].alpha = 0
+                    
+                    matchedViews.append(self.viewArray[self.cardIndex[i]])
+                        
+                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [], animations: {
+                        
+                        self.viewArray[self.cardIndex[i]].transform = CGAffineTransform.identity.scaledBy(x: 0.1   , y: 0.1);
+
+                        self.viewArray[self.cardIndex[i]].alpha = 0
+                        self.viewArray[self.cardIndex[i]].center = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
+                 
+                    } )
                     
                                         
                     viewArray[cardIndex[i]] = viewArray.remove(at: viewArray.endIndex - 1)
