@@ -24,7 +24,7 @@ class ViewController: UIViewController, changeLabelDelegate {
     }
     
    
-    @IBOutlet weak var gameView: playingCardView!
+    @IBOutlet weak var gameView: GameTableView!
     
     @IBAction func drawThreeButton(_ sender: UIButton) {
         gameView.drawThree()

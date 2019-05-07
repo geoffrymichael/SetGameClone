@@ -13,7 +13,7 @@ protocol changeLabelDelegate: class {
     func scoreChanged(score: Int)
 }
 
-class playingCardView: UIView {
+class GameTableView: UIView {
 
     
     
@@ -37,7 +37,7 @@ class playingCardView: UIView {
     }
     
     //Storing card views in an array. These are the visual representations of the cards currently on the board.
-    var viewArray = [SetgameView]()
+    var viewArray = [CardView]()
     
     
     //The animation delay that will be += through the interation to stutter the animation for each card so it delineates each card being dealt visually.
@@ -71,7 +71,7 @@ class playingCardView: UIView {
     private func createCard(cardNum: Int) {
         
         
-        let label = SetgameView()
+        let label = CardView()
         
         label.shape = shownCards[cardNum].shape.rawValue
         label.color = shownCards[cardNum].color.rawValue
@@ -147,7 +147,7 @@ class playingCardView: UIView {
      
     }
     
-    func drawAnimation(view: SetgameView) {
+    func drawAnimation(view: CardView) {
         var card = 0
         //This sets the initial card origin at the bottom left of the board and animates them being dealt into their grid positions.
         view.center = CGPoint(x: self.bounds.minX, y: self.bounds.maxY)

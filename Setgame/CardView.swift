@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetgameView: UIView {
+class CardView: UIView {
     
     
     
