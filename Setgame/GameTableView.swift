@@ -40,7 +40,7 @@ class GameTableView: UIView {
     
     
     //The animation delay that will be += through the interation to stutter the animation for each card so it delineates each card being dealt visually.
-    private var delay = 0.5
+    private var delay = 0.0
     
     
     //This is the grid framework. It is a computed property theat uses playingCardView as the bounds. It dynamically adjust for rows and columns depending on amount of cards currently in view.
@@ -179,10 +179,12 @@ class GameTableView: UIView {
 
         }
         
-        delay = 0.5
+        delay = 0
         
         
     }
+    
+    var matchedViews = [UIView]()
     
     
     //This is what happens when a card is pressed. Currently, visually the card gets a blue border and its data is added into an array so that the cards can be matched against each other according to the logic laid out in the SetGameDeck.
@@ -238,15 +240,20 @@ class GameTableView: UIView {
                     
                     createCard(cardNum: cardIndex[i])
                     
-                    UIViewPropertyAnimator.runningPropertyAnimator(
-                        withDuration: 1.0,
-                        delay: 0.0, options:
-                        [.transitionFlipFromLeft],
-                        animations: {self.viewArray[self.cardIndex[i]].alpha = 0 })
+//                    UIViewPropertyAnimator.runningPropertyAnimator(
+//                        withDuration: 1.0,
+//                        delay: 0.0, options:
+//                        [.transitionFlipFromLeft],
+//                        animations: { } )
+                        
+                    self.viewArray[self.cardIndex[i]].alpha = 0
                     
+                                        
                     viewArray[cardIndex[i]] = viewArray.remove(at: viewArray.endIndex - 1)
-                    viewArray[cardIndex[i]].alpha = 0
-                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[self.cardIndex[i]].alpha = 1; self.viewArray[self.cardIndex[i]].isChosen = true })
+                        
+                    drawAnimation(view: viewArray[cardIndex[i]])
+//                    viewArray[cardIndex[i]].alpha = 0
+//                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[self.cardIndex[i]].alpha = 1; self.viewArray[self.cardIndex[i]].isChosen = true })
                     
                     }
                     
@@ -259,6 +266,8 @@ class GameTableView: UIView {
                 //Clearing the arrays the keep track of selected cards
                 cardIndex = []
                 deck.clearChosen()
+                
+                delay = 0
                 
                 
             }
