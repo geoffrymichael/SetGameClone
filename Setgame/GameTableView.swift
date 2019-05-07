@@ -198,7 +198,14 @@ class GameTableView: UIView {
 //                        view.alpha = 0
 //                        view.isHidden = true
                 }, completion: { position in
-                    view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
+                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1);
+                        view.alpha = 0
+                        
+                    }, completion: { position in
+                        view.isHidden = true
+                    })
+                    
                 })
         } )
     }
