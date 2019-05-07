@@ -16,7 +16,6 @@ protocol changeLabelDelegate: class {
 class GameTableView: UIView {
 
     
-    
     //Declaring the protocol delegate
     weak var delegate: changeLabelDelegate? = nil
 
