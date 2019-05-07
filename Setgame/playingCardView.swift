@@ -105,24 +105,10 @@ class playingCardView: UIView {
     private func configureCard(_ label: UIView, gridNum: Int) {
         
         
+        //Currently this is used to establish a basic layout for the cards in the grid and have them redraw when views are laidout. This actiona is also animated. The initial twelve cards being dealt are in the newGame function and impliment annimation that starts from bottom left of the view and animates as they move into place in the grid.
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { label.frame.size = self.grid[gridNum]?.insetBy(dx: 5, dy: 5).size ?? self.bounds.size; label.center = CGPoint(x: self.grid[gridNum]?.midX ?? self.bounds.midX, y: self.grid[gridNum]?.midY ?? self.bounds.midY) } )
         
-//        let phoneOffsets = UIEdgeInsets(top: 50, left: 30, bottom: phoneFrame.height * 0.25, right: 30)
-//
-//        phoneFrame = phoneFrame.inset(by: phoneOffsets)
-        
-        
-        
-//        label.frame.size = CGSize.zero
-//        label.center = CGPoint(x: bounds.midY, y: bounds.midY)
-        
-        
-        
-        //Currently this is used to establish a basic layout for the cards in the grid and have them redraw when views are laidout. The initial twelve cards being dealt are in the newGame function and impliment annimation that starts from bottom left of the view and animates as they move into place in the grid.
-        label.frame.size = grid[gridNum]?.insetBy(dx: 5, dy: 5).size ?? bounds.size
-        label.center = CGPoint(x: grid[gridNum]?.midX ?? bounds.midX, y: grid[gridNum]?.midY ?? bounds.midY)
-        
-        //        label.sizeToFit()
-        
+
         
     }
     
