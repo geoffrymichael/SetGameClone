@@ -184,6 +184,26 @@ class GameTableView: UIView {
         
     }
     
+    
+    func animateRemoveMatches(view: CardView) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
+            view.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0);
+             },
+            completion: { position in
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
+                    
+                        view.center = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
+//                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+//
+//                        view.alpha = 0
+//                        view.isHidden = true
+                }, completion: { position in
+                    view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+                })
+        } )
+    }
+    
+    
     var matchedViews = [UIView]()
     
     
@@ -231,40 +251,27 @@ class GameTableView: UIView {
                 //TODO: This is a placeholder for animating matched cards being replaced by new cards from the deck. Currently, the chosen cards fade out to alpha 0 then the new cards come in with alpha zero and animates into alpha 1. I imagine I need to clean up some stuff because possibly alpha doesnt do the same job of removing from the superview I don't think. Also must make sure to handle when the deck runs out of cards. 
                 
                 
-                for i in 0..<cardIndex.count {
+                cardIndex.forEach {
                     if deck.cards.count > 0 {
                         
                     
-                    shownCards[cardIndex[i]] = deck.cards.remove(at: deck.cards.count.arc4random)
-                    viewArray[cardIndex[i]].layer.borderWidth = 0
+                    shownCards[$0] = deck.cards.remove(at: deck.cards.count.arc4random)
+                    viewArray[$0].layer.borderWidth = 0
                     
-                    createCard(cardNum: cardIndex[i])
+                    createCard(cardNum: $0)
                     
-//                    UIViewPropertyAnimator.runningPropertyAnimator(
-//                        withDuration: 1.0,
-//                        delay: 0.0, options:
-//                        [.transitionFlipFromLeft],
-//                        animations: { } )
                         
-//                    self.viewArray[self.cardIndex[i]].alpha = 0
-                    
-                    matchedViews.append(self.viewArray[self.cardIndex[i]])
-                        
-                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [], animations: {
-                        
-                        self.viewArray[self.cardIndex[i]].transform = CGAffineTransform.identity.scaledBy(x: 0.1   , y: 0.1);
+                    animateRemoveMatches(view: viewArray[$0])
 
-                        self.viewArray[self.cardIndex[i]].alpha = 0
-                        self.viewArray[self.cardIndex[i]].center = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
-                 
-                    } )
                     
-                                        
-                    viewArray[cardIndex[i]] = viewArray.remove(at: viewArray.endIndex - 1)
+                    matchedViews.append(self.viewArray[$0])
                         
-                    drawAnimation(view: viewArray[cardIndex[i]])
-//                    viewArray[cardIndex[i]].alpha = 0
-//                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 1.0, options: [.transitionFlipFromLeft], animations: { self.viewArray[self.cardIndex[i]].alpha = 1; self.viewArray[self.cardIndex[i]].isChosen = true })
+
+                                        
+                    viewArray[$0] = viewArray.remove(at: viewArray.endIndex - 1)
+                        
+                    drawAnimation(view: viewArray[$0])
+
                     
                     }
                     
