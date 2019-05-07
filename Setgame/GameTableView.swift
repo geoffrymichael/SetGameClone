@@ -65,6 +65,8 @@ class GameTableView: UIView {
         return grid
     }
     
+    lazy var animator = UIDynamicAnimator()
+    lazy var cardBehavior = CardBehaviorAttributes(in: animator)
     
     //Create an array of cardViews(Setgameviews)
     private func createCard(cardNum: Int) {
@@ -88,6 +90,8 @@ class GameTableView: UIView {
         
         //Adding the gesture to each card.
         label.addGestureRecognizer(tap)
+        
+        
         
         //Adding the card view as a subview of playingCardView
         addSubview(label)
@@ -186,6 +190,9 @@ class GameTableView: UIView {
     
     
     func animateRemoveMatches(view: CardView) {
+        cardBehavior.addItem(view)
+        
+        
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
             view.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0);
              },
@@ -268,11 +275,14 @@ class GameTableView: UIView {
                     createCard(cardNum: $0)
                     
                         
-                    animateRemoveMatches(view: viewArray[$0])
+//                    animateRemoveMatches(view: viewArray[$0])
 
                     
                     matchedViews.append(self.viewArray[$0])
-                        
+                    
+                        matchedViews.forEach {
+                            animateRemoveMatches(view: $0 as! CardView)
+                        }
 
                                         
                     viewArray[$0] = viewArray.remove(at: viewArray.endIndex - 1)

@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Setgame/GameTableView.swift"
-            timestampString = "578908715.931583"
+            timestampString = "578964747.348585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "handleTap(_:)"
             landmarkType = "7">
          </BreakpointContent>
