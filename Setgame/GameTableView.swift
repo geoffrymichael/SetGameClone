@@ -239,22 +239,61 @@ class GameTableView: UIView {
     var matchedViews = [UIView]()
     
     
+    
+    
     //This is what happens when a card is pressed. Currently, visually the card gets a blue border and its data is added into an array so that the cards can be matched against each other according to the logic laid out in the SetGameDeck.
     @objc func handleTap(_ pickedCard: UIGestureRecognizer) {
    
         
         
         if deck.chosenCards.count <= 2 {
+            var currentCardInt = Int()
             
             if let cardSelectedView = pickedCard.view {
                 
-                cardIndex += [cardSelectedView.tag]
+                //Temporarily track the current card selected
+                currentCardInt = cardSelectedView.tag
                 
+                //Pull the corresponding data from the associated clicked view
                 var cardData = shownCards[cardSelectedView.tag]
+                
+                //the data to be passed along with be defaulted to true but then will have to run through a check
                 cardData.isChosen = true
                 
-                cardSelectedView.layer.borderWidth = 3.0
-                cardSelectedView.layer.borderColor = UIColor.blue.cgColor
+                //Makes sure that the same card is not clicked.
+                if cardIndex.count >= 1 && deck.chosenCards.count >= 1 {
+                    for i in 0..<cardIndex.count {
+                        if currentCardInt == cardIndex[i] {
+//                            cardData.isChosen = false
+                            
+                            //If the card has already been clicked remove it from the index
+                            cardIndex.remove(at: i)
+                            //And remove it from the matching card logic. I probably want to refactor this at some point so that matching logic is only passed along once the fourth card is selected.
+                            deck.chosenCards.remove(at: i)
+                            
+                            //Card is deselected to be passed along to matching logic
+                            cardData.isChosen = false
+                            
+                            break
+                            
+                        }
+                    }
+                }
+                
+                
+                
+                //if the cardData is okay to be passed along, it is added to the cardIndex array
+                if cardData.isChosen == true {
+                    cardSelectedView.layer.borderWidth = 3.0
+                    cardSelectedView.layer.borderColor = UIColor.blue.cgColor
+                    cardIndex += [cardSelectedView.tag]
+                //Otherwise it is deselected
+                } else {
+                    cardSelectedView.layer.borderWidth = 0
+                    cardSelectedView.layer.borderColor = UIColor.clear.cgColor
+                }
+                
+                
                 
                 
                 
