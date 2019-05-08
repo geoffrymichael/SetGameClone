@@ -148,7 +148,7 @@ struct SetGameDeck {
             
         else if matchCount == 2 {
             let doubleMatchOne = firstCard.filter{ $0 != matchCard[0] && $0 != matchCard[1]}
-            let doubleMatchTwo = firstCard.filter{ $0 != matchCard[0] && $0 != matchCard[1]}
+            let doubleMatchTwo = secondCard.filter{ $0 != matchCard[0] && $0 != matchCard[1]}
             
             let compareDoubleMatch = doubleMatchOne + doubleMatchTwo
             
