@@ -65,7 +65,7 @@ class GameTableView: UIView {
         return grid
     }
     
-    lazy var animator = UIDynamicAnimator()
+    lazy var animator = UIDynamicAnimator(referenceView: self)
     lazy var cardBehavior = CardBehaviorAttributes(in: animator)
     
     //Create an array of cardViews(Setgameviews)
@@ -192,6 +192,7 @@ class GameTableView: UIView {
     func animateRemoveMatches(view: CardView) {
         
         self.cardBehavior.addItem(view)
+        
        
         weak var timer: Timer?
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { timer in
