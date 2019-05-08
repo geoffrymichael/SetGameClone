@@ -15,6 +15,7 @@ class CardBehaviorAttributes: UIDynamicBehavior {
         //This sets the collision boundary to our items
         behavior.translatesReferenceBoundsIntoBoundary = true
         
+        
         return behavior
         
     }()
@@ -33,7 +34,7 @@ class CardBehaviorAttributes: UIDynamicBehavior {
     private func push (_ item: UIDynamicItem) {
         let push = UIPushBehavior(items: [item], mode: .instantaneous)
         push.angle = (2*CGFloat.pi).arc4random
-        push.magnitude = CGFloat(1.0) + CGFloat(2.0).arc4random
+        push.magnitude = CGFloat(3.5) + CGFloat(2.0).arc4random
         push.action = { [unowned push, weak self] in
             self?.removeChildBehavior(push)
         }

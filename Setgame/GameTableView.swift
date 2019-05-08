@@ -190,31 +190,49 @@ class GameTableView: UIView {
     
     
     func animateRemoveMatches(view: CardView) {
-        cardBehavior.addItem(view)
+        
+        self.cardBehavior.addItem(view)
+       
+        weak var timer: Timer?
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { timer in
+            self.animator.removeAllBehaviors()
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 2, delay: 0.5, options: [], animations: { view.center = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY) }, completion: { position in
+                UIView.transition(with: view, duration: 0.5, options: [.transitionFlipFromLeft], animations: { view.isChosen = false; view.alpha = 0 } )
+            } )
+            
+        })
+        
+        self.animator.addBehavior(self.cardBehavior)
         
         
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
-            view.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0);
-             },
-            completion: { position in
-                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
-                    
-                        view.center = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
-//                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+        
+        
+        
+        
+//        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
+//            view.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0);
+//             },
+//            completion: { position in
+//                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
 //
+//                        view.center = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
+////                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+////
+////                        view.alpha = 0
+////                        view.isHidden = true
+//                }, completion: { position in
+//                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
+//                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1);
 //                        view.alpha = 0
+//
+//                    }, completion: { position in
 //                        view.isHidden = true
-                }, completion: { position in
-                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
-                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1);
-                        view.alpha = 0
-                        
-                    }, completion: { position in
-                        view.isHidden = true
-                    })
-                    
-                })
-        } )
+//                    })
+//
+//                })
+//        } )
+        
+        matchedViews = []
     }
     
     
@@ -274,7 +292,8 @@ class GameTableView: UIView {
                     
                     createCard(cardNum: $0)
                     
-                        
+                      
+                    
 //                    animateRemoveMatches(view: viewArray[$0])
 
                     
