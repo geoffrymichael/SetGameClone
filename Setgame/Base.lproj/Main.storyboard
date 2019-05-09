@@ -46,6 +46,9 @@
                                         <rect key="frame" x="239.33333333333334" y="0.0" width="103.66666666666666" height="36"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="New"/>
+                                        <connections>
+                                            <action selector="newGameButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o26-ZB-qRy"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

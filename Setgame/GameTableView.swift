@@ -134,6 +134,19 @@ class GameTableView: UIView {
     //    //Newgame function which produces 12 shown card view buttons with symbols. These card subviews animate from the lower left corner into their respective places in the grid.
     func newGame() {
         
+        deck.clearChosen()
+        
+        
+        shownCards = []
+        
+        viewArray.forEach {
+            $0.removeFromSuperview()
+        }
+        
+        viewArray = []
+        
+        cardIndex = []
+        
         
         for card in 0...11 {
             shownCards += [deck.cards.remove(at: deck.cards.count.arc4random)]
@@ -205,33 +218,7 @@ class GameTableView: UIView {
         
         self.animator.addBehavior(self.cardBehavior)
         
-        
-        
-        
-        
-        
-//        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
-//            view.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0);
-//             },
-//            completion: { position in
-//                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
-//
-//                        view.center = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
-////                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
-////
-////                        view.alpha = 0
-////                        view.isHidden = true
-//                }, completion: { position in
-//                    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0, options: [], animations: {
-//                        view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1);
-//                        view.alpha = 0
-//
-//                    }, completion: { position in
-//                        view.isHidden = true
-//                    })
-//
-//                })
-//        } )
+
         
         matchedViews = []
     }

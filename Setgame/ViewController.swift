@@ -32,6 +32,12 @@ class ViewController: UIViewController, changeLabelDelegate {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBAction func newGameButton(_ sender: UIButton) {
+        gameView.newGame()
+        scoreLabel.text = "Score: 0"
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,20 +49,13 @@ class ViewController: UIViewController, changeLabelDelegate {
         
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//
-//
-//
-//
-//    }
     
+
     
     
     
 }
-//
-//// This an extension that we will use in emoji function so it can stay cleaner and expressinve instead of that long long chain of modifiers.
+
 
 
 

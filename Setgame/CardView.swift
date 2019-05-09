@@ -12,10 +12,6 @@ class CardView: UIView {
     
     
     
-    
-    
-    
-    
     @IBInspectable
     var shape: String = "squiggle" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     @IBInspectable
@@ -58,28 +54,7 @@ class CardView: UIView {
         
     }
     
-//    func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-//        var text=""
-//        switch UIDevice.current.orientation{
-//        case .portrait:
-//            text="Portrait"
-//        case .portraitUpsideDown:
-//            text="PortraitUpsideDown"
-//        case .landscapeLeft:
-//            text="LandscapeLeft"
-//        case .landscapeRight:
-//            text="LandscapeRight"
-//        default:
-//            text="Another"
-//        }
-//        NSLog("You have moved: \(text)")
-//        if text == "Portrait" || text == "PortraitUpsideDown" {
-//            currentOrientation = bounds.width
-//        } else {
-//            currentOrientation = bounds.height
-//        }
-//    }
-    
+   
     
     
     //Computed center origin point so it changes when the card size changes
